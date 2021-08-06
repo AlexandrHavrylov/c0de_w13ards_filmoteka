@@ -26,6 +26,7 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "handlebars": "^4.7.7",
     "modern-normalize": "^1.1.0"
   }
