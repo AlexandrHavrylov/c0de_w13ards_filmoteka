@@ -1,29 +1,34 @@
+import { moviesList } from './js/refs';
+
 import './sass/main.scss';
-import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
-import { options } from 'colorette';
 
-let currentPage = HEADER_ENUM.HOME;
+// пробный код для проверки работоспособности запросов
+// =======================================================
 
-const headerSwitcher = new HeaderSwitcher({
-  currentHeader: currentPage,
-  header: '.header',
-  hideClassCss: 'is-hidden',
-  searchContainer: '.header__input',
-  libraryContainer: '.header__btn',
-  buttons: {
-    home: '.header__btn--home',
-    library: '.header__btn--library',
-  },
-  headerBackgroundImagesStyle: {
-    home: 'home', // 'тут має бути стиль з background image для home',
-    library: 'library', // 'тут має бути стиль з background image для library',
-  },
+import './js/fetch-items';
 
-  onChangeCallback: onChangePage,
-});
+import ItemsApiService from './js/fetch-items.js';
 
-function onChangePage(curPage) {
-  currentPage = curPage;
-  console.log(curPage);
-  // логіка при зміні сторінки з "Home" на "My Library" і навпаки
+import galleryMarkup from './templates/filmsInGallery.hbs';
+
+const itemsApiService = new ItemsApiService();
+
+console.log(itemsApiService);
+
+function onLoad() {
+  // Не уверен для чего эта функция, пока она ничего не ретурнит.
+  // Если в будущем она будет давать массив фильмов, тогда нужно убрать либо
+  // эту функцию (onLoad), либо мою (fetchMovies)
+  console.log(itemsApiService.fetchTrandingItems());
+
+  // Log ниже будет работать если подставить значение в search querry
+  // console.log(itemsApiService.fetchItemsFromSearch());
 }
+
+onLoad();
+
+const fetchMovies = () => itemsApiService.fetchTrandingItems();
+
+fetchMovies().then(result => (moviesList.innerHTML = galleryMarkup(result)));
+
+// =======================================================
