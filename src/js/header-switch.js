@@ -11,16 +11,19 @@ const CLASSLIST_ACTION = {
 export class HeaderSwitcher {
   constructor(
     options = {
-      currentHeader: HEADER_ENUM.HOME,
-      hideClassCss: 'is-hidden',
-      header: '.js-header',
-      searchContainer: '.js-search',
-      libraryContainer: '.js-library',
+      currentHeader: HEADER_ENUM.HOME, // поточна сторінка
+      hideClassCss: 'is-hidden', // клас для приховування елементів
+      header: '.js-header', // класс з хедером
+      searchContainer: '.js-search', // контейнер з пошуком
+      libraryContainer: '.js-library', // контейнер з кнопками "Watched" і "Queue"
       buttons: {
-        home: '.js-btn-home',
-        library: '.js-btn-library',
+        home: '.js-btn-home', // клас кнопки "Home"
+        library: '.js-btn-library', // клас кнопки "Library"
       },
-      headerImagesStyle: { home: 'header-home', library: 'header-library' },
+      headerImagesStyle: {
+        home: 'header-home', // стилі для хедер Home
+        library: 'header-library', // стиля для хедер Library
+      },
     },
   ) {
     this.currentHeader = options.currentHeader;
