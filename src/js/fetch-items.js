@@ -16,27 +16,22 @@ export default class ItemsApiService {
       .get(url)
       .then(response => {
         this.incrementPage();
-        console.log(response.data);
+       
         return response.data.results;
       })
       .catch(error => console.log(error.message));
   }
 
-  fetchItemsFromSearch() {
+  async fetchItemsFromSearch() {
     const BASE_URL = 'https://api.themoviedb.org';
     const URL_SEARCHED_ITEMS = '/3/search/movie';
     const API_KEY = '5fa4bb8a58c85ac583b1447954dde7e6';
 
     const url = `${BASE_URL}${URL_SEARCHED_ITEMS}?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${this.searchQuery}`;
 
-    return axios
-      .get(url)
-      .then(response => {
-        this.incrementPage();
-        console.log(response.data);
-        return response.data.results;
-      })
-      .catch(error => console.log(error.message));
+    const response = await axios.get(url) 
+    const film = response.data.results
+    return film
   }
 
   resetPage() {
