@@ -16,7 +16,6 @@ export default class ItemsApiService {
       .get(url)
       .then(response => {
         this.incrementPage();
-        console.log(response.data);
         return response.data.results;
       })
       .catch(error => console.log(error.message));
@@ -33,7 +32,6 @@ export default class ItemsApiService {
       .get(url)
       .then(response => {
         this.incrementPage();
-        console.log(response.data);
         return response.data.results;
       })
       .catch(error => console.log(error.message));
