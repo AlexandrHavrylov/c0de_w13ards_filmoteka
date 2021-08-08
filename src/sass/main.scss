@@ -1,14 +1,10 @@
-
 /*
  * Главный файл стилей.
  * Все паршалы подключаются сюда.
  */
-@import './variables';
-@import './common';
-@import './utils/comon';
 @import './utils/variables';
+@import './utils/comon';
 @import './components/header-home';
 @import './components/header-libary';
-@import './components/main';
+@import './components/main-section';
 @import './components/footer';
-
