@@ -73,4 +73,4 @@ var e,t=arguments[3];!function(t,r){"object"==typeof exports&&"object"==typeof m
 },{"./get-refs":"EGsz","./fetch-items.js":"N5Ug","../templates/filmsInGallery.hbs":"lXO5"}],"Focm":[function(require,module,exports) {
 "use strict";var e=require("./js/get-refs");require("./sass/main.scss");var r=n(require("./js/fetch-items.js")),s=n(require("./templates/filmsInGallery.hbs")),t=require("./js/fetch-by-name");function n(e){return e&&e.__esModule?e:{default:e}}const i=new r.default,a=(0,e.getRefs)(),c=()=>i.fetchTrandingItems();c().then(e=>a.moviesList.innerHTML=(0,s.default)(e)),a.searchForm.addEventListener("input",t.onSearchFormInput),a.searchBtn.addEventListener("click",t.onSerchBtnClick);
 },{"./js/get-refs":"EGsz","./sass/main.scss":"clu1","./js/fetch-items.js":"N5Ug","./templates/filmsInGallery.hbs":"lXO5","./js/fetch-by-name":"xCMy"}]},{},["Focm"], null)
-//# sourceMappingURL=/c0de_w13ards_filmoteka/src.f29cb311.js.map
+//# sourceMappingURL=/c0de_w13ards_filmoteka/src.64b5f876.js.map
