@@ -8,27 +8,29 @@ const CLASSLIST_ACTION = {
   REMOVE: 'remove',
 };
 
+const defaultOptions = {
+  currentHeader: HEADER_ENUM.HOME, // поточна сторінка
+  hideClassCss: 'is-hidden', // клас для приховування елементів
+  header: '.js-header', // класс з хедером
+  searchContainer: '.js-search', // контейнер з пошуком
+  libraryContainer: '.js-library', // контейнер з кнопками "Watched" і "Queue"
+  buttons: {
+    home: '.js-btn-home', // клас кнопки "Home"
+    library: '.js-btn-library', // клас кнопки "Library"
+  },
+  headerImagesStyle: {
+    home: 'header-home', // стилі для хедер Home
+    library: 'header-library', // стиля для хедер Library
+  },
+};
+
 export class HeaderSwitcher {
-  constructor(
-    options = {
-      currentHeader: HEADER_ENUM.HOME, // поточна сторінка
-      hideClassCss: 'is-hidden', // клас для приховування елементів
-      header: '.js-header', // класс з хедером
-      searchContainer: '.js-search', // контейнер з пошуком
-      libraryContainer: '.js-library', // контейнер з кнопками "Watched" і "Queue"
-      buttons: {
-        home: '.js-btn-home', // клас кнопки "Home"
-        library: '.js-btn-library', // клас кнопки "Library"
-      },
-      headerImagesStyle: {
-        home: 'header-home', // стилі для хедер Home
-        library: 'header-library', // стиля для хедер Library
-      },
-    },
-  ) {
+  constructor(arg) {
+    const options = { ...defaultOptions, ...arg };
+    console.log(options);
     this.currentHeader = options.currentHeader;
     this.hideClassCss = options.hideClassCss;
-    this.headerImagesStyle = this.headerImagesStyle;
+    this.headerImagesStyle = options.headerImagesStyle;
 
     this.refs = {
       headerEl: document.querySelector(options.header),
@@ -38,12 +40,8 @@ export class HeaderSwitcher {
       btnLibraryEl: document.querySelector(options.buttons.library),
     };
 
-    this.refs.btnHomeEl.addEventListener('click', e => {
-      this.switchTo(HEADER_ENUM.HOME);
-    });
-    this.refs.btnLibraryEl.addEventListener('click', e => {
-      this.switchTo(HEADER_ENUM.LIBRARY);
-    });
+    this.refs.btnHomeEl.addEventListener('click', () => this.switchTo(HEADER_ENUM.HOME));
+    this.refs.btnLibraryEl.addEventListener('click', () => this.switchTo(HEADER_ENUM.LIBRARY));
 
     this.switchTo(this.currentHeader);
   }
