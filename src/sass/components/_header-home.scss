@@ -14,7 +14,7 @@
     background-image: url('../images/header-home-320@2x.jpg');
   }
 
-  @media (min-width: 768px) {
+  @include tablet {
     width: 768px;
     background-image: url('../images/header-home-768.jpg');
 
@@ -25,7 +25,7 @@
     }
   }
 
-  @media (min-width: 1024px) {
+  @include desktop {
     width: 1024px;
     background-image: url('../images/header-home-1024.jpg');
     @media screen and (min-device-pixel-ratio: 2),
@@ -44,6 +44,7 @@
     screen and (min-resolution: 2dppx) {
     background-image: url('../images/header-library-320@2x.jpg');
   }
+
   @include tablet {
     background-image: url('../images/header-library-768.jpg');
     @media screen and (min-device-pixel-ratio: 2),
@@ -52,6 +53,7 @@
       background-image: url('../images/header-library-768@2x.jpg');
     }
   }
+
   @include desktop {
     background-image: url('../images/header-library-1024.jpg');
     @media screen and (min-device-pixel-ratio: 2),
@@ -90,7 +92,7 @@
   overflow: hidden;
   clip: rect(0 0 0 0);
 
-  @media (min-width: 768px) {
+  @include tablet {
     position: inherit;
     font-size: 30px;
     line-height: 1.1666;
@@ -113,12 +115,6 @@
   display: flex;
   width: auto;
 }
-
-// .header__button {
-//   // color: var(--font-color-light);
-//   line-height: 1.1666;
-//   text-transform: uppercase;
-// }
 
 .header__button:last-child {
   margin-left: 39px;
@@ -155,9 +151,19 @@
 
 .header__form {
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  @include tablet {
+    width: 336px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include desktop {
+    width: 336px;
+  }
 }
 
-.container {
+.wrapper {
   position: relative;
   height: 100%;
 }
@@ -177,12 +183,8 @@
 }
 
 .header__input {
-  position: absolute;
   display: flex;
-  max-width: 88%;
-  width: 88%;
-  bottom: 97px;
-  left: 20px;
+  width: 100%;
 
   margin-left: auto;
   margin-right: auto;
@@ -271,13 +273,22 @@
 
 .search__button {
   position: absolute;
-  top: 20%;
-  right: 0;
+  top: 49%;
+  right: 7%;
   background-color: transparent;
   display: inline-flex;
   width: 12px;
   height: 12px;
   border-style: none;
+  @include tablet {
+    top: 49%;
+    right: 217px;
+  }
+
+  @include desktop {
+    top: 49%;
+    right: 345px;
+  }
 }
 
 // Указатель активной кнопки============================
