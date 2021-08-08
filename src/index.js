@@ -6,14 +6,17 @@ let currentPage = HEADER_ENUM.HOME;
 
 const headerSwitcher = new HeaderSwitcher({
   currentHeader: currentPage,
+  header: '.header',
   hideClassCss: 'is-hidden',
+  searchContainer: '.header__input',
+  libraryContainer: '.header__btn',
   buttons: {
     home: '.header__btn--home',
     library: '.header__btn--library',
   },
   headerBackgroundImagesStyle: {
-    home: 'тут має бути стиль з background image для home',
-    library: 'тут має бути стиль з background image для library',
+    home: 'home', // 'тут має бути стиль з background image для home',
+    library: 'library', // 'тут має бути стиль з background image для library',
   },
 
   onChangeCallback: onChangePage,
