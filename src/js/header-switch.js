@@ -30,14 +30,12 @@ export class HeaderSwitcher {
     this.hideClassCss = options.hideClassCss;
     this.headerImagesStyle = this.headerImagesStyle;
 
-    const dqs = document.querySelector;
-
     this.refs = {
-      headerEl: dqs(options.header),
-      searchEl: dqs(options.searchContainer),
-      libraryEl: dqs(options.libraryContainer),
-      btnHomeEl: dqs(options.buttons.home),
-      btnLibraryEl: dqs(options.buttons.library),
+      headerEl: document.querySelector(options.header),
+      searchEl: document.querySelector(options.searchContainer),
+      libraryEl: document.querySelector(options.libraryContainer),
+      btnHomeEl: document.querySelector(options.buttons.home),
+      btnLibraryEl: document.querySelector(options.buttons.library),
     };
 
     this.refs.btnHomeEl.addEventListener('click', e => {
