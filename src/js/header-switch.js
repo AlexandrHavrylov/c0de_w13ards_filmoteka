@@ -22,16 +22,17 @@ const defaultOptions = {
     home: 'header-home', // стилі для хедер Home
     library: 'header-library', // стиля для хедер Library
   },
+  onChangeCallback: e => console.log(e),
 };
 
 export class HeaderSwitcher {
   constructor(arg) {
     const options = { ...defaultOptions, ...arg };
-    console.log(options);
+
     this.currentHeader = options.currentHeader;
     this.hideClassCss = options.hideClassCss;
     this.headerImagesStyle = options.headerImagesStyle;
-
+    this.onChangeCallback = options.onChangeCallback;
     this.refs = {
       headerEl: document.querySelector(options.header),
       searchEl: document.querySelector(options.searchContainer),
@@ -40,10 +41,14 @@ export class HeaderSwitcher {
       btnLibraryEl: document.querySelector(options.buttons.library),
     };
 
-    this.refs.btnHomeEl.addEventListener('click', () => this.switchTo(HEADER_ENUM.HOME));
-    this.refs.btnLibraryEl.addEventListener('click', () => this.switchTo(HEADER_ENUM.LIBRARY));
+    this.refs.btnHomeEl?.addEventListener('click', () => this.switchTo(HEADER_ENUM.HOME));
+    this.refs.btnLibraryEl?.addEventListener('click', () => this.switchTo(HEADER_ENUM.LIBRARY));
 
     this.switchTo(this.currentHeader);
+  }
+
+  onChange() {
+    this.onChangeCallback(this.currentHeader);
   }
 
   switchTo(headerEnum) {
@@ -57,13 +62,15 @@ export class HeaderSwitcher {
       case HEADER_ENUM.LIBRARY:
         this.#applyClasses(CLASSLIST_ACTION.ADD, CLASSLIST_ACTION.REMOVE);
     }
+
+    this.onChange();
   }
 
   #applyClasses(classListAction1, classListAction2) {
-    this.refs.searchEl.classList[classListAction1](this.hideClassCss);
-    this.refs.headerEl[classListAction1](this.headerImagesStyle.library);
+    this.refs.searchEl?.classList[classListAction1](this.hideClassCss);
+    this.refs.headerEl?.classList[classListAction1](this.headerImagesStyle.library);
 
-    this.refs.libraryEl.classList[classListAction2](this.hideClassCss);
-    this.refs.headerEl[classListAction2](this.headerImagesStyle.home);
+    this.refs.libraryEl?.classList[classListAction2](this.hideClassCss);
+    this.refs.headerEl?.classList[classListAction2](this.headerImagesStyle.home);
   }
 }
