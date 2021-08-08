@@ -1,4 +1,15 @@
-// Common.CSS
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* -----Common styles----- */
 ul,
 li {
   list-style-type: none;
@@ -20,7 +31,7 @@ h5,
 h6,
 p {
   font-size: inherit;
-  font-weight: 400;
+  font-weight: 500;
   margin-top: 0;
   margin-bottom: 0;
   margin-block-start: 0;
@@ -40,21 +51,46 @@ button {
 body {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  letter-spacing: 0.03em;
-  color: var(--font-color-main);
-  background-color: var(--bg-color-main);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--font-color-light);
+  background-color: var(--bg-color-light);
+  counter-reset: section;
 }
 
 /* -----Container----- */
 .container {
-  max-width: 1024px;
   min-width: 320px;
+  max-width: 480px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 20px;
+
+  @include tablet {
+    max-width: 768px;
+    padding: 0 75px;
+  }
+  @include desktop {
+    max-width: 1024px;
+    padding: 0 71px;
+  }
 }
 
-.link {
-  text-decoration: none;
+/* -----Accent text----- */
+.accent-text-color {
+  color: var(--accent-color);
+}
+
+/* -----Visually hidden----- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }

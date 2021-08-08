@@ -1,3 +1,38 @@
+@charset "UTF-8";
+/*
+ * Главный файл стилей.
+ * Все паршалы подключаются сюда.
+ */
+:root {
+  --bg-color-light: #fff;
+  --bg-color-dark: #333;
+  --bg-color-header: rgba(0, 0, 0, 0.56);
+  --font-color-dark: #000;
+  --font-color-light: #fff;
+  --font-color-footer: #545454;
+  --accent-color: #ff6b08;
+  --border-color: #000;
+  --border-color-light: #fff;
+  --reviews-box-shadow: -5px 8px 26px rgba(0, 0, 0, 0.04);
+  --timing-fn: cubic-bezier(0.4, 0, 0.2, 1);
+  --transiton-duration-time: 250ms;
+  --backdrop-color-op: rgba(17, 21, 24, 0.9);
+}
+
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+/* -----Common styles----- */
 ul,
 li {
   list-style-type: none;
@@ -19,7 +54,7 @@ h5,
 h6,
 p {
   font-size: inherit;
-  font-weight: 400;
+  font-weight: 500;
   margin-top: 0;
   margin-bottom: 0;
   -webkit-margin-before: 0;
@@ -41,22 +76,53 @@ button {
 body {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  letter-spacing: 0.03em;
-  color: var(--font-color-main);
-  background-color: var(--bg-color-main);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--font-color-light);
+  background-color: var(--bg-color-light);
+  counter-reset: section;
 }
 
 /* -----Container----- */
 .container {
-  max-width: 1024px;
   min-width: 320px;
+  max-width: 480px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 20px;
 }
 
-.link {
-  text-decoration: none;
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 75px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding: 0 71px;
+  }
+}
+
+/* -----Accent text----- */
+.accent-text-color {
+  color: var(--accent-color);
+}
+
+/* -----Visually hidden----- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+          clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
 /*# sourceMappingURL=main.css.map */
