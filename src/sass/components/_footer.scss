@@ -1,0 +1,23 @@
+.footer__content {
+  padding-top: 29px;
+  padding-bottom: 29px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.14rem;
+  align-items: center;
+  text-align: center;
+  color: var(--font-color-footer);
+  background-color: #f7f7f7;
+
+  @include tablet {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 28px;
+    padding-top: 30px;
+  }
+}
+
+.footer__link {
+  border-bottom: solid 1px var(--font-color-footer);
+}
