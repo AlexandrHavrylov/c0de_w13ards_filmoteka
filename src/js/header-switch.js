@@ -18,7 +18,7 @@ const defaultOptions = {
     home: '.js-btn-home', // клас кнопки "Home"
     library: '.js-btn-library', // клас кнопки "Library"
   },
-  headerImagesStyle: {
+  headerBackgroundImagesStyle: {
     home: 'header-home', // стилі для хедер Home
     library: 'header-library', // стиля для хедер Library
   },
@@ -31,7 +31,7 @@ export class HeaderSwitcher {
 
     this.currentHeader = options.currentHeader;
     this.hideClassCss = options.hideClassCss;
-    this.headerImagesStyle = options.headerImagesStyle;
+    this.headerBackgroundImagesStyle = options.headerBackgroundImagesStyle;
     this.onChangeCallback = options.onChangeCallback;
     this.refs = {
       headerEl: document.querySelector(options.header),
@@ -68,9 +68,9 @@ export class HeaderSwitcher {
 
   #applyClasses(classListAction1, classListAction2) {
     this.refs.searchEl?.classList[classListAction1](this.hideClassCss);
-    this.refs.headerEl?.classList[classListAction1](this.headerImagesStyle.library);
+    this.refs.headerEl?.classList[classListAction1](this.headerBackgroundImagesStyle.library);
 
     this.refs.libraryEl?.classList[classListAction2](this.hideClassCss);
-    this.refs.headerEl?.classList[classListAction2](this.headerImagesStyle.home);
+    this.refs.headerEl?.classList[classListAction2](this.headerBackgroundImagesStyle.home);
   }
 }
