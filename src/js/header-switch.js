@@ -1,7 +1,4 @@
-/*
- */
-
-const HEADER_ENUM = {
+export const HEADER_ENUM = {
   HOME: 'home',
   LIBRARY: 'library',
 };
@@ -11,7 +8,7 @@ const CLASSLIST_ACTION = {
   REMOVE: 'remove',
 };
 
-class HeaderSwitcher {
+export class HeaderSwitcher {
   constructor(
     options = {
       currentHeader: HEADER_ENUM.HOME,
@@ -40,8 +37,14 @@ class HeaderSwitcher {
       btnLibraryEl: dqs(options.buttons.library),
     };
 
-    this.refs.btnHomeEl.addEventListener('click', e => {});
-    this.refs.btnLibraryEl.addEventListener('click', e => {});
+    this.refs.btnHomeEl.addEventListener('click', e => {
+      this.switchTo(HEADER_ENUM.HOME);
+    });
+    this.refs.btnLibraryEl.addEventListener('click', e => {
+      this.switchTo(HEADER_ENUM.LIBRARY);
+    });
+
+    this.switchTo(this.currentHeader);
   }
 
   switchTo(headerEnum) {
