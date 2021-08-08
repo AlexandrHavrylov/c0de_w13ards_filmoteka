@@ -1,0 +1,25 @@
+.film-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 280px;
+  margin-bottom: 10px;
+
+  //   flex-basis: calc((100% - 30px * 4) / 4);
+}
+
+.film-card__poster {
+  border-radius: 5px;
+}
+
+.film-card__title {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  text-transform: uppercase;
+  color: var(--font-color-dark);
+}
+
+.film-card__descr {
+  color: var(--accent-color);
+}
