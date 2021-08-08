@@ -11,12 +11,12 @@ const CLASSLIST_ACTION = {
 const defaultOptions = {
   currentHeader: HEADER_ENUM.HOME, // поточна сторінка
   hideClassCss: 'is-hidden', // клас для приховування елементів
-  header: '.js-header', // класс з хедером
-  searchContainer: '.js-search', // контейнер з пошуком
-  libraryContainer: '.js-library', // контейнер з кнопками "Watched" і "Queue"
+  header: '.header', // класс з хедером
+  searchContainer: '.header__form', // контейнер з пошуком
+  libraryContainer: '.header__btn', // контейнер з кнопками "Watched" і "Queue"
   buttons: {
-    home: '.js-btn-home', // клас кнопки "Home"
-    library: '.js-btn-library', // клас кнопки "Library"
+    home: '.header__btn--home', // клас кнопки "Home"
+    library: '.header__btn--library', // клас кнопки "Library"
   },
   headerBackgroundImagesStyle: {
     home: 'header-home', // стилі для хедер Home
