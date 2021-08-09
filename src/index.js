@@ -5,7 +5,7 @@ import galleryMarkup from './templates/filmsInGallery.hbs';
 import { onSearchFormInput } from './js/fetch-by-name';
 import { onSerchBtnClick } from './js/fetch-by-name';
 import { onHomeBtnClick } from './js/on-home-btn';
-import { openCard } from './js/getCardMovie';
+import { getIdMovie } from './js/getCardMovie';
 
 
 const itemsApiService = new ItemsApiService();
@@ -20,4 +20,4 @@ fetchMovies().then(result => (refs.moviesList.innerHTML = galleryMarkup(result))
 refs.searchForm.addEventListener('input', onSearchFormInput)
 refs.searchBtn.addEventListener('click', onSerchBtnClick)
 refs.homeBtn.addEventListener('click', onHomeBtnClick)
-refs.moviesList.addEventListener('click', openCard)
+refs.moviesList.addEventListener('click', getIdMovie)
