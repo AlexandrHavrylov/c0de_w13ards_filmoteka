@@ -146,14 +146,6 @@
   margin-left: 20px;
 }
 
-.form__btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .header__input {
   display: flex;
   width: 100%;
@@ -229,6 +221,7 @@
   height: 12px;
   border-style: none;
   margin-left: -13px;
+  z-index: 1;
   @include tablet {
     top: 49%;
     right: 217px;

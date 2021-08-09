@@ -19,7 +19,7 @@
             </nav>
         </div>
         <div class="header__form">
-            <form class="header__input">             
+            <form class="header__input is-hidden">             
                     <input class="header__search " type="text" name="search" id="search"
                         placeholder="Поиск фильмов" autocomplete="off">
                         <button class="search__button" type="submit">
@@ -28,9 +28,9 @@
                             </svg>
                         </button>
             </form>
-            <div class="form__btns is-hidden">
-                <button class="form__btn form__btn--current" type="button">WATCHED</button>
-                <button class="form__btn" type="button">QUEUE</button>
+            <div class="form__btns">
+                <button class="form__btn form__btn--current" id="watched" type="button">WATCHED</button>
+                <button class="form__btn" id="queue" type="button">QUEUE</button>
             </div>
         </div>
     </div>
