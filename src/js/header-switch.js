@@ -13,7 +13,7 @@ const defaultOptions = {
   hideClassCss: 'is-hidden', // клас для приховування елементів
   header: '.header', // класс з хедером
   searchContainer: '.header__input', // контейнер з пошуком
-  libraryContainer: '.form__btn', // контейнер з кнопками "Watched" і "Queue"
+  libraryContainer: '.form__btns', // контейнер з кнопками "Watched" і "Queue"
   buttons: {
     home: '.header__btn--home', // клас кнопки "Home"
     library: '.header__btn--library', // клас кнопки "Library"
