@@ -12,15 +12,15 @@ const defaultOptions = {
   currentHeader: HEADER_ENUM.HOME, // поточна сторінка
   hideClassCss: 'is-hidden', // клас для приховування елементів
   header: '.header', // класс з хедером
-  searchContainer: '.header__form', // контейнер з пошуком
-  libraryContainer: '.header__btn', // контейнер з кнопками "Watched" і "Queue"
+  searchContainer: '.header__input', // контейнер з пошуком
+  libraryContainer: '.form__btn', // контейнер з кнопками "Watched" і "Queue"
   buttons: {
     home: '.header__btn--home', // клас кнопки "Home"
     library: '.header__btn--library', // клас кнопки "Library"
   },
   headerBackgroundImagesStyle: {
-    home: 'header-home', // стилі для хедер Home
-    library: 'header-library', // стиля для хедер Library
+    home: 'header', // стилі для хедер Home
+    library: 'header__lib', // стиля для хедер Library
   },
   onChangeCallback: e => console.log(e),
 };
@@ -41,8 +41,8 @@ export class HeaderSwitcher {
       btnLibraryEl: document.querySelector(options.buttons.library),
     };
 
-    this.refs.btnHomeEl?.addEventListener('click', () => this.switchTo(HEADER_ENUM.HOME));
-    this.refs.btnLibraryEl?.addEventListener('click', () => this.switchTo(HEADER_ENUM.LIBRARY));
+    this.refs.btnHomeEl.addEventListener('click', () => this.switchTo(HEADER_ENUM.HOME));
+    this.refs.btnLibraryEl.addEventListener('click', () => this.switchTo(HEADER_ENUM.LIBRARY));
 
     this.switchTo(this.currentHeader);
   }
@@ -67,10 +67,10 @@ export class HeaderSwitcher {
   }
 
   #applyClasses(classListAction1, classListAction2) {
-    this.refs.searchEl?.classList[classListAction1](this.hideClassCss);
-    this.refs.headerEl?.classList[classListAction1](this.headerBackgroundImagesStyle.library);
+    this.refs.searchEl.classList[classListAction1](this.hideClassCss);
+    this.refs.headerEl.classList[classListAction1](this.headerBackgroundImagesStyle.library);
 
-    this.refs.libraryEl?.classList[classListAction2](this.hideClassCss);
-    this.refs.headerEl?.classList[classListAction2](this.headerBackgroundImagesStyle.home);
+    this.refs.libraryEl.classList[classListAction2](this.hideClassCss);
+    this.refs.headerEl.classList[classListAction2](this.headerBackgroundImagesStyle.home);
   }
 }
