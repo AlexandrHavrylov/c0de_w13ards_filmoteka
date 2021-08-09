@@ -71,6 +71,5 @@ export class HeaderSwitcher {
     this.refs.headerEl.classList[classListAction1](this.headerBackgroundImagesStyle.library);
 
     this.refs.libraryEl.classList[classListAction2](this.hideClassCss);
-    this.refs.headerEl.classList[classListAction2](this.headerBackgroundImagesStyle.home);
   }
 }
