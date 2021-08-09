@@ -2,8 +2,9 @@
   margin-left: auto;
   margin-right: auto;
   background-color: var(--bg-color-header);
-  background-image: url('../images/header-home-320.jpg');
-  width: 320px;
+  background-image: linear-gradient(to right, var(--bg-color-header), var(--bg-color-header)),
+    url('../images/header-home-320.jpg');
+  min-width: 320px;
   height: 230px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -11,23 +12,27 @@
   @media screen and (min-device-pixel-ratio: 2),
     screen and (min-resolution: 192dpi),
     screen and (min-resolution: 2dppx) {
-    background-image: url('../images/header-home-320@2x.jpg');
+    background-image: linear-gradient(to right, var(--bg-color-header), var(--bg-color-header)),
+      url('../images/header-home-320@2x.jpg');
   }
 
   @include tablet {
-    width: 768px;
-    background-image: url('../images/header-home-768.jpg');
+    min-width: 768px;
+    background-image: linear-gradient(to right, var(--bg-color-header), var(--bg-color-header)),
+      url('../images/header-home-768.jpg');
 
     @media screen and (min-device-pixel-ratio: 2),
       screen and (min-resolution: 192dpi),
       screen and (min-resolution: 2dppx) {
-      background-image: url('../images/header-home-768@x2.jpg');
+      background-image: linear-gradient(to right, var(--bg-color-header), var(--bg-color-header)),
+        url('../images/header-home-768@x2.jpg');
     }
   }
 
   @include desktop {
-    width: 1024px;
-    background-image: url('../images/header-home-1024.jpg');
+    min-width: 1024px;
+    background-image: linear-gradient(to right, var(--bg-color-header), var(--bg-color-header)),
+      url('../images/header-home-1024.jpg');
     @media screen and (min-device-pixel-ratio: 2),
       screen and (min-resolution: 192dpi),
       screen and (min-resolution: 2dppx) {
@@ -36,43 +41,11 @@
   }
 }
 
-// Меняем фоновую картинку добавлением этого класса==============
-.header__lib {
-  background-image: url('../images/header-library-320.jpg');
-  @media screen and (min-device-pixel-ratio: 2),
-    screen and (min-resolution: 192dpi),
-    screen and (min-resolution: 2dppx) {
-    background-image: url('../images/header-library-320@2x.jpg');
-  }
-
-  @include tablet {
-    background-image: url('../images/header-library-768.jpg');
-    @media screen and (min-device-pixel-ratio: 2),
-      screen and (min-resolution: 192dpi),
-      screen and (min-resolution: 2dppx) {
-      background-image: url('../images/header-library-768@2x.jpg');
-    }
-  }
-
-  @include desktop {
-    background-image: url('../images/header-library-1024.jpg');
-    @media screen and (min-device-pixel-ratio: 2),
-      screen and (min-resolution: 192dpi),
-      screen and (min-resolution: 2dppx) {
-      background-image: url('../images/header-library-1024@2x.jpg');
-    }
-  }
-}
-// ================================================================
-
 .header__container {
   display: flex;
   align-items: baseline;
   flex-wrap: nowrap;
-
-  padding-top: 48px;
-  padding-bottom: 43px;
-
+  padding-top: 58px;
   max-width: 100%;
   height: 110px;
 }
@@ -153,6 +126,7 @@
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 14px;
   @include tablet {
     width: 336px;
     margin-left: auto;
@@ -173,13 +147,11 @@
 }
 
 .form__btn {
-  position: absolute;
-  bottom: 67px;
-  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .header__input {
@@ -212,17 +184,17 @@
   line-height: 1.1428;
 }
 
-.input-search-icon {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
 .header__btn--home {
   background-color: transparent;
   border-style: none;
   color: var(--font-color-light);
   line-height: 1.1666;
+  transition: color var(--transiton-duration-time) var(--timing-fn);
+
+  &:hover,
+  &:focus {
+    color: var(--accent-color);
+  }
 }
 
 .header__btn--library {
@@ -230,6 +202,10 @@
   border-style: none;
   color: var(--font-color-light);
   line-height: 1.1666;
+  &:hover,
+  &:focus {
+    color: var(--accent-color);
+  }
 }
 
 .header__library {
@@ -246,40 +222,13 @@
   }
 }
 
-.btn {
-  width: 130px;
-  height: 44px;
-  text-transform: uppercase;
-  line-height: 1.33;
-  color: var(--font-color-light);
-  border-radius: 5px;
-  transition: transform, 250ms;
-  background-color: transparent;
-  border-color: var(--font-color-light);
-  cursor: pointer;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-
-  &:last-child {
-    margin-left: 20px;
-
-    @media screen and(min-width: 768px) {
-      margin-left: 15px;
-    }
-  }
-}
-
 .search__button {
-  position: absolute;
-  top: 49%;
-  right: 7%;
   background-color: transparent;
   display: inline-flex;
   width: 12px;
   height: 12px;
   border-style: none;
+  margin-left: -13px;
   @include tablet {
     top: 49%;
     right: 217px;
@@ -290,13 +239,6 @@
     right: 345px;
   }
 }
-
-// Указатель активной кнопки============================
-.form__btn--current {
-  background-color: var(--accent-color);
-  border-color: transparent;
-}
-// =====================================================
 
 .is-hidden {
   position: absolute;
