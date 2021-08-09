@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export default class ItemsApiService {
   constructor() {
+    this.page = 1;
     this.searchQuery = '';
   }
 
@@ -15,7 +16,6 @@ export default class ItemsApiService {
     return axios
       .get(url)
       .then(response => {
-        this.incrementPage();
         return response.data.results;
       })
       .catch(error => console.log(error.message));
@@ -26,12 +26,11 @@ export default class ItemsApiService {
     const URL_SEARCHED_ITEMS = '/3/search/movie';
     const API_KEY = '5fa4bb8a58c85ac583b1447954dde7e6';
 
-    const url = `${BASE_URL}${URL_SEARCHED_ITEMS}?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${this.searchQuery}`;
+    const url = `${BASE_URL}${URL_SEARCHED_ITEMS}?api_key=${API_KEY}&language=en-US&page=${this.page}&include_adult=false&query=${this.searchQuery}`;
 
     return axios
       .get(url)
       .then(response => {
-        this.incrementPage();
         return response.data.results;
       })
       .catch(error => console.log(error.message));
@@ -56,6 +55,10 @@ export default class ItemsApiService {
     this.page = 1;
   }
 
+  setPage(pageNumber) {
+    this.page = pageNumber;
+  }
+
   incrementPage() {
     this.page += 1;
   }
@@ -67,5 +70,4 @@ export default class ItemsApiService {
   set query(newQuery) {
     this.searchQuery = newQuery;
   }
-
 }
