@@ -9,6 +9,10 @@
 .movie-list {
   display: flex;
   flex-wrap: wrap;
+
+  @include tablet {
+    margin-right: -30px;
+  }
 }
 
 .movie-card {
