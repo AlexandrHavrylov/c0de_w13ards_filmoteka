@@ -16,7 +16,7 @@ const refs = getRefs()
 
 
 // фетч фильмов по названию
-async function onSerchBtnClick(e) {
+async function onSearchBtnClick(e) {
   e.preventDefault()
  itemsApiService.query = filmToFind
   if (filmToFind) {
@@ -27,4 +27,4 @@ async function onSerchBtnClick(e) {
    
 }
 
-export {onSearchFormInput, onSerchBtnClick}
+export {onSearchFormInput, onSearchBtnClick}
