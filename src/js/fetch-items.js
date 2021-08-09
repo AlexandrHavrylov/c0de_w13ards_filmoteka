@@ -37,6 +37,8 @@ export default class ItemsApiService {
       .catch(error => console.log(error.message));
   }
 
+  
+
   resetPage() {
     this.page = 1;
   }
