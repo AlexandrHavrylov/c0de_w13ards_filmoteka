@@ -1,0 +1,28 @@
+import { getRefs } from './get-refs';
+import ItemsApiService from './fetch-items.js';
+import galleryMarkup from '../templates/filmsInGallery.hbs';
+const itemsApiService = new ItemsApiService();
+const movieCard = document.querySelector('.movie-card');
+const refs = getRefs()
+
+if (movieCard) {
+   movieCard.addEventListener('click', openCard)
+}
+function openCard(e) {
+   getIdMovie();
+   renderCard(movieId)
+};
+
+export { openCard };
+
+function getIdMovie() {
+   const movieId = movieCard.dataset.id
+   return movieId;
+}
+
+function renderCard(movieId) {
+   itemsApiService.fetchCard(movieId)
+      .then((response) => {
+         refs.modalMovie.innerHTML = modalMarkup(response);
+      })
+}
