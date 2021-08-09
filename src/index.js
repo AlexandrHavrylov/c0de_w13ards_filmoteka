@@ -3,7 +3,7 @@ import { getRefs } from './js/get-refs';
 import { onSearchFormInput } from './js/fetch-by-name';
 import { onSearchBtnClick } from './js/fetch-by-name';
 import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
-import { GetPopularFilms } from './js/get-popular-films';
+import { getPopularFilms } from './js/get-popular-films';
 
 
 const refs = getRefs();
@@ -17,16 +17,16 @@ const headerSwitcher = new HeaderSwitcher({
     switch (page) {
       case HEADER_ENUM.HOME:
         refs.searchForm.value = ''
-        GetPopularFilms();
+        getPopularFilms();
         break;
       case HEADER_ENUM.LIBRARY:
-        GetLibraryFilms();
+        getLibraryFilms();
         break;
     }
   },
 });
 
 
-function GetLibraryFilms() {
-
+function getLibraryFilms() {
+ refs.moviesList.innerHTML = ''
 }
