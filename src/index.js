@@ -22,12 +22,12 @@ const headerSwitcher = new HeaderSwitcher({
         GetPopularFilms();
         break;
       case HEADER_ENUM.LIBRARY:
-        showLibraryFilms();
+        GetLibraryFilms();
         break;
     }
   },
 });
 
-function showLibraryFilms() {
+function GetLibraryFilms() {
   userLibrary.showFiltered();
 }
