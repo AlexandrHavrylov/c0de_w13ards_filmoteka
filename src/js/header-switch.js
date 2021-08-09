@@ -17,6 +17,7 @@ const defaultOptions = {
   buttons: {
     home: '.header__btn--home', // клас кнопки "Home"
     library: '.header__btn--library', // клас кнопки "Library"
+    isSelectedStyle: 'header__navigation--current',
   },
   headerBackgroundImagesStyle: {
     home: 'header', // стилі для хедер Home
@@ -31,6 +32,7 @@ export class HeaderSwitcher {
 
     this.currentHeader = options.currentHeader;
     this.hideClassCss = options.hideClassCss;
+    this.isSelectedStyle = options.buttons.isSelectedStyle;
     this.headerBackgroundImagesStyle = options.headerBackgroundImagesStyle;
     this.onChangeCallback = options.onChangeCallback;
     this.refs = {
@@ -69,7 +71,9 @@ export class HeaderSwitcher {
   #applyClasses(classListAction1, classListAction2) {
     this.refs.searchEl.classList[classListAction1](this.hideClassCss);
     this.refs.headerEl.classList[classListAction1](this.headerBackgroundImagesStyle.library);
+    this.refs.btnHomeEl.classList[classListAction2](this.isSelectedStyle);
 
     this.refs.libraryEl.classList[classListAction2](this.hideClassCss);
+    this.refs.btnLibraryEl.classList[classListAction1](this.isSelectedStyle);
   }
 }
