@@ -1,7 +1,7 @@
 <header class="header">
-    <div class="container">
+    <div class="container wrapper">
         <div class="header__container">
-            <a href="/" class="header__logo">
+            <a href="index.html" class="header__logo">
                 <svg class="header__icon" width="24px" height="24px">
                     <use href="./images/icons.svg#icon-film"></use>
                 </svg>
@@ -19,18 +19,18 @@
             </nav>
         </div>
         <div class="header__form">
-            <form class="header__input">             
-                    <input class="header__search is-hidden" type="text" name="search" id="search"
+            <form class="header__input is-hidden">             
+                    <input class="header__search " type="text" name="search" id="search"
                         placeholder="Поиск фильмов" autocomplete="off">
                         <button class="search__button" type="submit">
-                            <svg class="input-search-icon is-hidden" width="12px" height="12px">
+                            <svg class="input-search-icon" width="12px" height="12px">
                                <use href="./images/icons.svg#icon-search"></use>
                             </svg>
                         </button>
             </form>
-            <div class="header__btn">
-                <button class="header__btn--watched" type="button">WATCHED</button>
-                <button class="header__btn--queue" type="button">QUEUE</button>
+            <div class="form__btns">
+                <button class="form__btn form__btn--current" id="watched" type="button">WATCHED</button>
+                <button class="form__btn" id="queue" type="button">QUEUE</button>
             </div>
         </div>
     </div>

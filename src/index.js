@@ -1,34 +1,40 @@
-import { moviesList } from './js/refs';
-
+import { getRefs } from './js/get-refs';
 import './sass/main.scss';
-
-// пробный код для проверки работоспособности запросов
-// =======================================================
-
-import './js/fetch-items';
-
 import ItemsApiService from './js/fetch-items.js';
-
 import galleryMarkup from './templates/filmsInGallery.hbs';
+import { onSearchFormInput } from './js/fetch-by-name';
+import { onSearchBtnClick } from './js/fetch-by-name';
 
-const itemsApiService = new ItemsApiService();
+import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
+import { getPopularFilms } from './js/get-popular-films';
 
-console.log(itemsApiService);
 
-function onLoad() {
-  // Не уверен для чего эта функция, пока она ничего не ретурнит.
-  // Если в будущем она будет давать массив фильмов, тогда нужно убрать либо
-  // эту функцию (onLoad), либо мою (fetchMovies)
-  console.log(itemsApiService.fetchTrandingItems());
 
-  // Log ниже будет работать если подставить значение в search querry
-  // console.log(itemsApiService.fetchItemsFromSearch());
+
+const refs = getRefs();
+
+refs.searchForm.addEventListener('input', onSearchFormInput);
+refs.searchBtn.addEventListener('click', onSearchBtnClick);
+
+const headerSwitcher = new HeaderSwitcher({
+  onChangeCallback: page => {
+    switch (page) {
+      case HEADER_ENUM.HOME:
+
+        refs.searchForm.value = ''
+        getPopularFilms();
+
+        break;
+      case HEADER_ENUM.LIBRARY:
+        getLibraryFilms();
+        break;
+    }
+  },
+});
+
+
+
+function getLibraryFilms() {
+ refs.moviesList.innerHTML = ''
+
 }
-
-onLoad();
-
-const fetchMovies = () => itemsApiService.fetchTrandingItems();
-
-fetchMovies().then(result => (moviesList.innerHTML = galleryMarkup(result)));
-
-// =======================================================

@@ -1,0 +1,114 @@
+.modal-movie__info {
+  background-color: var(--bg-color-light);
+  margin-top: 30px;
+
+  @include tablet {
+    margin-top: 0;
+    margin-left: 30px;
+  }
+
+  @include desktop {
+    margin-top: 0;
+    margin-left: 30px;
+  }
+}
+
+.modal-movie__title {
+  font-size: 20px;
+  line-height: 1.15;
+  text-transform: uppercase;
+
+  @include desktop {
+    font-size: 30px;
+    line-height: 1.172;
+  }
+}
+
+.modal-movie__descr {
+  margin: 0;
+  margin-top: 20px;
+}
+
+.modal-movie__item {
+  display: flex;
+  margin-top: 10px;
+}
+
+.modal-movie__descr-name {
+  width: 69px;
+  margin-right: 40px;
+  color: var(--font-color-modal);
+
+  @include desktop {
+    margin-right: 80px;
+  }
+}
+
+.modal-movie__descr-info {
+  line-height: 1.167;
+}
+
+.modal-movie__descr-vote {
+  display: inline-block;
+  padding: 1px 10px;
+  width: 36px;
+  height: 16px;
+
+  text-align: center;
+  color: var(--font-color-light);
+  background-color: var(--accent-color);
+  border-radius: 5px;
+}
+
+.modal-movie__slash {
+  line-height: 1.333;
+  color: var(--font-color-modal);
+}
+
+.modal-movie__descr-votes {
+}
+
+.modal-movie__genre {
+}
+
+.modal-movie__about-title {
+  line-height: 1.333;
+  text-transform: uppercase;
+  color: var(--font-color-dark);
+}
+
+.modal-movie__about {
+  margin-top: 10px;
+  max-width: 240px;
+  height: auto;
+  line-height: 1.666;
+  color: var(--font-color-dark);
+
+  @include tablet {
+    max-width: 264px;
+  }
+
+  @include desktop {
+    max-width: 396px;
+  }
+}
+
+.modal-movie__button-wrapper {
+  display: flex;
+  margin-top: 20px;
+}
+
+.modal-movie__button {
+  padding: 13px 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  text-transform: uppercase;
+  color: var(--font-color-dark);
+  transition: background-color var(--transiton-duration-time) var(--timing-fn);
+
+  &:hover,
+  &:focus {
+    background-color: var(--accent-color);
+    color: var(--font-color-light);
+  }
+}

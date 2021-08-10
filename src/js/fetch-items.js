@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export default class ItemsApiService {
   constructor() {
+    this.page = 1;
     this.searchQuery = '';
   }
 
@@ -15,8 +16,6 @@ export default class ItemsApiService {
     return axios
       .get(url)
       .then(response => {
-        this.incrementPage();
-        console.log(response.data);
         return response.data.results;
       })
       .catch(error => console.log(error.message));
@@ -27,20 +26,37 @@ export default class ItemsApiService {
     const URL_SEARCHED_ITEMS = '/3/search/movie';
     const API_KEY = '5fa4bb8a58c85ac583b1447954dde7e6';
 
-    const url = `${BASE_URL}${URL_SEARCHED_ITEMS}?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${this.searchQuery}`;
+    const url = `${BASE_URL}${URL_SEARCHED_ITEMS}?api_key=${API_KEY}&language=en-US&page=${this.page}&include_adult=false&query=${this.searchQuery}`;
 
     return axios
       .get(url)
       .then(response => {
-        this.incrementPage();
-        console.log(response.data);
         return response.data.results;
+      })
+      .catch(error => console.log(error.message));
+  }
+
+  fetchCard(movieId) {
+    const BASE_URL = 'https://api.themoviedb.org';
+    const URL_CARD = `/3/movie/${movieId}`;
+    const API_KEY = '5fa4bb8a58c85ac583b1447954dde7e6';
+
+    const url = `${BASE_URL}${URL_CARD}?api_key=${API_KEY}`;
+
+    return axios
+      .get(url)
+      .then(response => {
+        return response.data.result;
       })
       .catch(error => console.log(error.message));
   }
 
   resetPage() {
     this.page = 1;
+  }
+
+  setPage(pageNumber) {
+    this.page = pageNumber;
   }
 
   incrementPage() {

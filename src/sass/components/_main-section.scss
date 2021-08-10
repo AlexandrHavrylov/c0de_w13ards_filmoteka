@@ -1,6 +1,60 @@
 .main {
-  padding-top: 20px;
-  padding-bottom: 40px;
+  padding: 20px 0 40px 0;
+
+  @include tablet {
+    padding: 60px 0;
+  }
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  @include tablet {
+    margin-right: -30px;
+  }
+}
+
+.movie-card {
+  width: 100%;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  @include tablet {
+    margin-right: 30px;
+    margin-bottom: 30px;
+    flex-basis: calc((100% - 30px * 2) / 2);
+  }
+
+  @include desktop {
+    flex-basis: calc((100% - 30px * 3) / 3);
+  }
+}
+
+.movie-card__poster {
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.movie-card__title {
+  margin-bottom: 5px;
+
+  font-size: 12px;
+  line-height: 1.17;
+  text-transform: uppercase;
+  color: var(--font-color-dark);
+
+  @include desktop {
+    line-height: 1.33;
+  }
+}
+
+.movie-card__descr {
+  font-size: 12px;
+  line-height: 1.33;
+  color: var(--accent-color);
 }
 
 // pagination
