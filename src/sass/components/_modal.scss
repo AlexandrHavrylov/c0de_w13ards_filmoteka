@@ -1,0 +1,33 @@
+.modal-movie__info {
+  background-color: var(--bg-color-light);
+  margin-top: 30px;
+
+  @include tablet {
+    margin-top: 0;
+    margin-left: 30px;
+  }
+
+  @include desktop {
+    margin-top: 0;
+    margin-left: 30px;
+  }
+}
+
+.modal-movie__title {
+  font-size: 20px;
+  line-height: 1.15;
+  text-transform: uppercase;
+
+  @include desktop {
+    font-size: 30px;
+    line-height: 1.172;
+  }
+}
+
+.modal-movie__descr {
+  margin: 0;
+  margin-top: 20px;
+}
+
+.modal-movie__item {
+}
