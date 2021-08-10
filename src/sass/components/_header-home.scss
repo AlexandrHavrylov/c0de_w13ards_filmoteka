@@ -220,21 +220,19 @@
 }
 
 .search__button {
+  display: flex;
+  align-items: center;
   background-color: transparent;
   display: inline-flex;
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
   border-style: none;
   margin-left: -13px;
   z-index: 1;
-  @include tablet {
-    top: 49%;
-    right: 217px;
-  }
-
-  @include desktop {
-    top: 49%;
-    right: 345px;
+  cursor: pointer;
+  &:focus,
+  &:active {
+    outline: none;
   }
 }
 
