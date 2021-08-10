@@ -63,3 +63,39 @@
 
 .modal-movie__descr-votes {
 }
+
+.modal-movie__genre {
+}
+
+.modal-movie__about-title {
+  line-height: 1.333;
+  text-transform: uppercase;
+  color: var(--font-color-dark);
+}
+
+.modal-movie__about {
+  margin-top: 10px;
+  max-width: 240px;
+  height: auto;
+  line-height: 1.666;
+  color: var(--font-color-dark);
+}
+
+.modal-movie__button-wrapper {
+  display: flex;
+  margin-top: 20px;
+}
+
+.modal-movie__button {
+  padding: 13px 6px;
+  border: 1px solid var(--border-color);
+  text-transform: uppercase;
+  color: var(--font-color-dark);
+  transition: background-color var(--transiton-duration-time) var(--timing-fn);
+
+  &:hover,
+  &:focus {
+    background-color: var(--accent-color);
+    color: var(--font-color-light);
+  }
+}
