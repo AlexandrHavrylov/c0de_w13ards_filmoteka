@@ -1,7 +1,7 @@
 <div class="modal-movie">
 
     <div class="modal-movie__img">
-        <img src="https://image.tmdb.org/t/p/w240{{poster_path}}" alt="{{title}}" />
+        <img src="https://image.tmdb.org/t/p/w300{{poster_path}}" alt="{{title}}" />
     </div>
 
     <div class="modal-movie__info">
@@ -13,7 +13,7 @@
                 <p class="modal-movie__descr-name">Vote / Votes</p>
                 <p class="modal-movie__descr-info">
                     <span class="modal-movie__descr-vote">{{vote_average}}</span>
-                    <span>/</span>
+                    <span class="modal-movie__slash">/</span>
                     <span class="modal-movie__descr-votes">{{vote_count}}</span>
                 </p>
             </li>
@@ -35,7 +35,7 @@
             </li>
         </ul>
 
-        <h3>About</h3>
+        <h3 class="modal-movie__about-title">About</h3>
         <p class="modal-movie__about">{{overview}}</p>
 
         <div class="modal-movie__button-wrapper">
