@@ -46,7 +46,7 @@ export default class ItemsApiService {
     return axios
       .get(url)
       .then(response => {
-        return response.data.result;
+        return response.data;
       })
       .catch(error => console.log(error.message));
   }
