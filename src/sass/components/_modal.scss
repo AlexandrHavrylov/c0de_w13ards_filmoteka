@@ -38,6 +38,10 @@
   width: 69px;
   margin-right: 40px;
   color: var(--font-color-modal);
+
+  @include desktop {
+    margin-right: 80px;
+  }
 }
 
 .modal-movie__descr-info {
@@ -79,6 +83,14 @@
   height: auto;
   line-height: 1.666;
   color: var(--font-color-dark);
+
+  @include tablet {
+    max-width: 264px;
+  }
+
+  @include desktop {
+    max-width: 396px;
+  }
 }
 
 .modal-movie__button-wrapper {
@@ -89,6 +101,7 @@
 .modal-movie__button {
   padding: 13px 6px;
   border: 1px solid var(--border-color);
+  border-radius: 5px;
   text-transform: uppercase;
   color: var(--font-color-dark);
   transition: background-color var(--transiton-duration-time) var(--timing-fn);
