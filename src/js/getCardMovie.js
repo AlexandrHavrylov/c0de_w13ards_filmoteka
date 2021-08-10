@@ -24,8 +24,6 @@ async function renderCard(movieId) {
          refs.modalMovie.innerHTML = filmInModal(response);
          refs.modalMovie.classList.remove(('visually-hidden'))
          modalMovieClose = document.querySelector('.modal-movie__button--close');
-         modalMovieClose.addEventListener('click', closeCard);
-         modalMovieClose.addEventListener('keydown', closeCardEsc);
       })
    // добавление слушателей после формирования карточки
          modalMovieClose.addEventListener('click', closeCard);

@@ -36,23 +36,7 @@ export default class ItemsApiService {
       })
       .catch(error => console.log(error.message));
   }
-
-  fetchCard(movieId) {
-    const BASE_URL = 'https://api.themoviedb.org';
-    const URL_CARD = `/3/movie/${movieId}`;
-    const API_KEY = '5fa4bb8a58c85ac583b1447954dde7e6';
-
-    const url = `${BASE_URL}${URL_CARD}?api_key=${API_KEY}`;
-
-    return axios
-      .get(url)
-      .then(response => {
-        return response.data;
-      })
-      .catch(error => console.log(error.message));
-  }
   
-
   resetPage() {
     this.page = 1;
   }
