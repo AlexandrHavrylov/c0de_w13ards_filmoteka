@@ -1,12 +1,9 @@
 import genresTranslator from '../genres';
-import ItemsApiService from "./fetch-items";
-const itemsApiService = new ItemsApiService();
 
 
-async function updateTrandingMoviesData()
+
+async function updateMoviesData(result)
 {
-  const result = await itemsApiService.fetchTrandingItems()
-
   const updatedMovies = result.map(movie => {
     const genres = movie.genre_ids.map(genreId => {
       const currentGenre = genresTranslator.find(singleGenre => singleGenre.id === genreId);
@@ -38,4 +35,4 @@ async function updateTrandingMoviesData()
   return updatedMovies;
 };
 
-export { updateTrandingMoviesData }
+export { updateMoviesData }
