@@ -7,9 +7,7 @@ import { onSearchBtnClick } from './js/fetch-by-name';
 
 import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
 import { getPopularFilms } from './js/get-popular-films';
-
-
-
+import '../node_modules/tui-pagination/dist/tui-pagination.css';
 
 const refs = getRefs();
 
@@ -20,8 +18,7 @@ const headerSwitcher = new HeaderSwitcher({
   onChangeCallback: page => {
     switch (page) {
       case HEADER_ENUM.HOME:
-
-        refs.searchForm.value = ''
+        refs.searchForm.value = '';
         getPopularFilms();
 
         break;
@@ -32,9 +29,6 @@ const headerSwitcher = new HeaderSwitcher({
   },
 });
 
-
-
 function getLibraryFilms() {
- refs.moviesList.innerHTML = ''
-
+  refs.moviesList.innerHTML = '';
 }

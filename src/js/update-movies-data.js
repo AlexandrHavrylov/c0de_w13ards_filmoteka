@@ -1,10 +1,7 @@
 import genresTranslator from '../genres';
 
-
-
-async function updateMoviesData(result)
-{
-  const updatedMovies = result.map(movie => {
+async function updateMoviesData(result) {
+  const updatedMovies = result.results.map(movie => {
     const genres = movie.genre_ids.map(genreId => {
       const currentGenre = genresTranslator.find(singleGenre => singleGenre.id === genreId);
 
@@ -33,6 +30,6 @@ async function updateMoviesData(result)
   });
 
   return updatedMovies;
-};
+}
 
-export { updateMoviesData }
+export { updateMoviesData };
