@@ -6,6 +6,7 @@ function getRefs() {
         moviesList: document.querySelector('.movie-list'),
         homeBtn: document.querySelector('.header__btn--home'),
         modalMovie: document.querySelector('.modal-movie'),
+        main: document.querySelector('.main')
     }
 }
 
