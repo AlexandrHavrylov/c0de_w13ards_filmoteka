@@ -30,4 +30,36 @@
 }
 
 .modal-movie__item {
+  display: flex;
+  margin-top: 10px;
+}
+
+.modal-movie__descr-name {
+  width: 69px;
+  margin-right: 40px;
+  color: var(--font-color-modal);
+}
+
+.modal-movie__descr-info {
+  line-height: 1.167;
+}
+
+.modal-movie__descr-vote {
+  display: inline-block;
+  padding: 1px 10px;
+  width: 36px;
+  height: 16px;
+
+  text-align: center;
+  color: var(--font-color-light);
+  background-color: var(--accent-color);
+  border-radius: 5px;
+}
+
+.modal-movie__slash {
+  line-height: 1.333;
+  color: var(--font-color-modal);
+}
+
+.modal-movie__descr-votes {
 }
