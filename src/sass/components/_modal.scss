@@ -1,3 +1,26 @@
+.modal-movie__container {
+  padding: 48px 20px 40px 20px;
+}
+
+.modal-movie__close-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  fill: var(--font-color-dark);
+
+  &:hover,
+  &:focus {
+    fill: var(--accent-color);
+  }
+}
+
+.modal-movie__img {
+  width: 240px;
+  // margin-left: auto;
+  // margin-right: auto;
+}
+
 .modal-movie__info {
   background-color: var(--bg-color-light);
   margin-top: 30px;
@@ -17,6 +40,7 @@
   font-size: 20px;
   line-height: 1.15;
   text-transform: uppercase;
+  color: var(--font-color-dark);
 
   @include desktop {
     font-size: 30px;
@@ -34,8 +58,12 @@
   margin-top: 10px;
 }
 
+.modal-movie__item:first-child {
+  margin-top: 0;
+}
+
 .modal-movie__descr-name {
-  width: 69px;
+  width: 82px;
   margin-right: 40px;
   color: var(--font-color-modal);
 
@@ -45,6 +73,7 @@
 }
 
 .modal-movie__descr-info {
+  color: var(--font-color-dark);
   line-height: 1.167;
 }
 
@@ -72,6 +101,7 @@
 }
 
 .modal-movie__about-title {
+  margin-top: 20px;
   line-height: 1.333;
   text-transform: uppercase;
   color: var(--font-color-dark);
@@ -79,7 +109,7 @@
 
 .modal-movie__about {
   margin-top: 10px;
-  max-width: 240px;
+  // max-width: 240px;
   height: auto;
   line-height: 1.666;
   color: var(--font-color-dark);
@@ -96,14 +126,18 @@
 .modal-movie__button-wrapper {
   display: flex;
   margin-top: 20px;
+  justify-content: space-between;
 }
 
 .modal-movie__button {
   padding: 13px 6px;
+  width: 112px;
   border: 1px solid var(--border-color);
   border-radius: 5px;
   text-transform: uppercase;
   color: var(--font-color-dark);
+  line-height: 1.333;
+  background-color: transparent;
   transition: background-color var(--transiton-duration-time) var(--timing-fn);
 
   &:hover,
