@@ -4,15 +4,18 @@ import ItemsApiService from './js/fetch-items.js';
 import galleryMarkup from './templates/filmsInGallery.hbs';
 import { onSearchFormInput } from './js/fetch-by-name';
 import { onSearchBtnClick } from './js/fetch-by-name';
-
 import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
 import { getPopularFilms } from './js/get-popular-films';
-import '../node_modules/tui-pagination/dist/tui-pagination.css';
+import '../node_modules/tui-pagination/dist/tui-pagination.css'
+import { UserLibrary } from './js/userLibrary';
+
 
 const refs = getRefs();
 
 refs.searchForm.addEventListener('input', onSearchFormInput);
 refs.searchBtn.addEventListener('click', onSearchBtnClick);
+
+const userLibrary = new UserLibrary();
 
 const headerSwitcher = new HeaderSwitcher({
   onChangeCallback: page => {
@@ -30,5 +33,7 @@ const headerSwitcher = new HeaderSwitcher({
 });
 
 function getLibraryFilms() {
-  refs.moviesList.innerHTML = '';
+
+  userLibrary.showFiltered();
+
 }
