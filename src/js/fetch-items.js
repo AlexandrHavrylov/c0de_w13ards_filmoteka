@@ -16,7 +16,8 @@ export default class ItemsApiService {
     return axios
       .get(url)
       .then(response => {
-        return response.data.results;
+        // return response.data.results;
+        return response.data;
       })
       .catch(error => console.log(error.message));
   }
@@ -31,7 +32,8 @@ export default class ItemsApiService {
     return axios
       .get(url)
       .then(response => {
-        return response.data.results;
+        // return response.data.results;
+        return response.data;
       })
       .catch(error => console.log(error.message));
   }

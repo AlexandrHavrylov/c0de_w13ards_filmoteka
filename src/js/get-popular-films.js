@@ -1,47 +1,21 @@
-
-import ItemsApiService from "./fetch-items";
-import galleryMarkup from '../templates/filmsInGallery.hbs'
-import { getRefs } from "./get-refs";
-import genresTranslator from '../genres';
-
-
+import galleryMarkup from '../templates/filmsInGallery.hbs';
+import { getRefs } from './get-refs';
+import { updateMoviesData } from './update-movies-data';
+import ItemsApiService from './fetch-items';
 const itemsApiService = new ItemsApiService();
-const refs = getRefs()
-function GetPopularFilms() {
-const fetchMovies = async () => {
+import { setPagination } from './pagination';
+
+const refs = getRefs();
+
+async function getPopularFilms() {
   const result = await itemsApiService.fetchTrandingItems();
 
-  const updatedMovies = result.map(movie => {
-    const genres = movie.genre_ids.map(genreId => {
-      const currentGenre = genresTranslator.find(singleGenre => singleGenre.id === genreId);
+  // создание пагинации
+  const numberOfPages = result.total_pages;
+  console.log(numberOfPages);
+  setPagination(numberOfPages);
 
-      return ' ' + currentGenre.name;
-    });
-
-    const movieYear = movie.release_date.slice(0, 4);
-
-    if (genres.length > 3) {
-      const cutGenres = genres.slice(0, 2);
-
-      const modifiedGenre = [...cutGenres, ' Other'];
-
-      return {
-        ...movie,
-        genres: modifiedGenre,
-        movieYear,
-      };
-    }
-
-    return {
-      ...movie,
-      genres,
-      movieYear,
-    };
-  });
-
-  return updatedMovies;
-};
-fetchMovies().then(movies => (refs.moviesList.innerHTML = galleryMarkup(movies)));
+  updateMoviesData(result).then(movies => (refs.moviesList.innerHTML = galleryMarkup(movies)));
 }
 
-export {GetPopularFilms}
+export { getPopularFilms };
