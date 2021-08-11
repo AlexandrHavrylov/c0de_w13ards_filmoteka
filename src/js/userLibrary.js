@@ -141,9 +141,11 @@ export class UserLibrary {
     }
     this.showFiltered();
   }
-
   add(card) {
     this.#storage.add(card);
+  }
+  getById(cardId) {
+    return this.#storage.all().find(card => card.id === cardId);
   }
   getAll() {
     return this.#storage.all();
