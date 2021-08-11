@@ -97,7 +97,7 @@ const CLASSLIST_ACTION = {
   REMOVE: 'remove',
 };
 
-export class UserLibrary {
+class UserLibrary {
   #curLibrary = USER_LIBRARY_ENUM.WATCHED;
   #refs = {};
   #storage = new Storage();
@@ -211,3 +211,5 @@ class Storage {
     }
   }
 }
+
+export default new UserLibrary();
