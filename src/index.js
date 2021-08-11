@@ -6,23 +6,17 @@ import { onSearchFormInput } from './js/fetch-by-name';
 import { onSearchBtnClick } from './js/fetch-by-name';
 import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
 import { getPopularFilms } from './js/get-popular-films';
-import '../node_modules/tui-pagination/dist/tui-pagination.css'
-import { UserLibrary } from './js/userLibrary';
+import '../node_modules/tui-pagination/dist/tui-pagination.css';
+import userLibrary from './js/userLibrary';
 
 import { openCardMovie } from './js/getCardMovie';
 const itemsApiService = new ItemsApiService();
-
-
-
-
 
 const refs = getRefs();
 
 refs.searchForm.addEventListener('input', onSearchFormInput);
 refs.searchBtn.addEventListener('click', onSearchBtnClick);
-refs.moviesList.addEventListener('click', openCardMovie)
-
-const userLibrary = new UserLibrary();
+refs.moviesList.addEventListener('click', openCardMovie);
 
 const headerSwitcher = new HeaderSwitcher({
   onChangeCallback: page => {
@@ -40,7 +34,5 @@ const headerSwitcher = new HeaderSwitcher({
 });
 
 function getLibraryFilms() {
-
   userLibrary.showFiltered();
-
 }
