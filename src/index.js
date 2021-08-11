@@ -8,20 +8,20 @@ import { onSearchBtnClick } from './js/fetch-by-name';
 import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
 import { getPopularFilms } from './js/get-popular-films';
 
-
-
+import { UserLibrary } from './js/userLibrary';
 
 const refs = getRefs();
 
 refs.searchForm.addEventListener('input', onSearchFormInput);
 refs.searchBtn.addEventListener('click', onSearchBtnClick);
 
+const userLibrary = new UserLibrary();
+
 const headerSwitcher = new HeaderSwitcher({
   onChangeCallback: page => {
     switch (page) {
       case HEADER_ENUM.HOME:
-
-        refs.searchForm.value = ''
+        refs.searchForm.value = '';
         getPopularFilms();
 
         break;
@@ -32,9 +32,6 @@ const headerSwitcher = new HeaderSwitcher({
   },
 });
 
-
-
 function getLibraryFilms() {
- refs.moviesList.innerHTML = ''
-
+  userLibrary.showFiltered();
 }
