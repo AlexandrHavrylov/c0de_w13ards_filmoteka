@@ -13,6 +13,7 @@ const defaultOptions = {
   hideClassCss: 'is-hidden', // клас для приховування елементів
   header: '.header', // класс з хедером
   searchContainer: '.header__input', // контейнер з пошуком
+  alert:'.alert',
   libraryContainer: '.form__btns', // контейнер з кнопками "Watched" і "Queue"
   buttons: {
     home: '.header__btn--home', // клас кнопки "Home"
@@ -41,6 +42,7 @@ export class HeaderSwitcher {
       libraryEl: document.querySelector(options.libraryContainer),
       btnHomeEl: document.querySelector(options.buttons.home),
       btnLibraryEl: document.querySelector(options.buttons.library),
+      alertEl: document.querySelector(options.alert),
     };
 
     this.refs.btnHomeEl.addEventListener('click', () => this.switchTo(HEADER_ENUM.HOME));
@@ -71,6 +73,7 @@ export class HeaderSwitcher {
   #applyClasses(classListAction1, classListAction2) {
     this.refs.searchEl.classList[classListAction1](this.hideClassCss);
     this.refs.headerEl.classList[classListAction1](this.headerBackgroundImagesStyle.library);
+    this.refs.alertEl.classList[classListAction1](this.hideClassCss);
     this.refs.btnHomeEl.classList[classListAction2](this.isSelectedStyle);
 
     this.refs.libraryEl.classList[classListAction2](this.hideClassCss);
