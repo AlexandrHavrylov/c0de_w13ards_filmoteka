@@ -11,7 +11,7 @@ import { UserLibrary } from './js/userLibrary';
 
 import { openCardMovie } from './js/getCardMovie';
 const itemsApiService = new ItemsApiService();
-const userLibrary = new UserLibrary();
+
 
 
 
