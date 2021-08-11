@@ -2,6 +2,7 @@
 import { getRefs } from './get-refs';
 import ItemsApiService from './fetch-items.js';
 import filmInModal from '../templates/filmInModal.hbs';
+import Notiflix from "notiflix";
 
 
 const itemsApiService = new ItemsApiService();
@@ -13,8 +14,7 @@ function openCardMovie(event) {
    const movieId = event.target.parentNode.dataset.id;
    if (movieId) {
       renderCard(movieId);
-   }
-   
+   }  
 };
 
 // Отправка запроса и формирование карточки
@@ -25,11 +25,24 @@ async function renderCard(movieId) {
          refs.modalMovie.innerHTML = filmInModal(response);
          refs.modalMovie.classList.remove(('visually-hidden'))
          modalMovieClose = document.querySelector('.modal-movie__close-btn');
+         return response;
+      }).then(response => {
+           const addBtn = document.querySelector('[data-name="watched"]');
+         addBtn.addEventListener('click', () => {
+         const InList = localStorage.getItem(response.id);         
+         if (!InList) {
+            localStorage.setItem(`${response.id}`, JSON.stringify(response));
+            Notiflix.Notify.success('The movie has been added to your list');
+         }
+         else { Notiflix.Notify.failure("This movie is already in list") }});
       })
+   
    // добавление слушателей после формирования карточки
-         modalMovieClose.addEventListener('click', closeCard);
-         window.addEventListener('keydown', closeCardEsc);
+
+      modalMovieClose.addEventListener('click', closeCard);
+      window.addEventListener('keydown', closeCardEsc);
 };
+
 
 // Закрытие модального окна по событию
 const closeCard = () => closeCardMovie();
@@ -46,6 +59,7 @@ const closeCardMovie = () => {
    // Удаление слушателей
    modalMovieClose.removeEventListener('click', closeCard);
    window.removeEventListener('keydown', closeCardEsc);
+   // addBtn.removeEventListener('click', addToWatched)
 };
 
 export { openCardMovie, renderCard };
