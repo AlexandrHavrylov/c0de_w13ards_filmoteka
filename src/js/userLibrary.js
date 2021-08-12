@@ -170,6 +170,10 @@ class UserLibrary {
     const cards = this.#storage.all().filter(card => card[exp]);
     this.#refs.cardContainer.innerHTML = galleryMarkup(cards);
   }
+  // Отримати всі картки isWatched
+  getWatchedCards = () => this.#storage.all().find(card => card.isWatched);
+  // Отримати всі картки isQueue
+  getQuereueCards = () => this.#storage.all().find(card => card.isQueue);
 }
 
 class Storage {
