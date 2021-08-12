@@ -1,14 +1,29 @@
 import Notiflix from "notiflix";
-import  userLibrary  from './js/userLibrary';
-console.log(userLibrary);
+import userLibrary from './userLibrary';
 
-export default function addToWatched(data) {
-        const InList = localStorage.getItem(data.id);
-        console.log(InList)
+function addToWatched(card) {  
+    console.log(card)
+     const InList = userLibrary.getById(card.id);
+     console.log(InList)
         if (!InList) {
-            userLibrary.add();
-            Notiflix.Notify.success('The movie has been added to your list');
+            userLibrary.add(card);
+            Notiflix.Notify.success('The movie has been added to your watched list');
         }
-        else { Notiflix.Notify.failure("This movie is already in list") };
-    }
+        else {
+            Notiflix.Notify.failure("This movie is already in list")
+        }    
+}
 
+function addToQueue(card) {
+    console.log(card)
+    const isInList = userLibrary.getById(card.id);
+        if (!isInList) {
+            userLibrary.add(card);
+            Notiflix.Notify.success('The movie has been added to your queue list');
+        }
+        else {
+            Notiflix.Notify.failure("This movie is already in list")
+        }
+}
+
+export { addToWatched, addToQueue }
