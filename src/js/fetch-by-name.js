@@ -25,8 +25,8 @@ async function onSearchBtnClick(e) {
     
   if (filmToFind) {
     Notiflix.Loading.circle('Please wait ...');
-    Notiflix.Loading.remove(250);
     const result = await itemsApiService.fetchItemsFromSearch();
+    Notiflix.Loading.remove();
     updateMoviesData(result).then(movies => (refs.moviesList.innerHTML = galleryMarkup(movies)));
     refs.alert.innerHTML = "";
     const numberOfPages = result.total_pages;

@@ -10,8 +10,9 @@ const refs = getRefs();
 
 async function getPopularFilms() {
   Notiflix.Loading.circle('Please wait ...');    
-  Notiflix.Loading.remove(250);
   const result = await itemsApiService.fetchTrandingItems();
+  Notiflix.Loading.remove();
+  
   refs.alert.innerHTML= ""; 
   // создание пагинации
   const numberOfPages = result.total_pages;
