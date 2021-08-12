@@ -144,6 +144,15 @@ class UserLibrary {
   add(card) {
     this.#storage.add(card);
   }
+
+  addOrUpdate(card) {
+    if (this.getById(card)) {
+      this.update(card);
+    } else {
+      this.add(card);
+    }
+  }
+
   getById(cardId) {
     return this.#storage.all().find(card => card.id === cardId);
   }
