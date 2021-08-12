@@ -12,38 +12,30 @@ const refs = getRefs();
 
 // получаем значение из инпута
 function onSearchFormInput() {
-  filmToFind = refs.searchForm.value.trim();
+ filmToFind = refs.searchForm.value.trim();
     
-}
+  }
 
 // фетч фильмов по названию
 async function onSearchBtnClick(e) {
   e.preventDefault();
   itemsApiService.query = filmToFind;
-  document.querySelector(".header__search").value = "";
-  Notiflix.Loading.circle('Please wait ...');
+   
   
-  if (filmToFind === "") {
-      Notiflix.Loading.remove();
-    return;
-  }
-
-  
+    
   if (filmToFind) {
+    Notiflix.Loading.circle('Please wait ...');
+    Notiflix.Loading.remove(250);
     const result = await itemsApiService.fetchItemsFromSearch();
     updateMoviesData(result).then(movies => (refs.moviesList.innerHTML = galleryMarkup(movies)));
-    
-    Notiflix.Loading.remove(250);
- document.querySelector('.alert').innerHTML=''; 
+    refs.alert.innerHTML = "";
     const numberOfPages = result.total_pages;
     // console.log(numberOfPages);
     
     setPagination(numberOfPages);
 
      if (result.total_pages === 0) {
-       Notiflix.Loading.remove(250);
-   
-       document.querySelector('.alert').innerHTML='Search result is not successful. Enter the correct movie name and try again.'; 
+      refs.alert.innerHTML='Search result is not successful. Enter the correct movie name and try again.'; 
        
   }
   }
