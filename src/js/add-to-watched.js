@@ -2,9 +2,7 @@ import Notiflix from "notiflix";
 import userLibrary from './userLibrary';
 
 function addToWatched(card) {  
-    console.log(card)
      const InList = userLibrary.getById(card.id);
-     console.log(InList)
         if (!InList) {
             userLibrary.add(card);
             Notiflix.Notify.success('The movie has been added to your watched list');
@@ -15,9 +13,8 @@ function addToWatched(card) {
 }
 
 function addToQueue(card) {
-    console.log(card)
-    const isInList = userLibrary.getById(card.id);
-        if (!isInList) {
+    const InList = userLibrary.getById(card.id);
+        if (!InList) {
             userLibrary.add(card);
             Notiflix.Notify.success('The movie has been added to your queue list');
         }
@@ -25,5 +22,7 @@ function addToQueue(card) {
             Notiflix.Notify.failure("This movie is already in list")
         }
 }
+
+
 
 export { addToWatched, addToQueue }

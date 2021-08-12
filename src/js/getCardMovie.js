@@ -8,20 +8,20 @@ import { addToWatched, addToQueue } from './add-to-watched';
 
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
-// let card;
+let card;
       
 
 // Открытие модального окна с готовой карточкой
 function openCardMovie(event) {
    const movieId = event.target.parentNode.dataset.id;
    if (movieId) {
-      renderCard(movieId)
+      renderCard(movieId);
    }  
 };
 
 async function renderCard(movieId) {
    try {
-      const card = await itemsApiService.fetchCard(movieId);
+      card = await itemsApiService.fetchCard(movieId);
       refs.modalMovie.innerHTML = filmInModal(card);
       refs.modalMovie.classList.remove(('visually-hidden'));
 
@@ -31,8 +31,8 @@ async function renderCard(movieId) {
      
       // добавление слушателей после формирования карточки
       modalMovieClose.addEventListener('click', closeCard)
-      addToWatchBtn.addEventListener('click', addToWatched(card));
-      addToQueueBtn.addEventListener('click', addToQueue);
+      addToWatchBtn.addEventListener('click', addToWatchBtnListener);
+      addToQueueBtn.addEventListener('click', addToQueueBtnListener);
       window.addEventListener('keydown', closeCardEsc);
       return card;
    } catch (error) {
@@ -40,6 +40,15 @@ async function renderCard(movieId) {
       console.log(error.message)
    } 
 };
+
+function addToWatchBtnListener() {
+   addToWatched(card);
+}
+
+function addToQueueBtnListener() {
+   addToQueue(card);
+}
+
 
 // Закрытие модального окна по событию
 const closeCard = () => closeCardMovie();
