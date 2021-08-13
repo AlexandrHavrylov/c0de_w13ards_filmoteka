@@ -27,19 +27,20 @@ async function renderCard(movieId) {
       refs.modalMovie.innerHTML = filmInModal(card);
       refs.modalMovie.classList.remove(('visually-hidden'));
       const localCard = userLibrary.getById(card.id);
-      if (localCard) card = { ...card, ...localCard}
+      if (localCard) card = { ...card, ...localCard };
+      console.log(localCard)
       const addToWatchBtn = document.querySelector("[data-name='watched']");
-      if(card.isWatched){ addToWatchBtn.textContent = 'Remove from watched' }
+      if (card.isWatched) { addToWatchBtn.textContent = 'Remove from watched' };
       const addToQueueBtn = document.querySelector("[data-name='queue']");
       if (card.isQueue) {addToQueueBtn.textContent = 'Remove from queue'};
-      const modalMovieClose = document.querySelector('[data-action="modal-close"]')
+      const modalMovieClose = document.querySelector('[data-action="modal-close"]');
    
       // добавление слушателей после формирования карточки
       modalMovieClose.addEventListener('click', closeCard)
       addToWatchBtn.addEventListener('click', addToWatchBtnListener);
       addToQueueBtn.addEventListener('click', addToQueueBtnListener);
       window.addEventListener('keydown', closeCardEsc);
-      return (card);
+      return card;
    } catch (error) {
       Notiflix.Notify.info('Oops! Something went wrong, please try again');
       console.log(error.message)
