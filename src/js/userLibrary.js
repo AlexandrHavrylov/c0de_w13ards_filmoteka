@@ -72,7 +72,7 @@ class UserLibrary {
   }
 
   addOrUpdate(card) {
-    if (this.getById(card)) {
+    if (this.getById(card.id)) {
       this.update(card);
     } else {
       this.add(card);
