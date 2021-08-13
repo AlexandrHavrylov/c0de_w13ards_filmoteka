@@ -9,6 +9,7 @@ import { addToWatched, addToQueue } from './add-to-watched';
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
 let modalMovieClose;
+let card;
 // Открытие модального окна с готовой карточкой
 function openCardMovie(event) {
    const movieId = event.target.parentNode.dataset.id;
