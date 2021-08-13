@@ -8,15 +8,15 @@ import { addToWatched, addToQueue } from './add-to-watched';
 
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
-let card;
-      
-
+let modalMovieClose;
 // Открытие модального окна с готовой карточкой
 function openCardMovie(event) {
    const movieId = event.target.parentNode.dataset.id;
    if (movieId) {
       renderCard(movieId);
-   }  
+   }
+   document.querySelector('body').classList.add('scroll-disable');
+   
 };
 
 async function renderCard(movieId) {
@@ -61,6 +61,7 @@ const closeCardEsc = event => {
 // Функция закрытия
 const closeCardMovie = () => {
    refs.modalMovie.classList.add('visually-hidden');
+   document.querySelector('body').classList.remove('scroll-disable');
    
    // Удаление слушателей
    window.removeEventListener('keydown', closeCardEsc);
