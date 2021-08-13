@@ -10,7 +10,6 @@ async function renderCurrentPage(page) {
   itemsApiService.page = page;
 
   const result = await itemsApiService.fetchTrandingItems();
-  console.log(result);
   updateMoviesData(result).then(movies => (refs.moviesList.innerHTML = galleryMarkup(movies)));
 }
 
