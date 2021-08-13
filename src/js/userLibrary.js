@@ -1,6 +1,6 @@
 /*
 користування:
-    створити:               const userLib = new UserLibrary();
+    import userLibrary from 'path/to/library';
     додати картку:          userLib.add(card);
     змінити картку:         userLib.update(card);
     видалити картку:        userLib.remove(card);
@@ -9,74 +9,6 @@
 */
 
 import galleryMarkup from '../templates/filmsInGallery.hbs';
-
-// const test_cards = [
-//   {
-//     id: 436969,
-//     adult: false,
-//     backdrop_path: '/jlGmlFOcfo8n5tURmhC7YVd4Iyy.jpg',
-
-//     genre_ids: [28, 12, 35, 878],
-//     original_language: 'en',
-//     original_title: 'The Suicide Squad',
-//     poster_path: '/kb4s0ML0iVZlG6wAKbbs9NAm6X.jpg',
-//     video: false,
-//     vote_average: 8.2,
-//     vote_count: 1203,
-//     overview:
-//       'Supervillains Harley Quinn, Bloodsport, Peacemaker and a collection of nutty cons at Belle Reve prison join the super-secret, super-shady Task Force X as they are dropped off at the remote, enemy-infused island of Corto Maltese.',
-//     release_date: '2021-07-28',
-//     title: 'The Suicide Squad',
-//     popularity: 4168.234,
-//     media_type: 'movie',
-//     isWatched: false,
-//     isQueue: true,
-//   },
-
-//   {
-//     id: 385128,
-//     title: 'F9',
-//     overview:
-//       "Dominic Toretto and his crew battle the most skilled assassin and high-performance driver they've ever encountered: his forsaken brother.",
-//     release_date: '2021-05-19',
-//     adult: false,
-//     backdrop_path: '/xXHZeb1yhJvnSHPzZDqee0zfMb6.jpg',
-//     vote_count: 2315,
-
-//     genre_ids: [28, 80, 53],
-//     vote_average: 7.7,
-//     original_language: 'en',
-//     original_title: 'F9',
-//     poster_path: '/bOFaAXmWWXC3Rbv4u4uM9ZSzRXP.jpg',
-//     video: false,
-//     popularity: 4973.593,
-//     media_type: 'movie',
-//     isWatched: true,
-//     isQueue: false,
-//   },
-
-//   {
-//     id: 451048,
-
-//     genre_ids: [12, 14, 35, 28],
-//     original_language: 'en',
-//     original_title: 'Jungle Cruise',
-//     poster_path: '/9dKCd55IuTT5QRs989m9Qlb7d2B.jpg',
-//     video: false,
-//     vote_average: 8,
-//     overview:
-//       'Dr. Lily Houghton enlists the aid of wisecracking skipper Frank Wolff to take her down the Amazon in his dilapidated boat. Together, they search for an ancient tree that holds the power to heal – a discovery that will change the future of medicine.',
-//     release_date: '2021-07-28',
-//     vote_count: 1286,
-//     title: 'Jungle Cruise',
-//     adult: false,
-//     backdrop_path: '/bwBmo4I3fqMsVvVtamyVJHXGnLF.jpg',
-//     popularity: 5812.972,
-//     media_type: 'movie',
-//     isWatched: true,
-//     isQueue: true,
-//   },
-// ];
 
 const defaultOptions = {
   isSelectedStyle: 'form__btn--current',
@@ -115,12 +47,6 @@ class UserLibrary {
     });
 
     this.#refs.cardContainer = document.querySelector(this.options.cardContainer);
-
-    // this.#storage.update({ ...test_cards[0], release_date: '5555-55-55' });
-    // this.#storage.add(test_cards[0]);
-    // this.#storage.add(test_cards[1]);
-    // this.#storage.add(test_cards[2]);
-    // this.#storage.remove(test_cards[2]);
   }
 
   #setSelectedStyle(action1, action2) {
@@ -174,6 +100,14 @@ class UserLibrary {
   getWatchedCards = () => this.#storage.all().find(card => card?.isWatched);
   // Отримати всі картки isQueue
   getQuereueCards = () => this.#storage.all().find(card => card?.isQueue);
+
+  processCard(card) {
+    if (card.isWatched || card.isQueue) {
+      this.addOrUpdate(card);
+    } else {
+      this.remove(card);
+    }
+  }
 }
 
 class Storage {
