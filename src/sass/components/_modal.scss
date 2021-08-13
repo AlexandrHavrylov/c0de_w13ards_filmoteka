@@ -172,6 +172,12 @@
 }
 
 .modal-movie__genre {
+  &:after {
+    content: ',';
+  }
+  &:last-of-type::after {
+    content: '';
+  }
 }
 
 .modal-movie__about-title {
