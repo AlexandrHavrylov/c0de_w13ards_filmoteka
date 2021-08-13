@@ -33,13 +33,13 @@ async function renderCard(movieId) {
       const addToQueueBtn = document.querySelector("[data-name='queue']");
       if (userLibrary.getById(card.id)){ addToQueueBtn.textContent = 'Remove from queue' };
       const modalMovieClose = document.querySelector('[data-action="modal-close"]')
-     
+   
       // добавление слушателей после формирования карточки
       modalMovieClose.addEventListener('click', closeCard)
       addToWatchBtn.addEventListener('click', addToWatchBtnListener);
       addToQueueBtn.addEventListener('click', addToQueueBtnListener);
       window.addEventListener('keydown', closeCardEsc);
-      return (card,modalMovieClose,addToWatchBtn,addToQueueBtn);
+      return (card);
    } catch (error) {
       Notiflix.Notify.info('Oops! Something went wrong, please try again');
       console.log(error.message)
