@@ -87,7 +87,7 @@ const defaultOptions = {
   cardContainer: '.movie-list',
 };
 
-const USER_LIBRARY_ENUM = {
+export const USER_LIBRARY_ENUM = {
   WATCHED: 'watched',
   QUEUE: 'queue',
 };
@@ -98,7 +98,7 @@ const CLASSLIST_ACTION = {
 };
 
 class UserLibrary {
-  #curLibrary = USER_LIBRARY_ENUM.WATCHED;
+  curLibrary = USER_LIBRARY_ENUM.WATCHED;
   #refs = {};
   #storage = new Storage();
 
@@ -128,9 +128,9 @@ class UserLibrary {
     this.#refs.btnWatched.classList[action2](this.options.isSelectedStyle);
   }
   switchTo(libraryEnum = USER_LIBRARY_ENUM.WATCHED) {
-    this.#curLibrary = libraryEnum;
+    this.curLibrary = libraryEnum;
 
-    switch (this.#curLibrary) {
+    switch (this.curLibrary) {
       case USER_LIBRARY_ENUM.QUEUE:
         this.#setSelectedStyle(CLASSLIST_ACTION.ADD, CLASSLIST_ACTION.REMOVE);
         break;
@@ -166,10 +166,14 @@ class UserLibrary {
     this.#storage.remove(card);
   }
   showFiltered() {
-    const exp = this.#curLibrary === USER_LIBRARY_ENUM.WATCHED ? 'isWatched' : 'isQueue';
+    const exp = this.curLibrary === USER_LIBRARY_ENUM.WATCHED ? 'isWatched' : 'isQueue';
     const cards = this.#storage.all().filter(card => card[exp]);
     this.#refs.cardContainer.innerHTML = galleryMarkup(cards);
   }
+  // Отримати всі картки isWatched
+  getWatchedCards = () => this.#storage.all().find(card => card?.isWatched);
+  // Отримати всі картки isQueue
+  getQuereueCards = () => this.#storage.all().find(card => card?.isQueue);
 }
 
 class Storage {
