@@ -4,12 +4,13 @@ import ItemsApiService from './fetch-items.js';
 import filmInModal from '../templates/filmInModal.hbs';
 import Notiflix from "notiflix";
 import { addToWatched, addToQueue } from './add-to-watched';
+import userLibrary from './userLibrary';
 
 
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
-let modalMovieClose;
 let card;
+
 // Открытие модального окна с готовой карточкой
 function openCardMovie(event) {
    const movieId = event.target.parentNode.dataset.id;
@@ -27,7 +28,10 @@ async function renderCard(movieId) {
       refs.modalMovie.classList.remove(('visually-hidden'));
 
       const addToWatchBtn = document.querySelector("[data-name='watched']");
+      if (userLibrary.getById(card.id)){addToWatchBtn.textContent = 'Remove from watched'
+   };
       const addToQueueBtn = document.querySelector("[data-name='queue']");
+      if (userLibrary.getById(card.id)){ addToQueueBtn.textContent = 'Remove from queue' };
       const modalMovieClose = document.querySelector('[data-action="modal-close"]')
      
       // добавление слушателей после формирования карточки
@@ -35,7 +39,7 @@ async function renderCard(movieId) {
       addToWatchBtn.addEventListener('click', addToWatchBtnListener);
       addToQueueBtn.addEventListener('click', addToQueueBtnListener);
       window.addEventListener('keydown', closeCardEsc);
-      return card;
+      return (card,modalMovieClose,addToWatchBtn,addToQueueBtn);
    } catch (error) {
       Notiflix.Notify.info('Oops! Something went wrong, please try again');
       console.log(error.message)
@@ -65,10 +69,14 @@ const closeCardMovie = () => {
    document.querySelector('body').classList.remove('scroll-disable');
    
    // Удаление слушателей
+   const modalMovieClose = document.querySelector('[data-action="modal-close"]');
+   const addToWatchBtn = document.querySelector("[data-name='watched']");
+   const addToQueueBtn = document.querySelector("[data-name='queue']");
+
    window.removeEventListener('keydown', closeCardEsc);
-   modalMovieClose.removeEventListener('click', closeCard)
-   addToWatchBtn.removeEventListener('click', addToWatched);
-   addToQueueBtn.removeEventListener('click', addToQueue);
+   modalMovieClose.removeEventListener('click', closeCard);
+   addToWatchBtn.removeEventListener('click', addToWatchBtnListener);
+   addToQueueBtn.removeEventListener('click', addToQueueBtnListener);
    
 };
 
