@@ -26,12 +26,12 @@ async function renderCard(movieId) {
       card = await itemsApiService.fetchCard(movieId);
       refs.modalMovie.innerHTML = filmInModal(card);
       refs.modalMovie.classList.remove(('visually-hidden'));
-
+      const localCard = userLibrary.getById(card.id);
+      if (localCard) card = { ...card, ...localCard}
       const addToWatchBtn = document.querySelector("[data-name='watched']");
-      if (userLibrary.getById(card.id)){addToWatchBtn.textContent = 'Remove from watched'
-   };
+      if(card.isWatched){ addToWatchBtn.textContent = 'Remove from watched' }
       const addToQueueBtn = document.querySelector("[data-name='queue']");
-      if (userLibrary.getById(card.id)){ addToQueueBtn.textContent = 'Remove from queue' };
+      if (card.isQueue) {addToQueueBtn.textContent = 'Remove from queue'};
       const modalMovieClose = document.querySelector('[data-action="modal-close"]')
    
       // добавление слушателей после формирования карточки
