@@ -14,9 +14,6 @@ function addToWatched(card) {
         userLibrary.getWatchedCards();
         Notiflix.Notify.failure('The movie has been deleted from watched list');
     }
-    // else {
-    //     Notiflix.Notify.failure("This movie is already in list")
-    // }
 }
 
 function addToQueue(card) {
@@ -33,12 +30,7 @@ function addToQueue(card) {
     } else if (InList&&card.isWatched) {
         card.isQueue = true;
         userLibrary.update(card);
-        console.log('added lib')
-    } else {
-            Notiflix.Notify.failure("This movie is already in list")
-        }
+    }
 }
-
-
 
 export { addToWatched, addToQueue }
