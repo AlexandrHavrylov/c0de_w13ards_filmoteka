@@ -1,10 +1,15 @@
 import galleryMarkup from '../templates/filmsInGallery.hbs';
 import { getRefs } from './get-refs';
 import { updateMoviesData } from './update-movies-data';
+
 import ItemsApiService from './fetch-items';
+
+const itemsApiService = new ItemsApiService();
+
 import Pagination from 'tui-pagination';
 import { renderCurrentPage } from './pagination-nav';
 import { options } from './pagination';
+
 import { setPagination } from './pagination';
 import Notiflix from 'notiflix';
 
