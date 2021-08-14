@@ -28,7 +28,9 @@ function openCardMovie(event) {
 
 async function renderCard(movieId) {
    try {
+      Notiflix.Loading.circle('Please wait ...');
       card = await itemsApiService.fetchCard(movieId);
+      Notiflix.Loading.remove();
       refs.modalMovie.innerHTML = filmInModal(card);
       refs.modalMovie.classList.remove(('visually-hidden'));    
       const localCard = userLibrary.getById(card.id);
