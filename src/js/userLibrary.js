@@ -92,8 +92,8 @@ class UserLibrary {
     this.#storage.remove(card);
   }
   showFiltered() {
-    const exp = this.curLibrary === USER_LIBRARY_ENUM.WATCHED ? 'isWatched' : 'isQueue';
-    const cards = this.#storage.all().filter(card => card[exp]);
+    const cards =
+      this.curLibrary === USER_LIBRARY_ENUM.WATCHED ? getWatchedCards() : getQuereueCards();
     this.#refs.cardContainer.innerHTML = galleryMarkup(cards);
   }
   // Отримати всі картки isWatched
