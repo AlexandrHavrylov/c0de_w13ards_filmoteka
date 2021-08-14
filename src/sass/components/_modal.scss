@@ -13,6 +13,7 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
+  overflow: auto;
 }
 
 .modal-movie {
@@ -25,7 +26,7 @@
   z-index: 100;
   background-color: var(--bg-color-light);
   padding: 50px 30px 40px 30px;
-  overflow: auto;
+  // overflow: auto;
 
   @include tablet {
     display: flex;
@@ -172,6 +173,12 @@
 }
 
 .modal-movie__genre {
+  &:after {
+    content: ',';
+  }
+  &:last-of-type::after {
+    content: '';
+  }
 }
 
 .modal-movie__about-title {
