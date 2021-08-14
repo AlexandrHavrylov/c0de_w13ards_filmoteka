@@ -1,14 +1,15 @@
-import { getRefs } from './js/get-refs';
+import '../node_modules/tui-pagination/dist/tui-pagination.css';
 import './sass/main.scss';
+import { getRefs } from './js/get-refs';
 import ItemsApiService from './js/fetch-items.js';
 import galleryMarkup from './templates/filmsInGallery.hbs';
 import { onSearchFormInput } from './js/fetch-by-name';
 import { onSearchBtnClick } from './js/fetch-by-name';
 import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
 import { getPopularFilms } from './js/get-popular-films';
-import '../node_modules/tui-pagination/dist/tui-pagination.css';
+
 import userLibrary from './js/userLibrary';
-import '../node_modules/tui-pagination/dist/tui-pagination.css';
+
 import './js/pagination-nav';
 import { openCardMovie } from './js/getCardMovie';
 
