@@ -3,21 +3,41 @@ import { getRefs } from './get-refs';
 import { updateMoviesData } from './update-movies-data';
 
 import ItemsApiService from './fetch-items';
+
 const itemsApiService = new ItemsApiService();
 
 import Pagination from 'tui-pagination';
 import { renderCurrentPage } from './pagination-nav';
 import { options } from './pagination';
 
+import { setPagination } from './pagination';
+import Notiflix from 'notiflix';
+
+
 const refs = getRefs();
+const itemsApiService = new ItemsApiService();
 
 let numberOfPages = 0;
 
 async function getPopularFilms() {
+
   // Загрузка данных
+
+  Notiflix.Loading.circle('Please wait ...');
+
   const result = await itemsApiService.fetchTrandingItems();
+  Notiflix.Loading.remove();
+
 
   // Отрисовка данных
+
+  refs.alert.innerHTML = '';
+ 
+  const numberOfPages = result.total_pages;
+
+  setPagination(numberOfPages);
+
+
   updateMoviesData(result).then(movies => (refs.moviesList.innerHTML = galleryMarkup(movies)));
 
   // ========== Создание пагинации ==========

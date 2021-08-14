@@ -7,13 +7,13 @@ import filmInModal from '../templates/filmInModal.hbs';
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
 let modalMovieClose;
-
 // Открытие модального окна с готовой карточкой
 function openCardMovie(event) {
    const movieId = event.target.parentNode.dataset.id;
    if (movieId) {
       renderCard(movieId);
    }
+   document.querySelector('body').classList.add('scroll-disable');
    
 };
 
@@ -42,6 +42,7 @@ const closeCardEsc = event => {
 // Функция закрытия
 const closeCardMovie = () => {
    refs.modalMovie.classList.add('visually-hidden');
+   document.querySelector('body').classList.remove('scroll-disable');
    
    // Удаление слушателей
    modalMovieClose.removeEventListener('click', closeCard);
