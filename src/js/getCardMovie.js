@@ -28,7 +28,6 @@ async function renderCard(movieId) {
       refs.modalMovie.classList.remove(('visually-hidden'));    
       const localCard = userLibrary.getById(card.id);
       if (localCard) card = { ...card, ...localCard };
-      console.log(userLibrary.curLibrary)
       const addToWatchBtn = document.querySelector("[data-name='watched']");
       if (card.isWatched) { addToWatchBtn.textContent = 'Remove from watched' };
       const addToQueueBtn = document.querySelector("[data-name='queue']");

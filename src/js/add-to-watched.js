@@ -4,9 +4,10 @@ import userLibrary from './userLibrary';
 function addToWatched(card) {  
     const inList = userLibrary.getById(card.id);
     if (!inList || !inList.isWatched) {
-        userLibrary.add(card);
+        // userLibrary.add(card);
         card.isWatched = true;
-        userLibrary.update(card);
+        // userLibrary.update(card);
+        userLibrary.processCard(card);
         Notiflix.Notify.success('The movie has been added to your watched list');
     } else {
         card.isWatched = false;
@@ -19,9 +20,10 @@ function addToWatched(card) {
 function addToQueue(card) {
     const inList = userLibrary.getById(card.id);
     if (!inList || !inList.isQueue) {
-        userLibrary.add(card);
+        // userLibrary.add(card);
         card.isQueue = true;
-        userLibrary.update(card);
+        // userLibrary.update(card);
+        userLibrary.processCard(card);
         Notiflix.Notify.success('The movie has been added to your queue list');
     } else {
         card.isQueue = false;

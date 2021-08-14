@@ -174,6 +174,14 @@ class UserLibrary {
   getWatchedCards = () => this.#storage.all().find(card => card?.isWatched);
   // Отримати всі картки isQueue
   getQuereueCards = () => this.#storage.all().find(card => card?.isQueue);
+
+  processCard(card) {
+    if (card.isWatched || card.isQueue) {
+      this.addOrUpdate(card);
+    } else {
+      this.remove(card);
+    }
+  }
 }
 
 class Storage {
