@@ -2,11 +2,15 @@
 import { getRefs } from './get-refs';
 import ItemsApiService from './fetch-items.js';
 import filmInModal from '../templates/filmInModal.hbs';
+import Notiflix from "notiflix";
+import { addToWatched, addToQueue } from './add-to-watched';
+import userLibrary from './userLibrary';
 
 
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
-let modalMovieClose;
+let card;
+
 // Открытие модального окна с готовой карточкой
 
 function openCardMovie(event) {
@@ -20,19 +24,39 @@ function openCardMovie(event) {
    
 };
 
-// Отправка запроса и формирование карточки
 async function renderCard(movieId) {
-   await itemsApiService.fetchCard(movieId)
-      .then((response) => {
-         console.log(response);
-         refs.modalMovie.innerHTML = filmInModal(response);
-         refs.modalMovie.classList.remove(('visually-hidden'))
-         modalMovieClose = document.querySelector('.modal-movie__close-btn');
-      })
-   // добавление слушателей после формирования карточки
-         modalMovieClose.addEventListener('click', closeCard);
-         window.addEventListener('keydown', closeCardEsc);
+   try {
+      card = await itemsApiService.fetchCard(movieId);
+      refs.modalMovie.innerHTML = filmInModal(card);
+      refs.modalMovie.classList.remove(('visually-hidden'));    
+      const localCard = userLibrary.getById(card.id);
+      if (localCard) card = { ...card, ...localCard };
+      const addToWatchBtn = document.querySelector("[data-name='watched']");
+      if (card.isWatched) { addToWatchBtn.textContent = 'Remove from watched' };
+      const addToQueueBtn = document.querySelector("[data-name='queue']");
+      if (card.isQueue) {addToQueueBtn.textContent = 'Remove from queue'};
+      const modalMovieClose = document.querySelector('[data-action="modal-close"]');
+   
+      // добавление слушателей после формирования карточки
+      modalMovieClose.addEventListener('click', closeCard)
+      addToWatchBtn.addEventListener('click', addToWatchBtnListener);
+      addToQueueBtn.addEventListener('click', addToQueueBtnListener);
+      window.addEventListener('keydown', closeCardEsc);
+      return card;
+   } catch (error) {
+      Notiflix.Notify.info('Oops! Something went wrong, please try again');
+      console.log(error.message)
+   } 
 };
+
+function addToWatchBtnListener() {
+   addToWatched(card);
+}
+
+function addToQueueBtnListener() {
+   addToQueue(card);
+}
+
 
 // Закрытие модального окна по событию
 const closeCard = () => closeCardMovie();
@@ -48,8 +72,15 @@ const closeCardMovie = () => {
    document.querySelector('body').classList.remove('scroll-disable');
    
    // Удаление слушателей
-   modalMovieClose.removeEventListener('click', closeCard);
+   const modalMovieClose = document.querySelector('[data-action="modal-close"]');
+   const addToWatchBtn = document.querySelector("[data-name='watched']");
+   const addToQueueBtn = document.querySelector("[data-name='queue']");
+
    window.removeEventListener('keydown', closeCardEsc);
+   modalMovieClose.removeEventListener('click', closeCard);
+   addToWatchBtn.removeEventListener('click', addToWatchBtnListener);
+   addToQueueBtn.removeEventListener('click', addToQueueBtnListener);
+   
 };
 
 export { openCardMovie, renderCard };
