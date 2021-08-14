@@ -43,9 +43,32 @@
   }
 }
 
-.movie-card__poster {
+.movie-card__thumb {
+  position: relative;
   margin-bottom: 10px;
+}
+
+.movie-card__poster {
   border-radius: 5px;
+}
+
+.movie-card__descr-vote {
+  position: absolute;
+  bottom: 7px;
+  right: 7px;
+
+  display: inline-block;
+  padding: 1px 10px;
+  width: 36px;
+  height: 16px;
+  text-align: center;
+  color: var(--font-color-light);
+  background-color: var(--accent-color);
+  border-radius: 5px;
+}
+
+.movie-card__descr-container {
+  padding: 0 10px 10px 10px;
 }
 
 .movie-card__title {
