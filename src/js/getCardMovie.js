@@ -10,6 +10,8 @@ import userLibrary from './userLibrary';
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
 let card;
+let modalMovieOverlay;
+let modalMovieClose;
 
 // Открытие модального окна с готовой карточкой
 
@@ -35,17 +37,19 @@ async function renderCard(movieId) {
       if (card.isWatched) { addToWatchBtn.textContent = 'Remove from watched' };
       const addToQueueBtn = document.querySelector("[data-name='queue']");
       if (card.isQueue) {addToQueueBtn.textContent = 'Remove from queue'};
-      const modalMovieClose = document.querySelector('[data-action="modal-close"]');
+      modalMovieClose = document.querySelector('[data-action="modal-close"]');
+      modalMovieOverlay = document.querySelector('.modal-movie__overlay');
    
       // добавление слушателей после формирования карточки
-      modalMovieClose.addEventListener('click', closeCard)
+      modalMovieClose.addEventListener('click', closeCard);
       addToWatchBtn.addEventListener('click', addToWatchBtnListener);
       addToQueueBtn.addEventListener('click', addToQueueBtnListener);
       window.addEventListener('keydown', closeCardEsc);
+      modalMovieOverlay.addEventListener('click', closeCard);
       return card;
    } catch (error) {
       Notiflix.Notify.info('Oops! Something went wrong, please try again');
-      console.log(error.message)
+      console.log(error.message);
    } 
 };
 
@@ -59,7 +63,12 @@ function addToQueueBtnListener() {
 
 
 // Закрытие модального окна по событию
-const closeCard = () => closeCardMovie();
+const closeCard = (event) => {
+   if (event.target === modalMovieOverlay || event.target === modalMovieClose) {
+      closeCardMovie();
+   };
+};
+
 const closeCardEsc = event => {
    if (event.key === "Escape") {
       closeCardMovie();
