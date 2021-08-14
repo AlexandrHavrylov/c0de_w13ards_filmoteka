@@ -2,7 +2,7 @@ import { getRefs } from './get-refs';
 import ItemsApiService from './fetch-items.js';
 import galleryMarkup from '../templates/filmsInGallery.hbs';
 import { updateMoviesData } from './update-movies-data';
-import { setPagination } from './pagination';
+
 import Notiflix from 'notiflix';
 
 const itemsApiService = new ItemsApiService();
@@ -32,7 +32,7 @@ async function onSearchBtnClick(e) {
     const numberOfPages = result.total_pages;
     // console.log(numberOfPages);
     
-    setPagination(numberOfPages);
+   
 
      if (result.total_pages === 0) {
       refs.alert.innerHTML='Search result is not successful. Enter the correct movie name and try again.'; 
