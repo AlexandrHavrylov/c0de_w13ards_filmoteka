@@ -1,4 +1,5 @@
 import { HEADER_ENUM } from './header-switch';
-return {
+
+export default {
   curPage: HEADER_ENUM.HOME,
 };
