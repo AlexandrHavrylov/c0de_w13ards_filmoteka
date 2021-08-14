@@ -8,8 +8,11 @@ const itemsApiService = new ItemsApiService();
 const refs = getRefs();
 let modalMovieClose;
 // Открытие модального окна с готовой карточкой
+
 function openCardMovie(event) {
-   const movieId = event.target.parentNode.dataset.id;
+   const movieId = event.path[2].dataset.id
+   console.log(movieId)
+
    if (movieId) {
       renderCard(movieId);
    }

@@ -29,7 +29,7 @@ async function onSearchBtnClick(e) {
     Notiflix.Loading.remove();
     updateMoviesData(result).then(movies => (refs.moviesList.innerHTML = galleryMarkup(movies)));
     refs.alert.innerHTML = "";
-    const numberOfPages = result.total_pages;
+
     // console.log(numberOfPages);
     
    
