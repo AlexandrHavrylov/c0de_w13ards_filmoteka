@@ -8,10 +8,11 @@ import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
 import { getPopularFilms } from './js/get-popular-films';
 import '../node_modules/tui-pagination/dist/tui-pagination.css';
 import userLibrary from './js/userLibrary';
-
+import '../node_modules/tui-pagination/dist/tui-pagination.css';
+import './js/pagination-nav';
 import { openCardMovie } from './js/getCardMovie';
-const itemsApiService = new ItemsApiService();
 
+const itemsApiService = new ItemsApiService();
 const refs = getRefs();
 
 refs.searchForm.addEventListener('input', onSearchFormInput);

@@ -2,15 +2,15 @@ import galleryMarkup from '../templates/filmsInGallery.hbs';
 import { getRefs } from './get-refs';
 import { updateMoviesData } from './update-movies-data';
 import ItemsApiService from './fetch-items';
-
 import Pagination from 'tui-pagination';
 import { renderCurrentPage } from './pagination-nav';
 import { options } from './pagination';
-
 import Notiflix from 'notiflix';
 
 const refs = getRefs();
 const itemsApiService = new ItemsApiService();
+
+let numberOfPages = 0;
 
 async function getPopularFilms() {
   Notiflix.Loading.circle('Please wait ...');
