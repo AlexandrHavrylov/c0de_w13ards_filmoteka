@@ -1,5 +1,6 @@
 import '../node_modules/tui-pagination/dist/tui-pagination.css';
 import './sass/main.scss';
+import globalVariables from './js/global-variables';
 import { getRefs } from './js/get-refs';
 import ItemsApiService from './js/fetch-items.js';
 import galleryMarkup from './templates/filmsInGallery.hbs';
@@ -22,6 +23,8 @@ refs.moviesList.addEventListener('click', openCardMovie);
 
 const headerSwitcher = new HeaderSwitcher({
   onChangeCallback: page => {
+    globalVariables.curPage = page;
+
     switch (page) {
       case HEADER_ENUM.HOME:
         refs.searchForm.value = '';
