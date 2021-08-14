@@ -11,7 +11,7 @@ export default class ItemsApiService {
     const URL_TRANDING_ITEMS = '/3/trending/movie/day';
     const API_KEY = '5fa4bb8a58c85ac583b1447954dde7e6';
 
-    const url = `${BASE_URL}${URL_TRANDING_ITEMS}?api_key=${API_KEY}&page=${this.page}`;
+    const url = `${BASE_URL}${URL_TRANDING_ITEMS}?api_key=${API_KEY}`;
 
     return axios
       .get(url)
