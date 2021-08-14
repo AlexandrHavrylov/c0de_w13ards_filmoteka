@@ -1,4 +1,6 @@
-import Pagination from 'tui-pagination';
+
+import { numberOfPages } from './get-popular-films';
+
 
 function setPagination(numberOfPages) {
   const options = {
