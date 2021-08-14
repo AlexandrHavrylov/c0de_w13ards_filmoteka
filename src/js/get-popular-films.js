@@ -5,9 +5,7 @@ import ItemsApiService from './fetch-items';
 import Pagination from 'tui-pagination';
 import { renderCurrentPage } from './pagination-nav';
 import { options } from './pagination';
-import { setPagination } from './pagination';
 import Notiflix from 'notiflix';
-
 
 const refs = getRefs();
 const itemsApiService = new ItemsApiService();
@@ -15,24 +13,13 @@ const itemsApiService = new ItemsApiService();
 let numberOfPages = 0;
 
 async function getPopularFilms() {
-
-  // Загрузка данных
-
   Notiflix.Loading.circle('Please wait ...');
-
+  // Загрузка данных
   const result = await itemsApiService.fetchTrandingItems();
+
   Notiflix.Loading.remove();
-
-
-  // Отрисовка данных
-
   refs.alert.innerHTML = '';
- 
-  const numberOfPages = result.total_pages;
-
-  setPagination(numberOfPages);
-
-
+  // Отрисовка данных
   updateMoviesData(result).then(movies => (refs.moviesList.innerHTML = galleryMarkup(movies)));
 
   // ========== Создание пагинации ==========
@@ -46,7 +33,7 @@ async function getPopularFilms() {
   // События при навигации
   pagination.on('afterMove', event => {
     const currentPage = event.page;
-    console.log(currentPage);
+    // console.log(currentPage);
 
     // Загрузка и отрисовка выбранной страницы
     renderCurrentPage(currentPage);

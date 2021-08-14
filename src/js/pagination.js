@@ -1,5 +1,3 @@
-import Pagination from 'tui-pagination';
-import ItemsApiService from './fetch-items';
 import { numberOfPages } from './get-popular-films';
 
 const options = {
