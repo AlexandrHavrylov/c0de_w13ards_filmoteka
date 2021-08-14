@@ -3,7 +3,7 @@ import userLibrary from './userLibrary';
 
 function addToWatched(card) {  
     const inList = userLibrary.getById(card.id);
-    if (!inList||!inList.isWatched) {
+    if (!inList || !inList.isWatched) {
         userLibrary.add(card);
         card.isWatched = true;
         userLibrary.update(card);
@@ -12,12 +12,13 @@ function addToWatched(card) {
         card.isWatched = false;
         userLibrary.update(card);
         Notiflix.Notify.failure('The movie has been deleted from watched list');
+        userLibrary.showFiltered(card.isWatched);
     }
 }
 
 function addToQueue(card) {
     const inList = userLibrary.getById(card.id);
-    if (!inList||!inList.isQueue) {
+    if (!inList || !inList.isQueue) {
         userLibrary.add(card);
         card.isQueue = true;
         userLibrary.update(card);
@@ -26,6 +27,7 @@ function addToQueue(card) {
         card.isQueue = false;
         userLibrary.update(card);
         Notiflix.Notify.failure('The movie has been deleted from queue list');
+        userLibrary.showFiltered(card.isQueue);
     }
 }
 

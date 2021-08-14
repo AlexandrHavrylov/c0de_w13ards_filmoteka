@@ -25,10 +25,10 @@ async function renderCard(movieId) {
    try {
       card = await itemsApiService.fetchCard(movieId);
       refs.modalMovie.innerHTML = filmInModal(card);
-      refs.modalMovie.classList.remove(('visually-hidden'));
+      refs.modalMovie.classList.remove(('visually-hidden'));    
       const localCard = userLibrary.getById(card.id);
       if (localCard) card = { ...card, ...localCard };
-      console.log(localCard)
+      console.log(userLibrary.curLibrary)
       const addToWatchBtn = document.querySelector("[data-name='watched']");
       if (card.isWatched) { addToWatchBtn.textContent = 'Remove from watched' };
       const addToQueueBtn = document.querySelector("[data-name='queue']");
