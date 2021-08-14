@@ -93,13 +93,15 @@ class UserLibrary {
   }
   showFiltered() {
     const cards =
-      this.curLibrary === USER_LIBRARY_ENUM.WATCHED ? getWatchedCards() : getQuereueCards();
+      this.curLibrary === USER_LIBRARY_ENUM.WATCHED
+        ? this.getWatchedCards()
+        : this.getQuereueCards();
     this.#refs.cardContainer.innerHTML = galleryMarkup(cards);
   }
   // Отримати всі картки isWatched
-  getWatchedCards = () => this.#storage.all().find(card => card?.isWatched);
+  getWatchedCards = () => this.#storage.all().filter(card => card?.isWatched);
   // Отримати всі картки isQueue
-  getQuereueCards = () => this.#storage.all().find(card => card?.isQueue);
+  getQuereueCards = () => this.#storage.all().filter(card => card?.isQueue);
 
   processCard(card) {
     if (card.isWatched || card.isQueue) {
