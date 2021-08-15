@@ -1,0 +1,10 @@
+<div class="thumb-wrap">
+   {{#if linkEmbed}}
+   <iframe src="{{linkEmbed}}" width="864" height="480" allowfullscreen="true" mozallowfullscreen="true"
+      webkitallowfullscreen="true" frameborder="no" scrolling="no"></iframe>
+   {{/if}}
+   {{#unless linkEmbed}}
+   <img src="https://dummyimage.com/864x480/f7f7f7/ff6b08.png&text=Sorry,+there+is+no+trailer." alt="{{title}}"
+      width="500" class="movie-card__poster">
+   {{/unless}}
+</div>

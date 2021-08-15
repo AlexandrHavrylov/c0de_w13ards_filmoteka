@@ -6,12 +6,15 @@ import Notiflix from 'notiflix';
 import { addToWatched, addToQueue } from './add-to-watched';
 import userLibrary from './userLibrary';
 import { updateMoviesData } from './update-movies-data';
+import trailerInMovie from '../templates/trailerInMovie.hbs'
 
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
 let card;
 let modalMovieOverlay;
 let modalMovieClose;
+let modalTrailer;
+let trailerToWatch;
 
 // Открытие модального окна с готовой карточкой
 
@@ -24,6 +27,15 @@ function openCardMovie(event) {
   }
   document.querySelector('body').classList.add('scroll-disable');
 }
+
+function openTrailer(event) {
+   const imdbId = event.target.dataset.id;
+   renderTrailer(imdbId);
+   modalMovieClose.removeEventListener('click', closeCard);
+   window.removeEventListener('keydown', closeCardEsc);
+   modalMovieClose.addEventListener('click', closeTrailer);
+   window.addEventListener('keydown', closeTrailerEsc);
+};
 
 async function renderCard(movieId) {
 
@@ -51,6 +63,7 @@ async function renderCard(movieId) {
     if (card.isQueue) {
       addToQueueBtn.textContent = 'Remove from queue';
     }
+    trailerToWatch = document.querySelector('[data-name="trailer"]');
     modalMovieClose = document.querySelector('[data-action="modal-close"]');
     modalMovieOverlay = document.querySelector('.modal-movie__overlay');
 
@@ -60,6 +73,7 @@ async function renderCard(movieId) {
     addToQueueBtn.addEventListener('click', addToQueueBtnListener);
     window.addEventListener('keydown', closeCardEsc);
     modalMovieOverlay.addEventListener('click', closeCard);
+    trailerToWatch.addEventListener('click', openTrailer);
     return card;
   } catch (error) {
     Notiflix.Notify.info('Oops! Something went wrong, please try again');
@@ -105,4 +119,33 @@ const closeCardMovie = () => {
   addToQueueBtn.removeEventListener('click', addToQueueBtnListener);
 };
 
-export { openCardMovie, renderCard };
+const closeTrailer = () => {
+     modalTrailer.classList.add('visually-hidden');
+   modalMovieClose.addEventListener('click', closeCard);
+   window.addEventListener('keydown', closeCardEsc);
+   modalMovieClose.removeEventListener('click', closeTrailer);
+   window.removeEventListener('keydown', closeTrailerEsc);
+};
+
+const closeTrailerEsc = event => {
+   if (event.key === "Escape") {
+      closeTrailer();
+   };
+};
+
+async function renderTrailer(imdbId) {
+try {
+      console.log(imdbId);
+      const cardImdb = await itemsApiService.fetchTrailer(imdbId);
+      console.log(cardImdb);
+      modalTrailer = document.querySelector('.modal-trailer');
+      modalTrailer.innerHTML = trailerInMovie(cardImdb);
+      modalTrailer.classList.remove(('visually-hidden'));
+   } catch {
+      console.log(5);
+   };
+   console.log(cardImdb);
+};
+
+
+export { openCardMovie, renderCard,  openTrailer, renderTrailer};
