@@ -20,21 +20,11 @@ let trailerToWatch;
 
 function openCardMovie(event) {
   const movieId = event.path[2].dataset.id;
-  console.log(modalMovieClose);
 
   if (movieId) {
     renderCard(movieId);
   }
   document.querySelector('body').classList.add('scroll-disable');
-}
-
-function openTrailer(event) {
-   const imdbId = event.target.dataset.id;
-   renderTrailer(imdbId);
-   modalMovieClose.removeEventListener('click', closeCard);
-   window.removeEventListener('keydown', closeCardEsc);
-   modalMovieClose.addEventListener('click', closeTrailer);
-   window.addEventListener('keydown', closeTrailerEsc);
 };
 
 async function renderCard(movieId) {
@@ -89,10 +79,10 @@ function addToQueueBtnListener() {
   addToQueue(card);
 }
 
-// Закрытие модального окна по событию
 const closeCard = event => {
   if (event.target === modalMovieOverlay || event.target === modalMovieClose) {
     closeCardMovie();
+    
   }
 };
 
@@ -108,7 +98,6 @@ const closeCardMovie = () => {
   document.querySelector('body').classList.remove('scroll-disable');
 
   // Удаление слушателей
-  const modalMovieClose = document.querySelector('[data-action="modal-close"]');
   const addToWatchBtn = document.querySelector("[data-name='watched']");
   const addToQueueBtn = document.querySelector("[data-name='queue']");
 
@@ -118,34 +107,53 @@ const closeCardMovie = () => {
   addToQueueBtn.removeEventListener('click', addToQueueBtnListener);
 };
 
-const closeTrailer = (event) => {
-  if (event.target === modalMovieOverlay || event.target === modalMovieClose) {
-    modalTrailer.classList.add('visually-hidden');
-    modalMovieClose.addEventListener('click', closeCard);
-    window.addEventListener('keydown', closeCardEsc);
-    modalMovieClose.removeEventListener('click', closeTrailer);
-    window.removeEventListener('keydown', closeTrailerEsc);
-  };
+// Добавление трейлера в модальное окно
+
+// Открытие модального окна с трейлером
+function openTrailer(event) {
+  const imdbId = event.target.dataset.id;
+  renderTrailer(imdbId);
+  modalMovieOverlay.removeEventListener('click', closeCard);
+  window.removeEventListener('keydown', closeCardEsc);
 };
+
+// Закрытие окна с трейлером
+
+const closeTrailer = (event) => {
+  modalMovieOverlay.addEventListener('click', closeCard);
+  modalMovieClose.addEventListener('click', closeCard);
+  window.addEventListener('keydown', closeCardEsc);
+  modalTrailer.classList.add('visually-hidden');
+  
+  modalMovieOverlay.removeEventListener('click', closeTrailer);
+  modalMovieClose.removeEventListener('click', closeTrailer);
+  window.removeEventListener('keydown', closeTrailerEsc);
+ 
+};
+
 const closeTrailerEsc = event => {
    if (event.key === "Escape") {
       closeTrailer();
    };
 };
 
+// Содание карточки с трейлером
+
 async function renderTrailer(imdbId) {
 try {
-      console.log(imdbId);
-      const cardImdb = await itemsApiService.fetchTrailer(imdbId);
-      console.log(cardImdb);
-      modalTrailer = document.querySelector('.modal-trailer');
-      modalTrailer.innerHTML = trailerInMovie(cardImdb);
-      modalTrailer.classList.remove(('visually-hidden'));
-   } catch {
-      console.log(5);
-   };
-   console.log(cardImdb);
+  const cardImdb = await itemsApiService.fetchTrailer(imdbId);
+  modalTrailer = document.querySelector('.modal-trailer');
+  modalTrailer.innerHTML = trailerInMovie(cardImdb);
+  modalTrailer.classList.remove(('visually-hidden'));
+  modalMovieOverlay.addEventListener('click', closeTrailer);
+  modalMovieClose.addEventListener('click', closeTrailer);
+  window.addEventListener('keydown', closeTrailerEsc);
+  modalMovieClose.removeEventListener('click', closeCard);
+   modalMovieOverlay.removeEventListener('click', closeCard);
+   window.removeEventListener('keydown', closeCardEsc);
+  
+} catch (error){
+      console.log(error.message);
+  };
 };
-
-
 export { openCardMovie, renderCard,  openTrailer, renderTrailer};
