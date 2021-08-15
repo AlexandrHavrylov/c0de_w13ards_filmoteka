@@ -20,7 +20,7 @@ function onSearchFormInput() {
 async function onSearchBtnClick(e) {
   e.preventDefault();
   itemsApiService.query = filmToFind;
-   
+    refs.filterContainer.classList.add('is-hidden')
   
     
   if (filmToFind) {

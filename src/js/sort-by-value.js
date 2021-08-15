@@ -5,6 +5,7 @@ import { getRefs } from './get-refs'
 const refs  = getRefs()
 
 function onSortChange() {
+
   if (refs.sort.value === "rating") {
     getTop()
 }

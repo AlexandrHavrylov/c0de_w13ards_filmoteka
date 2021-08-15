@@ -31,13 +31,14 @@ const headerSwitcher = new HeaderSwitcher({
     switch (page) {
       case HEADER_ENUM.HOME:
         refs.searchForm.value = '';
+        refs.filterContainer.classList.remove('is-hidden')
         getPopularFilms()
-
         refs.sort.addEventListener('change', onSortChange)
 
         break;
       case HEADER_ENUM.LIBRARY:
         getLibraryFilms();
+        refs.filterContainer.classList.add('is-hidden')
         break;
     }
   },
