@@ -261,25 +261,33 @@
 }
 .modal-trailer {
   position: absolute;
-  top: 50%;
+  top: 47%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: block;
   width: 280px;
-  z-index: 101;
+  height: 90vh;
+  z-index: 100;
   background-color: var(--bg-color-light);
-  // padding: 50px 30px 40px 30px;
+  padding-top: 50px;
   overflow: auto;
+
   @include tablet {
     justify-content: center;
     display: flex;
     width: 618px;
+    height: auto;
   }
 
   @include desktop {
     display: flex;
     justify-content: center;
-    width: 882px;
-    top: 581px;
+    width: 862px;
+    height: auto;
+    // top: 581px;
   }
+}
+
+.thumb-wrap {
+  padding-left: 13px;
 }
