@@ -26,7 +26,9 @@ function openCardMovie(event) {
 }
 
 async function renderCard(movieId) {
+
   try {
+       Notiflix.Loading.circle('Please wait ...');
     card = await itemsApiService.fetchCard(movieId);
     // костиль для коректного відображення карточки
     card.genre_ids = card.genres.map(genre => genre.id);
@@ -35,6 +37,9 @@ async function renderCard(movieId) {
 
     console.log('fixedCard:', card);
     refs.modalMovie.innerHTML = filmInModal(card);
+    
+     Notiflix.Loading.remove();
+    
     refs.modalMovie.classList.remove('visually-hidden');
     const localCard = userLibrary.getById(card.id);
     if (localCard) card = { ...card, ...localCard };
@@ -61,6 +66,7 @@ async function renderCard(movieId) {
     console.log(error.message);
   }
 }
+
 
 function addToWatchBtnListener() {
   addToWatched(card);
