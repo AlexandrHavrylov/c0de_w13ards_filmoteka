@@ -19,7 +19,7 @@ import { openCardMovie } from './js/getCardMovie';
 
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
-const sort = document.querySelector('.filter__select')
+
 refs.searchForm.addEventListener('input', onSearchFormInput);
 refs.searchBtn.addEventListener('click', onSearchBtnClick);
 refs.moviesList.addEventListener('click', openCardMovie);
