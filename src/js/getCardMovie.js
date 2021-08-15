@@ -20,7 +20,7 @@ let trailerToWatch;
 
 function openCardMovie(event) {
   const movieId = event.path[2].dataset.id;
-  console.log(movieId);
+  console.log(modalMovieClose);
 
   if (movieId) {
     renderCard(movieId);
@@ -64,9 +64,8 @@ async function renderCard(movieId) {
       addToQueueBtn.textContent = 'Remove from queue';
     }
     trailerToWatch = document.querySelector('[data-name="trailer"]');
-    modalMovieClose = document.querySelector('[data-action="modal-close"]');
     modalMovieOverlay = document.querySelector('.modal-movie__overlay');
-
+    modalMovieClose = document.querySelector('[data-action="modal-close"]');
     // добавление слушателей после формирования карточки
     modalMovieClose.addEventListener('click', closeCard);
     addToWatchBtn.addEventListener('click', addToWatchBtnListener);
@@ -119,14 +118,15 @@ const closeCardMovie = () => {
   addToQueueBtn.removeEventListener('click', addToQueueBtnListener);
 };
 
-const closeTrailer = () => {
-     modalTrailer.classList.add('visually-hidden');
-   modalMovieClose.addEventListener('click', closeCard);
-   window.addEventListener('keydown', closeCardEsc);
-   modalMovieClose.removeEventListener('click', closeTrailer);
-   window.removeEventListener('keydown', closeTrailerEsc);
+const closeTrailer = (event) => {
+  if (event.target === modalMovieOverlay || event.target === modalMovieClose) {
+    modalTrailer.classList.add('visually-hidden');
+    modalMovieClose.addEventListener('click', closeCard);
+    window.addEventListener('keydown', closeCardEsc);
+    modalMovieClose.removeEventListener('click', closeTrailer);
+    window.removeEventListener('keydown', closeTrailerEsc);
+  };
 };
-
 const closeTrailerEsc = event => {
    if (event.key === "Escape") {
       closeTrailer();
