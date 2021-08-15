@@ -7,9 +7,11 @@
     отримати всі картки:    userLib.getAll();
     показати згідно вибраної кнопки: userLib.showFiltered();
 */
-
+import Pagination from 'tui-pagination';
+import { options } from './pagination';
 import galleryMarkup from '../templates/filmsInGallery.hbs';
-
+import globalVariables from './global-variables';
+import { HEADER_ENUM } from './header-switch';
 const defaultOptions = {
   isSelectedStyle: 'form__btn--current',
   buttons: {
@@ -17,6 +19,7 @@ const defaultOptions = {
     queue: '#queue',
   },
   cardContainer: '.movie-list',
+  pagination: '#pagination',
 };
 
 export const USER_LIBRARY_ENUM = {
@@ -33,6 +36,9 @@ class UserLibrary {
   curLibrary = USER_LIBRARY_ENUM.WATCHED;
   #refs = {};
   #storage = new Storage();
+  #pagination;
+  curPage = 1;
+  ITEMS_PER_PAGE = 2;
 
   constructor(args) {
     this.options = { ...defaultOptions, ...args };
@@ -47,6 +53,33 @@ class UserLibrary {
     });
 
     this.#refs.cardContainer = document.querySelector(this.options.cardContainer);
+    this.#refs.pagination = document.querySelector(this.options.pagination);
+
+    this.#pagination = new Pagination(this.#refs.pagination, { ...options, totalItems: 2 });
+    console.log(this.#pagination);
+    this.#pagination.on('afterMove', event => {
+      if (globalVariables.curPage === HEADER_ENUM.LIBRARY) {
+        this.showFiltered();
+      }
+
+      //this.#pagination.movePageTo(event.page);
+      // Загрузка и отрисовка выбранной страницы
+    });
+    this.#pagination.on('beforeMove', e => {
+      if (globalVariables.curPage === HEADER_ENUM.LIBRARY) {
+        this.curPage = e.page;
+      }
+      return true;
+    });
+
+    Object.defineProperty(Array.prototype, 'getPage', {
+      value: function getPage(pageNumber, itemsPerPage) {
+        const start = pageNumber * itemsPerPage - itemsPerPage;
+        const end = pageNumber * itemsPerPage;
+
+        return this.slice(start, end);
+      },
+    });
   }
 
   #setSelectedStyle(action1, action2) {
@@ -96,7 +129,11 @@ class UserLibrary {
       this.curLibrary === USER_LIBRARY_ENUM.WATCHED
         ? this.getWatchedCards()
         : this.getQuereueCards();
-    this.#refs.cardContainer.innerHTML = galleryMarkup(cards);
+
+    this.#pagination.reset(cards.length);
+    this.#refs.cardContainer.innerHTML = galleryMarkup(
+      cards.getPage(this.curPage, this.ITEMS_PER_PAGE),
+    );
   }
   // Отримати всі картки isWatched
   getWatchedCards = () => this.#storage.all().filter(card => card?.isWatched);
