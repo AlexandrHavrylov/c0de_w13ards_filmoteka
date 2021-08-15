@@ -8,7 +8,7 @@
     показати згідно вибраної кнопки: userLib.showFiltered();
 */
 import Pagination from 'tui-pagination';
-import { options } from './pagination';
+
 import galleryMarkup from '../templates/filmsInGallery.hbs';
 import globalVariables from './global-variables';
 import { HEADER_ENUM } from './header-switch';
@@ -55,10 +55,14 @@ class UserLibrary {
     this.#refs.cardContainer = document.querySelector(this.options.cardContainer);
     this.#refs.pagination = document.querySelector(this.options.pagination);
 
-    this.#pagination = new Pagination(this.#refs.pagination, { ...options, totalItems: 2 });
+    this.#pagination = new Pagination(this.#refs.pagination, {
+      itemsPerPage: this.ITEMS_PER_PAGE,
+      centerAlign: true,
+    });
     console.log(this.#pagination);
-    this.#pagination.on('afterMove', event => {
+    this.#pagination.on('afterMove', e => {
       if (globalVariables.curPage === HEADER_ENUM.LIBRARY) {
+        this.#pagination._options.page = e.page;
         this.showFiltered();
       }
 
