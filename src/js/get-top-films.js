@@ -3,7 +3,7 @@ import { getRefs } from './get-refs';
 import { updateMoviesData } from './update-movies-data';
 import ItemsApiService from './fetch-items';
 import Pagination from 'tui-pagination';
-import { renderTrandingPage } from './pagination-nav';
+import { renderTopPage } from './pagination-nav';
 import { options } from './pagination';
 import Notiflix from 'notiflix';
 
@@ -12,11 +12,12 @@ const itemsApiService = new ItemsApiService();
 
 let numberOfPages = 0;
 
-async function getPopularFilms() {
+async function getTop() {
   Notiflix.Loading.circle('Please wait ...');
 
   // Загрузка данных
-  const result = await itemsApiService.fetchTrandingItems();
+    const result = await itemsApiService.fetchTop();
+    console.log(result)
 
   Notiflix.Loading.remove();
   refs.alert.innerHTML = '';
@@ -38,11 +39,11 @@ async function getPopularFilms() {
     // console.log(currentPage);
 
     // Загрузка и отрисовка выбранной страницы
-    renderTrandingPage(currentPage);
+    renderTopPage(currentPage);
   });
 
 
 
 }
 
-export { getPopularFilms };
+export { getTop };
