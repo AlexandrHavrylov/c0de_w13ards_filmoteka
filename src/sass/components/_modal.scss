@@ -32,12 +32,14 @@
   @include tablet {
     display: flex;
     width: 618px;
+    height: auto;
   }
 
   @include desktop {
     display: flex;
     justify-content: flex-end;
     width: 882px;
+    height: auto;
   }
 }
 
