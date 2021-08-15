@@ -53,6 +53,19 @@ export default class ItemsApiService {
       .catch(error => console.log(error.message));
   }
 
+  fetchTop() {
+    const BASE_URL = 'https://api.themoviedb.org/3/movie/top_rated';
+    const API_KEY = '5fa4bb8a58c85ac583b1447954dde7e6';
+    const url = `${BASE_URL}?api_key=${API_KEY}&language=en-US&page=${this.page}`;
+
+    return axios
+      .get(url)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => console.log(error.message));
+  }
+  
   resetPage() {
     this.page = 1;
   }

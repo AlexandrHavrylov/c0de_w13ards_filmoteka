@@ -8,11 +8,14 @@ import { onSearchFormInput } from './js/fetch-by-name';
 import { onSearchBtnClick } from './js/fetch-by-name';
 import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
 import { getPopularFilms } from './js/get-popular-films';
+import { getTop } from './js/get-top-films';
+import { onSortChange } from './js/sort-by-value';
 
 import userLibrary from './js/userLibrary';
 
 import './js/pagination-nav';
 import { openCardMovie } from './js/getCardMovie';
+
 
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
@@ -28,11 +31,14 @@ const headerSwitcher = new HeaderSwitcher({
     switch (page) {
       case HEADER_ENUM.HOME:
         refs.searchForm.value = '';
-        getPopularFilms();
+        refs.filterContainer.classList.remove('is-hidden')
+        getPopularFilms()
+        refs.sort.addEventListener('change', onSortChange)
 
         break;
       case HEADER_ENUM.LIBRARY:
         getLibraryFilms();
+        refs.filterContainer.classList.add('is-hidden')
         break;
     }
   },
@@ -41,3 +47,5 @@ const headerSwitcher = new HeaderSwitcher({
 function getLibraryFilms() {
   userLibrary.showFiltered();
 }
+
+
