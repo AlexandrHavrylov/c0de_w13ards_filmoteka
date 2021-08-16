@@ -8,10 +8,10 @@
     показати згідно вибраної кнопки: userLib.showFiltered();
 */
 import Pagination from 'tui-pagination';
-
 import galleryMarkup from '../templates/filmsInGallery.hbs';
 import globalVariables from './global-variables';
 import { HEADER_ENUM } from './header-switch';
+
 const defaultOptions = {
   isSelectedStyle: 'form__btn--current',
   buttons: {
@@ -39,7 +39,7 @@ class UserLibrary {
   pagination;
   curPageWatched = 1;
   curPageQueue = 1;
-  ITEMS_PER_PAGE = 2;
+  ITEMS_PER_PAGE = 20;
   bindAfterMove;
   constructor(args) {
     this.options = { ...defaultOptions, ...args };
@@ -75,17 +75,13 @@ class UserLibrary {
 
   afterMove(e) {
     if (globalVariables.curPage === HEADER_ENUM.LIBRARY) {
-      this.pagination.off('afterMove', this.bindAfterMove);
-
       if (this.curLibrary === USER_LIBRARY_ENUM.WATCHED) {
         this.curPageWatched = e.page;
       } else {
         this.curPageQueue = e.page;
       }
       this.showFiltered(e.page);
-      this.pagination.movePageTo(e.page);
-
-      this.pagination.on('afterMove', this.bindAfterMove);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
@@ -93,6 +89,11 @@ class UserLibrary {
     this.#refs.btnQueue.classList[action1](this.options.isSelectedStyle);
     this.#refs.btnWatched.classList[action2](this.options.isSelectedStyle);
   }
+
+  switchToCurrentLibrary() {
+    this.switchTo(this.curLibrary);
+  }
+
   switchTo(libraryEnum = USER_LIBRARY_ENUM.WATCHED) {
     this.curLibrary = libraryEnum;
 
@@ -105,6 +106,7 @@ class UserLibrary {
 
         break;
     }
+    this.resetPagination();
     this.showFiltered();
   }
   add(card) {
@@ -133,8 +135,6 @@ class UserLibrary {
   }
   showFiltered(page = 1) {
     const cards = this.getFilteredCard();
-
-    this.pagination.reset(cards.length);
     this.#refs.cardContainer.innerHTML = galleryMarkup(cards.getPage(page, this.ITEMS_PER_PAGE));
   }
 
@@ -155,6 +155,17 @@ class UserLibrary {
     } else {
       this.remove(card);
     }
+    this.resetPagination();
+  }
+
+  resetPagination() {
+    const cntCards =
+      this.curLibrary === USER_LIBRARY_ENUM.WATCHED
+        ? this.getWatchedCards().length
+        : this.getQuereueCards().length;
+
+    this.#refs.pagination.hidden = cntCards <= this.ITEMS_PER_PAGE ? true : false;
+    this.pagination.reset(cntCards);
   }
 }
 
@@ -165,7 +176,6 @@ class Storage {
 
   constructor() {
     this.#load();
-    console.log('db', this.#db);
   }
   all() {
     return this.#db;
@@ -180,7 +190,6 @@ class Storage {
   }
 
   update(item) {
-    console.log('update', item);
     let findItem = this.#db.find(i => i.id === item.id);
     if (findItem) {
       this.remove(findItem);
