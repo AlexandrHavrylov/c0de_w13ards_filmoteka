@@ -158,12 +158,11 @@ class UserLibrary {
   }
 
   resetPagination() {
-    let cntCards = 0;
-    if (this.curLibrary === USER_LIBRARY_ENUM.WATCHED) {
-      cntCards = this.getWatchedCards().length;
-    } else {
-      cntCards = this.getQuereueCards().length;
-    }
+    let cntCards =
+      this.curLibrary === USER_LIBRARY_ENUM.WATCHED
+        ? this.getWatchedCards().length
+        : (cntCards = this.getQuereueCards().length);
+
     this.#refs.pagination.hidden = cntCards <= this.ITEMS_PER_PAGE ? true : false;
     this.pagination.reset(cntCards);
   }
