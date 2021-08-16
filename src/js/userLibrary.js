@@ -161,7 +161,7 @@ class UserLibrary {
     let cntCards =
       this.curLibrary === USER_LIBRARY_ENUM.WATCHED
         ? this.getWatchedCards().length
-        : (cntCards = this.getQuereueCards().length);
+        : this.getQuereueCards().length;
 
     this.#refs.pagination.hidden = cntCards <= this.ITEMS_PER_PAGE ? true : false;
     this.pagination.reset(cntCards);
