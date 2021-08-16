@@ -29,7 +29,6 @@ const headerSwitcher = new HeaderSwitcher({
 
     switch (page) {
       case HEADER_ENUM.HOME:
-        refs.pagination.hidden = false;
         refs.searchForm.value = '';
         refs.filterContainer.classList.remove('is-hidden');
         getPopularFilms();
