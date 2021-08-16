@@ -75,17 +75,12 @@ class UserLibrary {
 
   afterMove(e) {
     if (globalVariables.curPage === HEADER_ENUM.LIBRARY) {
-      this.pagination.off('afterMove', this.bindAfterMove);
-
       if (this.curLibrary === USER_LIBRARY_ENUM.WATCHED) {
         this.curPageWatched = e.page;
       } else {
         this.curPageQueue = e.page;
       }
       this.showFiltered(e.page);
-      this.pagination.movePageTo(e.page);
-
-      this.pagination.on('afterMove', this.bindAfterMove);
     }
   }
 
@@ -93,6 +88,11 @@ class UserLibrary {
     this.#refs.btnQueue.classList[action1](this.options.isSelectedStyle);
     this.#refs.btnWatched.classList[action2](this.options.isSelectedStyle);
   }
+
+  switchToCurrentLibrary() {
+    this.switchTo(this.curLibrary);
+  }
+
   switchTo(libraryEnum = USER_LIBRARY_ENUM.WATCHED) {
     this.curLibrary = libraryEnum;
 
@@ -105,6 +105,7 @@ class UserLibrary {
 
         break;
     }
+    this.resetPagination();
     this.showFiltered();
   }
   add(card) {
@@ -134,7 +135,7 @@ class UserLibrary {
   showFiltered(page = 1) {
     const cards = this.getFilteredCard();
 
-    this.pagination.reset(cards.length);
+    //this.pagination.reset(cards.length);
     this.#refs.cardContainer.innerHTML = galleryMarkup(cards.getPage(page, this.ITEMS_PER_PAGE));
   }
 
@@ -154,6 +155,15 @@ class UserLibrary {
       this.addOrUpdate(card);
     } else {
       this.remove(card);
+    }
+    resetPagination();
+  }
+
+  resetPagination() {
+    if (this.curLibrary === USER_LIBRARY_ENUM.WATCHED) {
+      this.pagination.reset(this.getWatchedCards().length);
+    } else {
+      this.pagination.reset(this.getQuereueCards().length);
     }
   }
 }
