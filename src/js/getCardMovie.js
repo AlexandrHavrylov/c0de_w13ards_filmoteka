@@ -6,24 +6,26 @@ import Notiflix from 'notiflix';
 import { addToWatched, addToQueue } from './add-to-watched';
 import userLibrary from './userLibrary';
 import { updateMoviesData } from './update-movies-data';
+import trailerInMovie from '../templates/trailerInMovie.hbs'
 
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
 let card;
 let modalMovieOverlay;
 let modalMovieClose;
+let modalTrailer;
+let trailerToWatch;
 
 // Открытие модального окна с готовой карточкой
 
 function openCardMovie(event) {
   const movieId = event.path[2].dataset.id;
-  console.log(movieId);
 
   if (movieId) {
     renderCard(movieId);
   }
   document.querySelector('body').classList.add('scroll-disable');
-}
+};
 
 async function renderCard(movieId) {
 
@@ -51,15 +53,16 @@ async function renderCard(movieId) {
     if (card.isQueue) {
       addToQueueBtn.textContent = 'Remove from queue';
     }
-    modalMovieClose = document.querySelector('[data-action="modal-close"]');
+    trailerToWatch = document.querySelector('[data-name="trailer"]');
     modalMovieOverlay = document.querySelector('.modal-movie__overlay');
-
+    modalMovieClose = document.querySelector('[data-action="modal-close"]');
     // добавление слушателей после формирования карточки
     modalMovieClose.addEventListener('click', closeCard);
     addToWatchBtn.addEventListener('click', addToWatchBtnListener);
     addToQueueBtn.addEventListener('click', addToQueueBtnListener);
     window.addEventListener('keydown', closeCardEsc);
     modalMovieOverlay.addEventListener('click', closeCard);
+    trailerToWatch.addEventListener('click', openTrailer);
     return card;
   } catch (error) {
     Notiflix.Notify.info('Oops! Something went wrong, please try again');
@@ -76,10 +79,10 @@ function addToQueueBtnListener() {
   addToQueue(card);
 }
 
-// Закрытие модального окна по событию
 const closeCard = event => {
   if (event.target === modalMovieOverlay || event.target === modalMovieClose) {
     closeCardMovie();
+    
   }
 };
 
@@ -95,7 +98,6 @@ const closeCardMovie = () => {
   document.querySelector('body').classList.remove('scroll-disable');
 
   // Удаление слушателей
-  const modalMovieClose = document.querySelector('[data-action="modal-close"]');
   const addToWatchBtn = document.querySelector("[data-name='watched']");
   const addToQueueBtn = document.querySelector("[data-name='queue']");
 
@@ -105,4 +107,53 @@ const closeCardMovie = () => {
   addToQueueBtn.removeEventListener('click', addToQueueBtnListener);
 };
 
-export { openCardMovie, renderCard };
+// Добавление трейлера в модальное окно
+
+// Открытие модального окна с трейлером
+function openTrailer(event) {
+  const imdbId = event.target.dataset.id;
+  renderTrailer(imdbId);
+  modalMovieOverlay.removeEventListener('click', closeCard);
+  window.removeEventListener('keydown', closeCardEsc);
+};
+
+// Закрытие окна с трейлером
+
+const closeTrailer = (event) => {
+  modalMovieOverlay.addEventListener('click', closeCard);
+  modalMovieClose.addEventListener('click', closeCard);
+  window.addEventListener('keydown', closeCardEsc);
+  modalTrailer.classList.add('visually-hidden');
+  
+  modalMovieOverlay.removeEventListener('click', closeTrailer);
+  modalMovieClose.removeEventListener('click', closeTrailer);
+  window.removeEventListener('keydown', closeTrailerEsc);
+ 
+};
+
+const closeTrailerEsc = event => {
+   if (event.key === "Escape") {
+      closeTrailer();
+   };
+};
+
+// Содание карточки с трейлером
+
+async function renderTrailer(imdbId) {
+try {
+  const cardImdb = await itemsApiService.fetchTrailer(imdbId);
+  modalTrailer = document.querySelector('.modal-trailer');
+  modalTrailer.innerHTML = trailerInMovie(cardImdb);
+  modalTrailer.classList.remove(('visually-hidden'));
+  modalMovieOverlay.addEventListener('click', closeTrailer);
+  modalMovieClose.addEventListener('click', closeTrailer);
+  window.addEventListener('keydown', closeTrailerEsc);
+  modalMovieClose.removeEventListener('click', closeCard);
+   modalMovieOverlay.removeEventListener('click', closeCard);
+   window.removeEventListener('keydown', closeCardEsc);
+  
+} catch (error){
+      console.log(error.message);
+  };
+};
+export { openCardMovie, renderCard,  openTrailer, renderTrailer};

@@ -16,6 +16,8 @@
           alt='{{title}}'
           width='500'
           class='movie-card__poster'
+          data-id = "{{imdb_id}}
+          data-name = "trailer"
         />
       {{/unless}}
     </div>
@@ -57,8 +59,11 @@
       <div class='modal-movie__button-wrapper'>
         <button data-name='watched' class='modal-movie__button' type='button'>add to watched</button>
         <button data-name='queue' class='modal-movie__button' type='button'>add to queue</button>
+        <button data-name='trailer' data-id = "{{imdb_id}}" class='modal-movie__button--trailer' type='button'></button>
       </div>
 
     </div>
+    <div class="modal-trailer visually-hidden"></div>
   </div>
+  
 </div>
