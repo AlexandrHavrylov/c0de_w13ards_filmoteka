@@ -7,8 +7,10 @@
     отримати всі картки:    userLib.getAll();
     показати згідно вибраної кнопки: userLib.showFiltered();
 */
-
+import Pagination from 'tui-pagination';
 import galleryMarkup from '../templates/filmsInGallery.hbs';
+import globalVariables from './global-variables';
+import { HEADER_ENUM } from './header-switch';
 
 const defaultOptions = {
   isSelectedStyle: 'form__btn--current',
@@ -17,6 +19,7 @@ const defaultOptions = {
     queue: '#queue',
   },
   cardContainer: '.movie-list',
+  pagination: '#pagination',
 };
 
 export const USER_LIBRARY_ENUM = {
@@ -33,7 +36,11 @@ class UserLibrary {
   curLibrary = USER_LIBRARY_ENUM.WATCHED;
   #refs = {};
   #storage = new Storage();
-
+  pagination;
+  curPageWatched = 1;
+  curPageQueue = 1;
+  ITEMS_PER_PAGE = 2;
+  bindAfterMove;
   constructor(args) {
     this.options = { ...defaultOptions, ...args };
 
@@ -47,12 +54,45 @@ class UserLibrary {
     });
 
     this.#refs.cardContainer = document.querySelector(this.options.cardContainer);
+    this.#refs.pagination = document.querySelector(this.options.pagination);
+
+    this.pagination = new Pagination(this.#refs.pagination, {
+      itemsPerPage: this.ITEMS_PER_PAGE,
+      centerAlign: true,
+    });
+    this.bindAfterMove = this.afterMove.bind(this);
+    this.pagination.on('afterMove', this.bindAfterMove);
+
+    Object.defineProperty(Array.prototype, 'getPage', {
+      value: function getPage(pageNumber, itemsPerPage) {
+        const start = pageNumber * itemsPerPage - itemsPerPage;
+        const end = pageNumber * itemsPerPage;
+
+        return this.slice(start, end);
+      },
+    });
+  }
+
+  afterMove(e) {
+    if (globalVariables.curPage === HEADER_ENUM.LIBRARY) {
+      if (this.curLibrary === USER_LIBRARY_ENUM.WATCHED) {
+        this.curPageWatched = e.page;
+      } else {
+        this.curPageQueue = e.page;
+      }
+      this.showFiltered(e.page);
+    }
   }
 
   #setSelectedStyle(action1, action2) {
     this.#refs.btnQueue.classList[action1](this.options.isSelectedStyle);
     this.#refs.btnWatched.classList[action2](this.options.isSelectedStyle);
   }
+
+  switchToCurrentLibrary() {
+    this.switchTo(this.curLibrary);
+  }
+
   switchTo(libraryEnum = USER_LIBRARY_ENUM.WATCHED) {
     this.curLibrary = libraryEnum;
 
@@ -65,6 +105,7 @@ class UserLibrary {
 
         break;
     }
+    this.resetPagination();
     this.showFiltered();
   }
   add(card) {
@@ -91,13 +132,17 @@ class UserLibrary {
   remove(card) {
     this.#storage.remove(card);
   }
-  showFiltered() {
-    const cards =
-      this.curLibrary === USER_LIBRARY_ENUM.WATCHED
-        ? this.getWatchedCards()
-        : this.getQuereueCards();
-    this.#refs.cardContainer.innerHTML = galleryMarkup(cards);
+  showFiltered(page = 1) {
+    const cards = this.getFilteredCard();
+    this.#refs.cardContainer.innerHTML = galleryMarkup(cards.getPage(page, this.ITEMS_PER_PAGE));
   }
+
+  getFilteredCard() {
+    return this.curLibrary === USER_LIBRARY_ENUM.WATCHED
+      ? this.getWatchedCards()
+      : this.getQuereueCards();
+  }
+
   // Отримати всі картки isWatched
   getWatchedCards = () => this.#storage.all().filter(card => card?.isWatched);
   // Отримати всі картки isQueue
@@ -109,6 +154,15 @@ class UserLibrary {
     } else {
       this.remove(card);
     }
+    this.resetPagination();
+  }
+
+  resetPagination() {
+    if (this.curLibrary === USER_LIBRARY_ENUM.WATCHED) {
+      this.pagination.reset(this.getWatchedCards().length);
+    } else {
+      this.pagination.reset(this.getQuereueCards().length);
+    }
   }
 }
 
@@ -119,7 +173,6 @@ class Storage {
 
   constructor() {
     this.#load();
-    console.log('db', this.#db);
   }
   all() {
     return this.#db;
@@ -134,7 +187,6 @@ class Storage {
   }
 
   update(item) {
-    console.log('update', item);
     let findItem = this.#db.find(i => i.id === item.id);
     if (findItem) {
       this.remove(findItem);
