@@ -8,10 +8,10 @@
     показати згідно вибраної кнопки: userLib.showFiltered();
 */
 import Pagination from 'tui-pagination';
-
 import galleryMarkup from '../templates/filmsInGallery.hbs';
 import globalVariables from './global-variables';
 import { HEADER_ENUM } from './header-switch';
+
 const defaultOptions = {
   isSelectedStyle: 'form__btn--current',
   buttons: {
@@ -134,8 +134,6 @@ class UserLibrary {
   }
   showFiltered(page = 1) {
     const cards = this.getFilteredCard();
-
-    //this.pagination.reset(cards.length);
     this.#refs.cardContainer.innerHTML = galleryMarkup(cards.getPage(page, this.ITEMS_PER_PAGE));
   }
 
@@ -175,7 +173,6 @@ class Storage {
 
   constructor() {
     this.#load();
-    console.log('db', this.#db);
   }
   all() {
     return this.#db;
@@ -190,7 +187,6 @@ class Storage {
   }
 
   update(item) {
-    console.log('update', item);
     let findItem = this.#db.find(i => i.id === item.id);
     if (findItem) {
       this.remove(findItem);
