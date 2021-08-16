@@ -81,6 +81,7 @@ class UserLibrary {
         this.curPageQueue = e.page;
       }
       this.showFiltered(e.page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
