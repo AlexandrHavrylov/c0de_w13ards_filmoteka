@@ -156,7 +156,7 @@ class UserLibrary {
     } else {
       this.remove(card);
     }
-    resetPagination();
+    this.resetPagination();
   }
 
   resetPagination() {
