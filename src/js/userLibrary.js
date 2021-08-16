@@ -158,7 +158,7 @@ class UserLibrary {
   }
 
   resetPagination() {
-    let cntCards =
+    const cntCards =
       this.curLibrary === USER_LIBRARY_ENUM.WATCHED
         ? this.getWatchedCards().length
         : this.getQuereueCards().length;
