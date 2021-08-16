@@ -8,10 +8,10 @@
     показати згідно вибраної кнопки: userLib.showFiltered();
 */
 import Pagination from 'tui-pagination';
-
 import galleryMarkup from '../templates/filmsInGallery.hbs';
 import globalVariables from './global-variables';
 import { HEADER_ENUM } from './header-switch';
+
 const defaultOptions = {
   isSelectedStyle: 'form__btn--current',
   buttons: {
@@ -75,17 +75,12 @@ class UserLibrary {
 
   afterMove(e) {
     if (globalVariables.curPage === HEADER_ENUM.LIBRARY) {
-      this.pagination.off('afterMove', this.bindAfterMove);
-
       if (this.curLibrary === USER_LIBRARY_ENUM.WATCHED) {
         this.curPageWatched = e.page;
       } else {
         this.curPageQueue = e.page;
       }
       this.showFiltered(e.page);
-      this.pagination.movePageTo(e.page);
-
-      this.pagination.on('afterMove', this.bindAfterMove);
     }
   }
 
@@ -93,6 +88,11 @@ class UserLibrary {
     this.#refs.btnQueue.classList[action1](this.options.isSelectedStyle);
     this.#refs.btnWatched.classList[action2](this.options.isSelectedStyle);
   }
+
+  switchToCurrentLibrary() {
+    this.switchTo(this.curLibrary);
+  }
+
   switchTo(libraryEnum = USER_LIBRARY_ENUM.WATCHED) {
     this.curLibrary = libraryEnum;
 
@@ -105,6 +105,7 @@ class UserLibrary {
 
         break;
     }
+    this.resetPagination();
     this.showFiltered();
   }
   add(card) {
@@ -133,8 +134,6 @@ class UserLibrary {
   }
   showFiltered(page = 1) {
     const cards = this.getFilteredCard();
-
-    this.pagination.reset(cards.length);
     this.#refs.cardContainer.innerHTML = galleryMarkup(cards.getPage(page, this.ITEMS_PER_PAGE));
   }
 
@@ -155,6 +154,15 @@ class UserLibrary {
     } else {
       this.remove(card);
     }
+    this.resetPagination();
+  }
+
+  resetPagination() {
+    if (this.curLibrary === USER_LIBRARY_ENUM.WATCHED) {
+      this.pagination.reset(this.getWatchedCards().length);
+    } else {
+      this.pagination.reset(this.getQuereueCards().length);
+    }
   }
 }
 
@@ -165,7 +173,6 @@ class Storage {
 
   constructor() {
     this.#load();
-    console.log('db', this.#db);
   }
   all() {
     return this.#db;
@@ -180,7 +187,6 @@ class Storage {
   }
 
   update(item) {
-    console.log('update', item);
     let findItem = this.#db.find(i => i.id === item.id);
     if (findItem) {
       this.remove(findItem);
