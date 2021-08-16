@@ -39,7 +39,7 @@ class UserLibrary {
   pagination;
   curPageWatched = 1;
   curPageQueue = 1;
-  ITEMS_PER_PAGE = 2;
+  ITEMS_PER_PAGE = 20;
   bindAfterMove;
   constructor(args) {
     this.options = { ...defaultOptions, ...args };
