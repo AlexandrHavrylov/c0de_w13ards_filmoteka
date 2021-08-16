@@ -26,8 +26,8 @@ async function getPopularFilms() {
   // ========== Создание пагинации ==========
   // Общее количество полученных страниц храним в numberOfPages
   numberOfPages = result.total_pages;
+  // console.log(numberOfPages);
 
- 
   // Пагинация
   const container = document.getElementById('pagination');
   const pagination = new Pagination(container, options, (options.totalItems = numberOfPages));
@@ -40,9 +40,6 @@ async function getPopularFilms() {
     // Загрузка и отрисовка выбранной страницы
     renderTrandingPage(currentPage);
   });
-
-
-
 }
 
 export { getPopularFilms };
