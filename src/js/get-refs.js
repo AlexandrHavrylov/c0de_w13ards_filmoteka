@@ -7,7 +7,8 @@ function getRefs() {
         modalMovie: document.querySelector('.modal-movie__container'),
         alert: document.querySelector('.alert'),
         filterContainer: document.querySelector('.filter'),
-        sort: document.querySelector('.filter__select')
+        sort: document.querySelector('.filter__select'),
+        pagination: document.querySelector('#pagination'),
     };
 }
 
