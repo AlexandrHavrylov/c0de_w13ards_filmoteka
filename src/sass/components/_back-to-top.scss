@@ -2,7 +2,7 @@
   font-size: 20px;
   padding-top: 3px;
   position: fixed;
-  bottom: 80px;
+  bottom: 60px;
   right: 40px;
   z-index: 9999;
   width: 40px;
@@ -20,6 +20,7 @@
     background: var(--accent-color);
     color: var(--bg-color-light);
     transition: background-color var(--transiton-duration-time) var(--timing-fn);
+    box-shadow: 3px 3px 6px rgb(11 11 11 / 31%);
   }
 }
 
