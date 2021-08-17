@@ -39,6 +39,7 @@ async function onSearchBtnClick(e) {
     // Пагинация
     const container = document.getElementById('pagination');
 
+
     // Читаем ширину экрана
     let deviceWidth = document.documentElement.clientWidth;
     // Количество видимых страниц пагинации
@@ -75,6 +76,7 @@ async function onSearchBtnClick(e) {
         renderMovieToFindPage(currentPage, filmToFind);
       });
     }
+
 
     refs.alert.innerHTML = '';
 

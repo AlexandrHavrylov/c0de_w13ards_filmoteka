@@ -36,6 +36,7 @@ async function getPopularFilms() {
   // Количество видимых страниц пагинации
   let pagesToShow = 5;
 
+
   // Если ширина экрана менее 520px отображаем 3 страницы пагинации
   if (deviceWidth < 520) {
     pagesToShow = 3;
@@ -67,6 +68,7 @@ async function getPopularFilms() {
       renderTrandingPage(currentPage);
     });
   }
+
 }
 
 export { getPopularFilms };
