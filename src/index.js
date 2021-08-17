@@ -10,7 +10,6 @@ import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
 import { getPopularFilms } from './js/get-popular-films';
 import { getTop } from './js/get-top-films';
 import { onSortChange } from './js/sort-by-value';
-import { scrollToTopBtn } from './js/back-to-top';
 
 import userLibrary from './js/userLibrary';
 import './js/team-modal';
@@ -20,9 +19,6 @@ import { openCardMovie } from './js/getCardMovie';
 
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
-
-// Добавление стрелки back-to-top на старницу
-scrollToTopBtn();
 
 refs.searchForm.addEventListener('input', onSearchFormInput);
 refs.searchBtn.addEventListener('click', onSearchBtnClick);
