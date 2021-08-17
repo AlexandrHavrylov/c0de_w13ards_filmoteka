@@ -6,7 +6,9 @@ import Notiflix from 'notiflix';
 import { addToWatched, addToQueue } from './add-to-watched';
 import userLibrary from './userLibrary';
 import { updateMoviesData } from './update-movies-data';
-import trailerInMovie from '../templates/trailerInMovie.hbs'
+import trailerInMovieMobile from '../templates/trailerInMovieMobile.hbs'
+import trailerInMovieTablet from '../templates/trailerInMovieTablet.hbs'
+import trailerInMovieDesktop from '../templates/trailerInMovieDesktop.hbs'
 
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
@@ -82,7 +84,6 @@ function addToQueueBtnListener() {
 const closeCard = event => {
   if (event.target === modalMovieOverlay || event.target === modalMovieClose) {
     closeCardMovie();
-    
   }
 };
 
@@ -103,6 +104,7 @@ const closeCardMovie = () => {
 
   window.removeEventListener('keydown', closeCardEsc);
   modalMovieClose.removeEventListener('click', closeCard);
+  modalMovieOverlay.removeEventListener('click', closeCard);
   addToWatchBtn.removeEventListener('click', addToWatchBtnListener);
   addToQueueBtn.removeEventListener('click', addToQueueBtnListener);
 };
@@ -113,6 +115,7 @@ const closeCardMovie = () => {
 function openTrailer(event) {
   const imdbId = event.target.dataset.id;
   renderTrailer(imdbId);
+  modalMovieClose.removeEventListener('click', closeCard);
   modalMovieOverlay.removeEventListener('click', closeCard);
   window.removeEventListener('keydown', closeCardEsc);
 };
@@ -120,14 +123,15 @@ function openTrailer(event) {
 // Закрытие окна с трейлером
 
 const closeTrailer = (event) => {
-  modalMovieOverlay.addEventListener('click', closeCard);
-  modalMovieClose.addEventListener('click', closeCard);
-  window.addEventListener('keydown', closeCardEsc);
   modalTrailer.classList.add('visually-hidden');
-  
+  const modalTrailerItem = document.querySelector('.modal-movie__video');
+  modalTrailerItem.setAttribute("src", " ")
   modalMovieOverlay.removeEventListener('click', closeTrailer);
   modalMovieClose.removeEventListener('click', closeTrailer);
   window.removeEventListener('keydown', closeTrailerEsc);
+  modalMovieOverlay.addEventListener('click', closeCard);
+  modalMovieClose.addEventListener('click', closeCard);
+  window.addEventListener('keydown', closeCardEsc);
  
 };
 
@@ -142,8 +146,15 @@ const closeTrailerEsc = event => {
 async function renderTrailer(imdbId) {
 try {
   const cardImdb = await itemsApiService.fetchTrailer(imdbId);
+  const modalMovie = document.querySelector('.modal-movie')
   modalTrailer = document.querySelector('.modal-trailer');
-  modalTrailer.innerHTML = trailerInMovie(cardImdb);
+  if (modalMovie.clientWidth >= 882) {
+    modalTrailer.innerHTML = trailerInMovieDesktop(cardImdb);
+  } else if (modalMovie.clientWidth <= 320) {
+    modalTrailer.innerHTML = trailerInMovieMobile(cardImdb);
+  } else {
+    modalTrailer.innerHTML = trailerInMovieTablet(cardImdb);
+  }
   modalTrailer.classList.remove(('visually-hidden'));
   modalMovieOverlay.addEventListener('click', closeTrailer);
   modalMovieClose.addEventListener('click', closeTrailer);
