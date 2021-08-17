@@ -38,16 +38,46 @@ async function onSearchBtnClick(e) {
 
     // Пагинация
     const container = document.getElementById('pagination');
-    const pagination = new Pagination(container, options, (options.totalItems = numberOfPages));
 
-    // События при навигации
-    pagination.on('afterMove', event => {
-      const currentPage = event.page;
-      // console.log(currentPage);
 
-      // Загрузка и отрисовка выбранной страницы
-      renderMovieToFindPage(currentPage, filmToFind);
-    });
+    // Читаем ширину экрана
+    let deviceWidth = document.documentElement.clientWidth;
+    // Количество видимых страниц пагинации
+    let pagesToShow = 5;
+
+    // Если ширина экрана менее 520px отображаем 3 страницы пагинации
+    if (deviceWidth < 520) {
+      pagesToShow = 3;
+
+      const pagination = new Pagination(
+        container,
+        options,
+        ((options.totalItems = numberOfPages), (options.visiblePages = pagesToShow)),
+      );
+
+      // События при навигации
+      pagination.on('afterMove', event => {
+        const currentPage = event.page;
+        // console.log(currentPage);
+
+        // Загрузка и отрисовка выбранной страницы
+        renderMovieToFindPage(currentPage, filmToFind);
+      });
+    } else {
+      // Если ширина экрана менее 520px отображаем 5 страницы пагинации (по умолчанию 5)
+      const pagination = new Pagination(container, options, (options.totalItems = numberOfPages));
+
+      // События при навигации
+      pagination.on('afterMove', event => {
+        const currentPage = event.page;
+        // console.log(currentPage);
+
+        // Загрузка и отрисовка выбранной страницы
+        renderMovieToFindPage(currentPage, filmToFind);
+      });
+    }
+
+
     refs.alert.innerHTML = '';
 
     if (result.total_pages === 0) {
