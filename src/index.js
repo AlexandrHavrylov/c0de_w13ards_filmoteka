@@ -13,6 +13,7 @@ import { onSortChange } from './js/sort-by-value';
 import { scrollToTopBtn } from './js/back-to-top';
 
 import userLibrary from './js/userLibrary';
+import './js/team-modal';
 
 import './js/pagination-nav';
 import { openCardMovie } from './js/getCardMovie';
