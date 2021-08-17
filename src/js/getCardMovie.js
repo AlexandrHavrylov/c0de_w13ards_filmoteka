@@ -23,12 +23,9 @@ function openCardMovie(event) {
 
   if (movieId) {
     renderCard(movieId);
-    document.querySelector('body').classList.add('scroll-disable');
   }
-
-  
-}
-
+  document.querySelector('body').classList.add('scroll-disable');
+};
 
 async function renderCard(movieId) {
 
