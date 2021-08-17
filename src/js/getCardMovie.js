@@ -118,6 +118,7 @@ function openTrailer(event) {
   modalMovieClose.removeEventListener('click', closeCard);
   modalMovieOverlay.removeEventListener('click', closeCard);
   window.removeEventListener('keydown', closeCardEsc);
+  document.querySelector('.modal-movie').classList.add('scroll-disable');
 };
 
 // Закрытие окна с трейлером
@@ -132,6 +133,7 @@ const closeTrailer = (event) => {
   modalMovieOverlay.addEventListener('click', closeCard);
   modalMovieClose.addEventListener('click', closeCard);
   window.addEventListener('keydown', closeCardEsc);
+  document.querySelector('.modal-movie').classList.remove('scroll-disable');
  
 };
 
