@@ -12,11 +12,17 @@ import './js/team-modal';
 import './js/pagination-nav';
 import { openCardMovie } from './js/getCardMovie';
 
+import { scrollToTopBtn } from './js/back-to-top';
+
+
 const refs = getRefs();
 
 refs.searchForm.addEventListener('input', onSearchFormInput);
 refs.searchBtn.addEventListener('click', onSearchBtnClick);
 refs.moviesList.addEventListener('click', openCardMovie);
+
+// Добавление стрелки back-to-top на старницу
+scrollToTopBtn();
 
 const headerSwitcher = new HeaderSwitcher({
   onChangeCallback: page => {
