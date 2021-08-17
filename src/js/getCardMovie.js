@@ -21,12 +21,14 @@ let trailerToWatch;
 // Открытие модального окна с готовой карточкой
 
 function openCardMovie(event) {
-  const movieId = event.path[2].dataset.id;
 
-  if (movieId) {
+  const movieId = event.path[2].dataset.id ;
+
+  if (movieId && event.target.nodeName !== 'UL') {
     renderCard(movieId);
+      document.querySelector('body').classList.add('scroll-disable');
   }
-  document.querySelector('body').classList.add('scroll-disable');
+
 };
 
 async function renderCard(movieId) {
