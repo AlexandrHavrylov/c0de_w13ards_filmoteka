@@ -8,7 +8,7 @@ function getRefs() {
         alert: document.querySelector('.alert'),
         filterContainer: document.querySelector('.filter'),
         sort: document.querySelector('.filter__select')
-    }
+    };
 }
 
 export { getRefs }
