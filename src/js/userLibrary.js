@@ -39,7 +39,7 @@ class UserLibrary {
   pagination;
   curPageWatched = 1;
   curPageQueue = 1;
-  ITEMS_PER_PAGE = 2;
+  ITEMS_PER_PAGE = 20;
   bindAfterMove;
   constructor(args) {
     this.options = { ...defaultOptions, ...args };
@@ -81,6 +81,7 @@ class UserLibrary {
         this.curPageQueue = e.page;
       }
       this.showFiltered(e.page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
@@ -158,11 +159,13 @@ class UserLibrary {
   }
 
   resetPagination() {
-    if (this.curLibrary === USER_LIBRARY_ENUM.WATCHED) {
-      this.pagination.reset(this.getWatchedCards().length);
-    } else {
-      this.pagination.reset(this.getQuereueCards().length);
-    }
+    const cntCards =
+      this.curLibrary === USER_LIBRARY_ENUM.WATCHED
+        ? this.getWatchedCards().length
+        : this.getQuereueCards().length;
+
+    this.#refs.pagination.hidden = cntCards <= this.ITEMS_PER_PAGE ? true : false;
+    this.pagination.reset(cntCards);
   }
 }
 
