@@ -12,6 +12,7 @@ import { getTop } from './js/get-top-films';
 import { onSortChange } from './js/sort-by-value';
 
 import userLibrary from './js/userLibrary';
+import './js/team-modal';
 
 import './js/pagination-nav';
 import { openCardMovie } from './js/getCardMovie';
