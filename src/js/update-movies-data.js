@@ -1,14 +1,25 @@
 import genresTranslator from '../genres';
 
-async function updateMoviesData(result) {
+const updateMoviesData = async result => {
   const updatedMovies = result.results.map(movie => {
-    const genres = movie.genre_ids.map(genreId => {
-      const currentGenre = genresTranslator.find(singleGenre => singleGenre.id === genreId);
+    let genres = [];
+    let movieYear = '';
 
-      return ' ' + currentGenre.name;
-    });
+    if (movie.genre_ids.length) {
+      genres = movie.genre_ids.map(genreId => {
+        const currentGenre = genresTranslator.find(singleGenre => singleGenre.id === genreId);
 
-    const movieYear = movie.release_date.slice(0, 4);
+        return ' ' + currentGenre.name;
+      });
+    } else {
+      genres = ['Secret genre'];
+    }
+
+    if (movie.release_date) {
+      movieYear = movie.release_date.slice(0, 4);
+    } else {
+      movieYear = 'Long ago';
+    }
 
     if (genres.length > 3) {
       const cutGenres = genres.slice(0, 2);
@@ -30,6 +41,6 @@ async function updateMoviesData(result) {
   });
 
   return updatedMovies;
-}
+};
 
 export { updateMoviesData };

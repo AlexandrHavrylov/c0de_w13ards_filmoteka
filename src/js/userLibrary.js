@@ -1,82 +1,16 @@
 /*
 користування:
-    створити:               const userLib = new UserLibrary();
+    import userLibrary from 'path/to/library';
     додати картку:          userLib.add(card);
     змінити картку:         userLib.update(card);
     видалити картку:        userLib.remove(card);
     отримати всі картки:    userLib.getAll();
     показати згідно вибраної кнопки: userLib.showFiltered();
 */
-
+import Pagination from 'tui-pagination';
 import galleryMarkup from '../templates/filmsInGallery.hbs';
-
-// const test_cards = [
-//   {
-//     id: 436969,
-//     adult: false,
-//     backdrop_path: '/jlGmlFOcfo8n5tURmhC7YVd4Iyy.jpg',
-
-//     genre_ids: [28, 12, 35, 878],
-//     original_language: 'en',
-//     original_title: 'The Suicide Squad',
-//     poster_path: '/kb4s0ML0iVZlG6wAKbbs9NAm6X.jpg',
-//     video: false,
-//     vote_average: 8.2,
-//     vote_count: 1203,
-//     overview:
-//       'Supervillains Harley Quinn, Bloodsport, Peacemaker and a collection of nutty cons at Belle Reve prison join the super-secret, super-shady Task Force X as they are dropped off at the remote, enemy-infused island of Corto Maltese.',
-//     release_date: '2021-07-28',
-//     title: 'The Suicide Squad',
-//     popularity: 4168.234,
-//     media_type: 'movie',
-//     isWatched: false,
-//     isQueue: true,
-//   },
-
-//   {
-//     id: 385128,
-//     title: 'F9',
-//     overview:
-//       "Dominic Toretto and his crew battle the most skilled assassin and high-performance driver they've ever encountered: his forsaken brother.",
-//     release_date: '2021-05-19',
-//     adult: false,
-//     backdrop_path: '/xXHZeb1yhJvnSHPzZDqee0zfMb6.jpg',
-//     vote_count: 2315,
-
-//     genre_ids: [28, 80, 53],
-//     vote_average: 7.7,
-//     original_language: 'en',
-//     original_title: 'F9',
-//     poster_path: '/bOFaAXmWWXC3Rbv4u4uM9ZSzRXP.jpg',
-//     video: false,
-//     popularity: 4973.593,
-//     media_type: 'movie',
-//     isWatched: true,
-//     isQueue: false,
-//   },
-
-//   {
-//     id: 451048,
-
-//     genre_ids: [12, 14, 35, 28],
-//     original_language: 'en',
-//     original_title: 'Jungle Cruise',
-//     poster_path: '/9dKCd55IuTT5QRs989m9Qlb7d2B.jpg',
-//     video: false,
-//     vote_average: 8,
-//     overview:
-//       'Dr. Lily Houghton enlists the aid of wisecracking skipper Frank Wolff to take her down the Amazon in his dilapidated boat. Together, they search for an ancient tree that holds the power to heal – a discovery that will change the future of medicine.',
-//     release_date: '2021-07-28',
-//     vote_count: 1286,
-//     title: 'Jungle Cruise',
-//     adult: false,
-//     backdrop_path: '/bwBmo4I3fqMsVvVtamyVJHXGnLF.jpg',
-//     popularity: 5812.972,
-//     media_type: 'movie',
-//     isWatched: true,
-//     isQueue: true,
-//   },
-// ];
+import globalVariables from './global-variables';
+import { HEADER_ENUM } from './header-switch';
 
 const defaultOptions = {
   isSelectedStyle: 'form__btn--current',
@@ -85,9 +19,10 @@ const defaultOptions = {
     queue: '#queue',
   },
   cardContainer: '.movie-list',
+  pagination: '#pagination',
 };
 
-const USER_LIBRARY_ENUM = {
+export const USER_LIBRARY_ENUM = {
   WATCHED: 'watched',
   QUEUE: 'queue',
 };
@@ -98,10 +33,14 @@ const CLASSLIST_ACTION = {
 };
 
 class UserLibrary {
-  #curLibrary = USER_LIBRARY_ENUM.WATCHED;
+  curLibrary = USER_LIBRARY_ENUM.WATCHED;
   #refs = {};
   #storage = new Storage();
-
+  pagination;
+  curPageWatched = 1;
+  curPageQueue = 1;
+  ITEMS_PER_PAGE = 20;
+  bindAfterMove;
   constructor(args) {
     this.options = { ...defaultOptions, ...args };
 
@@ -115,22 +54,50 @@ class UserLibrary {
     });
 
     this.#refs.cardContainer = document.querySelector(this.options.cardContainer);
+    this.#refs.pagination = document.querySelector(this.options.pagination);
 
-    // this.#storage.update({ ...test_cards[0], release_date: '5555-55-55' });
-    // this.#storage.add(test_cards[0]);
-    // this.#storage.add(test_cards[1]);
-    // this.#storage.add(test_cards[2]);
-    // this.#storage.remove(test_cards[2]);
+    this.pagination = new Pagination(this.#refs.pagination, {
+      itemsPerPage: this.ITEMS_PER_PAGE,
+      centerAlign: true,
+    });
+    this.bindAfterMove = this.afterMove.bind(this);
+    this.pagination.on('afterMove', this.bindAfterMove);
+
+    Object.defineProperty(Array.prototype, 'getPage', {
+      value: function getPage(pageNumber, itemsPerPage) {
+        const start = pageNumber * itemsPerPage - itemsPerPage;
+        const end = pageNumber * itemsPerPage;
+
+        return this.slice(start, end);
+      },
+    });
+  }
+
+  afterMove(e) {
+    if (globalVariables.curPage === HEADER_ENUM.LIBRARY) {
+      if (this.curLibrary === USER_LIBRARY_ENUM.WATCHED) {
+        this.curPageWatched = e.page;
+      } else {
+        this.curPageQueue = e.page;
+      }
+      this.showFiltered(e.page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   #setSelectedStyle(action1, action2) {
     this.#refs.btnQueue.classList[action1](this.options.isSelectedStyle);
     this.#refs.btnWatched.classList[action2](this.options.isSelectedStyle);
   }
-  switchTo(libraryEnum = USER_LIBRARY_ENUM.WATCHED) {
-    this.#curLibrary = libraryEnum;
 
-    switch (this.#curLibrary) {
+  switchToCurrentLibrary() {
+    this.switchTo(this.curLibrary);
+  }
+
+  switchTo(libraryEnum = USER_LIBRARY_ENUM.WATCHED) {
+    this.curLibrary = libraryEnum;
+
+    switch (this.curLibrary) {
       case USER_LIBRARY_ENUM.QUEUE:
         this.#setSelectedStyle(CLASSLIST_ACTION.ADD, CLASSLIST_ACTION.REMOVE);
         break;
@@ -139,11 +106,21 @@ class UserLibrary {
 
         break;
     }
+    this.resetPagination();
     this.showFiltered();
   }
   add(card) {
     this.#storage.add(card);
   }
+
+  addOrUpdate(card) {
+    if (this.getById(card.id)) {
+      this.update(card);
+    } else {
+      this.add(card);
+    }
+  }
+
   getById(cardId) {
     return this.#storage.all().find(card => card.id === cardId);
   }
@@ -156,10 +133,39 @@ class UserLibrary {
   remove(card) {
     this.#storage.remove(card);
   }
-  showFiltered() {
-    const exp = this.#curLibrary === USER_LIBRARY_ENUM.WATCHED ? 'isWatched' : 'isQueue';
-    const cards = this.#storage.all().filter(card => card[exp]);
-    this.#refs.cardContainer.innerHTML = galleryMarkup(cards);
+  showFiltered(page = 1) {
+    const cards = this.getFilteredCard();
+    this.#refs.cardContainer.innerHTML = galleryMarkup(cards.getPage(page, this.ITEMS_PER_PAGE));
+  }
+
+  getFilteredCard() {
+    return this.curLibrary === USER_LIBRARY_ENUM.WATCHED
+      ? this.getWatchedCards()
+      : this.getQuereueCards();
+  }
+
+  // Отримати всі картки isWatched
+  getWatchedCards = () => this.#storage.all().filter(card => card?.isWatched);
+  // Отримати всі картки isQueue
+  getQuereueCards = () => this.#storage.all().filter(card => card?.isQueue);
+
+  processCard(card) {
+    if (card.isWatched || card.isQueue) {
+      this.addOrUpdate(card);
+    } else {
+      this.remove(card);
+    }
+    this.resetPagination();
+  }
+
+  resetPagination() {
+    const cntCards =
+      this.curLibrary === USER_LIBRARY_ENUM.WATCHED
+        ? this.getWatchedCards().length
+        : this.getQuereueCards().length;
+
+    this.#refs.pagination.hidden = cntCards <= this.ITEMS_PER_PAGE ? true : false;
+    this.pagination.reset(cntCards);
   }
 }
 
@@ -170,7 +176,6 @@ class Storage {
 
   constructor() {
     this.#load();
-    console.log('db', this.#db);
   }
   all() {
     return this.#db;
@@ -185,7 +190,6 @@ class Storage {
   }
 
   update(item) {
-    console.log('update', item);
     let findItem = this.#db.find(i => i.id === item.id);
     if (findItem) {
       this.remove(findItem);

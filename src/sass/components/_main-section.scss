@@ -16,7 +16,9 @@
 }
 
 .movie-card {
+  cursor: pointer;
   width: 100%;
+  transition: transform 250ms linear;
 
   &:not(:last-child) {
     margin-bottom: 20px;
@@ -31,11 +33,41 @@
   @include desktop {
     flex-basis: calc((100% - 30px * 3) / 3);
   }
+  &:hover,
+  &:focus {
+    box-shadow: 3px 3px 6px rgba(255, 107, 8, 0.25);
+    border-radius: 3px;
+
+    transform: scale(1.03);
+  }
+}
+
+.movie-card__thumb {
+  position: relative;
+  margin-bottom: 10px;
 }
 
 .movie-card__poster {
-  margin-bottom: 10px;
   border-radius: 5px;
+}
+
+.movie-card__descr-vote {
+  position: absolute;
+  bottom: 7px;
+  right: 7px;
+
+  display: inline-block;
+  padding: 1px 10px;
+  width: 36px;
+  height: 16px;
+  text-align: center;
+  color: var(--font-color-light);
+  background-color: var(--accent-color);
+  border-radius: 5px;
+}
+
+.movie-card__descr-container {
+  padding: 0 10px 10px 10px;
 }
 
 .movie-card__title {
@@ -57,43 +89,10 @@
   color: var(--accent-color);
 }
 
-// pagination
-.pagination {
-  padding: 40px 20px 40px 20px;
-  display: flex;
-  justify-content: space-between;
+.filter__text {
   color: black;
+}
 
-  &__arrow {
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 5px;
-    background-color: #f7f7f7;
-    &:hover,
-    :focus {
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-      cursor: pointer;
-
-      transition: box-shadow var(--transiton-duration-time) var(--timing-fn);
-    }
-  }
-
-  &__items {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &__item {
-    width: 40px;
-    height: 40px;
-    padding: 13px;
-    border-radius: 5px;
-    text-align: center;
-    &:hover,
-    :focus {
-      color: var(--font-color-light);
-      background-color: var(--accent-color);
-    }
-  }
+.filter__select {
+  margin-bottom: 20px;
 }
