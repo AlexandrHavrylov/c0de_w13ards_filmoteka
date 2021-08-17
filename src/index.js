@@ -8,6 +8,7 @@ import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
 import { getPopularFilms } from './js/get-popular-films';
 import '../node_modules/tui-pagination/dist/tui-pagination.css';
 import userLibrary from './js/userLibrary';
+import './js/team-modal';
 
 import { openCardMovie } from './js/getCardMovie';
 const itemsApiService = new ItemsApiService();
