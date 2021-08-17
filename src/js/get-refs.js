@@ -12,4 +12,4 @@ function getRefs() {
     };
 }
 
-export { getRefs }
+export { getRefs };
