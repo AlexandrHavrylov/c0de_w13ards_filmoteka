@@ -156,4 +156,4 @@ try {
       console.log(error.message);
   };
 };
-export { openCardMovie, renderCard,  openTrailer, renderTrailer};
+export { openCardMovie, renderCard,  openTrailer, renderTrailer}; 
