@@ -259,3 +259,26 @@
 .scroll-disable {
   overflow: hidden;
 }
+.modal-trailer {
+  position: absolute;
+  display: flex;
+  width: 862px;
+  padding-left: 20px;
+}
+
+.modal-movie__button--trailer {
+  display: flex;
+  border: none;
+  background-color: var(--bg-color-light);
+  width: 24px;
+  height: 44px;
+  margin-left: 15px;
+  background-image: url('../images/button-trailer.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
+}
