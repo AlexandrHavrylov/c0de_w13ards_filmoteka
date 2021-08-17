@@ -272,15 +272,16 @@
   display: flex;
   border: none;
   background-color: var(--bg-color-light);
-  width: 24px;
-  height: 44px;
+  margin-top: 15px;
   margin-left: 15px;
-  background-image: url('../images/button-trailer.svg');
+  width: 32px;
+  height: 32px;
+  background-image: url('../images/film.svg');
   background-position: center;
   background-repeat: no-repeat;
+  cursor: pointer;
 
-  &:hover,
-  &:focus {
-    cursor: pointer;
+  @include tablet {
+    margin-top: 11px;
   }
 }
