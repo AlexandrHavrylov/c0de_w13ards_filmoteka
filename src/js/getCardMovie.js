@@ -24,7 +24,7 @@ function openCardMovie(event) {
 
   const movieId = event.path[2].dataset.id ;
 
-  if (movieId && event.target.nodeName !== 'UL') {
+  if (movieId ) {
     renderCard(movieId);
       document.querySelector('body').classList.add('scroll-disable');
   }
@@ -41,7 +41,7 @@ async function renderCard(movieId) {
     // отримуємо картку з виправленими полями
     card = (await updateMoviesData({ results: [card] }))[0];
 
-    console.log('fixedCard:', card);
+   
     refs.modalMovie.innerHTML = filmInModal(card);
     
      Notiflix.Loading.remove();
