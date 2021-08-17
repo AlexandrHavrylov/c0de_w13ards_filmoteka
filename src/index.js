@@ -10,9 +10,7 @@ import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
 import { getPopularFilms } from './js/get-popular-films';
 import { getTop } from './js/get-top-films';
 import { onSortChange } from './js/sort-by-value';
-
 import userLibrary from './js/userLibrary';
-
 import './js/pagination-nav';
 import { openCardMovie } from './js/getCardMovie';
 

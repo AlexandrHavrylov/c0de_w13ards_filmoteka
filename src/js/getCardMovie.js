@@ -2,7 +2,8 @@
 import { getRefs } from './get-refs';
 import ItemsApiService from './fetch-items.js';
 import filmInModal from '../templates/filmInModal.hbs';
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
+import notification from './pop-up-messages.js';
 import { addToWatched, addToQueue } from './add-to-watched';
 import userLibrary from './userLibrary';
 import { updateMoviesData } from './update-movies-data';
@@ -30,7 +31,8 @@ function openCardMovie(event) {
 async function renderCard(movieId) {
 
   try {
-       Notiflix.Loading.circle('Please wait ...');
+      //  Notiflix.Loading.circle('Please wait ...');
+    notification.loadingCircle();
     card = await itemsApiService.fetchCard(movieId);
     // костиль для коректного відображення карточки
     card.genre_ids = card.genres.map(genre => genre.id);
@@ -40,7 +42,8 @@ async function renderCard(movieId) {
     console.log('fixedCard:', card);
     refs.modalMovie.innerHTML = filmInModal(card);
     
-     Notiflix.Loading.remove();
+    //  Notiflix.Loading.remove();
+    notification.loadingRemove();
     
     refs.modalMovie.classList.remove('visually-hidden');
     const localCard = userLibrary.getById(card.id);
@@ -65,7 +68,8 @@ async function renderCard(movieId) {
     trailerToWatch.addEventListener('click', openTrailer);
     return card;
   } catch (error) {
-    Notiflix.Notify.info('Oops! Something went wrong, please try again');
+    // Notiflix.Notify.info('Oops! Something went wrong, please try again');
+    notification.oops();
     console.log(error.message);
   }
 }
