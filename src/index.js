@@ -2,22 +2,16 @@ import '../node_modules/tui-pagination/dist/tui-pagination.css';
 import './sass/main.scss';
 import globalVariables from './js/global-variables';
 import { getRefs } from './js/get-refs';
-import ItemsApiService from './js/fetch-items.js';
-import galleryMarkup from './templates/filmsInGallery.hbs';
 import { onSearchFormInput } from './js/fetch-by-name';
 import { onSearchBtnClick } from './js/fetch-by-name';
 import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
 import { getPopularFilms } from './js/get-popular-films';
-import { getTop } from './js/get-top-films';
 import { onSortChange } from './js/sort-by-value';
-
 import userLibrary from './js/userLibrary';
 import './js/team-modal';
-
 import './js/pagination-nav';
 import { openCardMovie } from './js/getCardMovie';
 
-const itemsApiService = new ItemsApiService();
 const refs = getRefs();
 
 refs.searchForm.addEventListener('input', onSearchFormInput);
