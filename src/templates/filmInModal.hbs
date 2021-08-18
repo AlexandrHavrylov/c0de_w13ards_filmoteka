@@ -6,9 +6,9 @@
     </svg> }}
     </button>
 
-    <div class='modal-movie__img'>
+    <div class='modal-movie__thumb'>
       {{#if poster_path}}
-        <img src='https://image.tmdb.org/t/p/w300{{poster_path}}' alt='{{title}}' />
+        <img class='modal-movie__img' src='https://image.tmdb.org/t/p/w300{{poster_path}}' alt='{{title}}' />
       {{/if}}
       {{#unless poster_path}}
         <img
