@@ -24,7 +24,7 @@ refs.moviesList.addEventListener('click', openCardMovie);
 // Добавление стрелки back-to-top на старницу
 scrollToTopBtn();
 
-const headerSwitcher = new HeaderSwitcher({
+new HeaderSwitcher({
   onChangeCallback: page => {
     globalVariables.curPage = page;
 
