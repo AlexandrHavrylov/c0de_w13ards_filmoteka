@@ -5,8 +5,7 @@ import { updateMoviesData } from './update-movies-data';
 import Pagination from 'tui-pagination';
 import { renderMovieToFindPage } from './pagination-nav';
 import { options } from './pagination';
-
-import Notiflix from 'notiflix';
+import notification from './pop-up-messages.js';
 
 const itemsApiService = new ItemsApiService();
 
@@ -26,9 +25,9 @@ async function onSearchBtnClick(e) {
   refs.filterContainer.classList.add('is-hidden');
 
   if (filmToFind) {
-    Notiflix.Loading.circle('Please wait ...');
+    notification.onLoadingCircleAdd();
     const result = await itemsApiService.fetchItemsFromSearch();
-    Notiflix.Loading.remove();
+    notification.onLoadingCircleRemove();
     updateMoviesData(result).then(movies => (refs.moviesList.innerHTML = galleryMarkup(movies)));
 
     // ========== Создание пагинации ==========
