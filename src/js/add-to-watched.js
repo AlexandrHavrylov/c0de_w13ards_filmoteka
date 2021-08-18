@@ -17,7 +17,7 @@ function addToWatched(card) {
     card.isWatched = false;
     userLibrary.processCard(card);
     notification.onDeleteFromWatched();
-    addToWatchBtn.textContent = 'add to watch';
+    addToWatchBtn.textContent = 'add to watched';
   }
   if (globalVariables.curPage === HEADER_ENUM.LIBRARY) userLibrary.showFiltered();
 }
