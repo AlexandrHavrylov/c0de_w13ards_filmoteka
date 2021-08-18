@@ -22,12 +22,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
   display: block;
-  width: 280px;
+  width: 88vw; //280px=>88vw
   height: 90vh;
   z-index: 100;
   background-color: var(--bg-color-light);
   padding: 50px 30px 40px 30px;
   overflow: auto;
+  border-radius: 4px;
 
   @include tablet {
     display: flex;
@@ -46,7 +47,7 @@
 .modal-movie__close-btn {
   position: absolute;
   top: 15px;
-  right: 15px;
+  right: 20px; //15=>20px
   width: 30px;
   height: 30px;
   border: none;
@@ -62,8 +63,8 @@
   }
 }
 
-.modal-movie__img {
-  width: 240px;
+.modal-movie__thumb {
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
@@ -78,8 +79,8 @@
   }
 }
 
-.modal-movie__img img {
-  width: 90%;
+.modal-movie__img {
+  width: 100%;
   height: auto;
   object-fit: cover;
   border-radius: 5px;
@@ -213,7 +214,13 @@
 
 .modal-movie__button-wrapper {
   display: flex;
+  justify-content: center; //добавил
   margin-top: 20px;
+
+  @include tablet {
+    justify-content: space-between;
+    width: 264px; //добавиш ширину контейнера
+  }
 
   @include desktop {
     justify-content: start;
@@ -221,8 +228,9 @@
 }
 
 .modal-movie__button {
-  padding: 13px 6px;
+  padding: 6px 5px; //13px 6px=>13px 5px
   width: 112px;
+  height: 44px; //добавил высоту
   border: 1px solid var(--border-color);
   border-radius: 5px;
   text-transform: uppercase;
@@ -250,7 +258,7 @@
 
   @include desktop {
     width: 136px;
-    padding: 14px 10px;
+    padding: 6px 5px; //14px=>9px
 
     &:first-child {
       margin-right: 15px;
