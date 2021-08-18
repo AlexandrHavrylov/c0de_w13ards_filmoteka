@@ -93,6 +93,7 @@
 }
 
 .modal-movie__info {
+  position: relative;
   background-color: var(--bg-color-light);
   margin-top: 30px;
 
@@ -267,4 +268,29 @@
 }
 .scroll-disable {
   overflow: hidden;
+}
+.modal-trailer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+}
+
+.modal-movie__button--trailer {
+  display: flex;
+  border: none;
+  background-color: var(--bg-color-light);
+  margin-top: 15px;
+  margin-left: 15px;
+  width: 32px;
+  height: 32px;
+  background-image: url('../images/film.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+
+  @include tablet {
+    margin-top: 11px;
+  }
 }
