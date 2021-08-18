@@ -9,6 +9,7 @@ import { getPopularFilms } from './js/get-popular-films';
 import { onSortChange } from './js/sort-by-value';
 import userLibrary from './js/userLibrary';
 import './js/pagination-nav';
+import './js/team-modal';
 import { openCardMovie } from './js/getCardMovie';
 
 import { scrollToTopBtn } from './js/back-to-top';
