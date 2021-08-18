@@ -91,6 +91,7 @@
 }
 
 .modal-movie__info {
+  position: relative;
   background-color: var(--bg-color-light);
   margin-top: 30px;
 
@@ -261,24 +262,26 @@
 }
 .modal-trailer {
   position: absolute;
-  display: flex;
-  width: 862px;
-  padding-left: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
 }
 
 .modal-movie__button--trailer {
   display: flex;
   border: none;
   background-color: var(--bg-color-light);
-  width: 24px;
-  height: 44px;
+  margin-top: 15px;
   margin-left: 15px;
-  background-image: url('../images/button-trailer.svg');
+  width: 32px;
+  height: 32px;
+  background-image: url('../images/film.svg');
   background-position: center;
   background-repeat: no-repeat;
+  cursor: pointer;
 
-  &:hover,
-  &:focus {
-    cursor: pointer;
+  @include tablet {
+    margin-top: 11px;
   }
 }
