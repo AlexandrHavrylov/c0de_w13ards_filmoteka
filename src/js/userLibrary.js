@@ -167,7 +167,7 @@ class UserLibrary {
         ? this.getWatchedCards().length
         : this.getQuereueCards().length;
 
-    this.#refs.pagination.hidden = cntCards <= this.ITEMS_PER_PAGE ? true : false;
+    this.#refs.pagination.style.visibility = cntCards <= this.ITEMS_PER_PAGE ? 'hidden' : 'visible';
     this.pagination.reset(cntCards);
   }
 }
