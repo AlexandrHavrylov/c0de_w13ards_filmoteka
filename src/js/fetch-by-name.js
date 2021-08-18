@@ -28,10 +28,10 @@ async function onSearchBtnClick(e) {
 
   if (filmToFind) {
     // Notiflix.Loading.circle('Please wait ...');
-    notification.loadingCircle();
+    notification.onLoadingCircleAdd();
     const result = await itemsApiService.fetchItemsFromSearch();
     // Notiflix.Loading.remove();
-    notification.loadingRemove();
+    notification.onLoadingCircleRemove();
     updateMoviesData(result).then(movies => (refs.moviesList.innerHTML = galleryMarkup(movies)));
 
     // ========== Создание пагинации ==========

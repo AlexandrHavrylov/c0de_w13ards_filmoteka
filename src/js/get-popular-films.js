@@ -15,13 +15,13 @@ let numberOfPages = 0;
 
 async function getPopularFilms() {
   // 
-  notification.loadingCircle();
+  notification.onLoadingCircleAdd();
 
   // Загрузка данных
   const result = await itemsApiService.fetchTrandingItems();
 
   // Notiflix.Loading.remove();
-  notification.loadingRemove();
+  notification.onLoadingCircleRemove();
   refs.alert.innerHTML = '';
   // Отрисовка данных
   updateMoviesData(result).then(movies => (refs.moviesList.innerHTML = galleryMarkup(movies)));

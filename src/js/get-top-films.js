@@ -15,14 +15,14 @@ let numberOfPages = 0;
 
 async function getTop() {
   // Notiflix.Loading.circle('Please wait ...');
-  notification.loadingCircle();
+  notification.onLoadingCircleAdd();
 
   // Загрузка данных
     const result = await itemsApiService.fetchTop();
     console.log(result)
 
   // Notiflix.Loading.remove();
-  notification.loadingRemove();
+  notification.onLoadingCircleRemove();
   refs.alert.innerHTML = '';
   // Отрисовка данных
   updateMoviesData(result).then(movies => (refs.moviesList.innerHTML = galleryMarkup(movies)));

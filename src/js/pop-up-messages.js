@@ -16,30 +16,30 @@ class Notification {
         this.options = notiflixParams;
     }
     
-    addWatched() {
+    onAddToWatched() {
         Notiflix.Notify.success('Added to Watched', this.options)
     }
 
-    deleteWatched() {
+    onDeleteFromWatched() {
         Notiflix.Notify.warning('Deleted from Watched',  this.options)
     }
 
-    addQueue() {
+    onAddToQueue() {
         Notiflix.Notify.success('Added to Queue',  this.options)
     }
 
-    deleteQueue() {
+    onDeleteFromQueue() {
         Notiflix.Notify.warning('Deleted from Queue',  this.options)
     }
 
-    loadingCircle() {
+    onLoadingCircleAdd() {
         Notiflix.Loading.circle('Please wait ...', this.options);
     }
-    loadingRemove() {
+    onLoadingCircleRemove() {
         Notiflix.Loading.remove();
     }
 
-    oops() {
+    onError() {
         Notiflix.Notify.info('Oops! Something went wrong, please try again', this.options);
     }
 }
