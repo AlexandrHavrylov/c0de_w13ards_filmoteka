@@ -135,7 +135,10 @@ class UserLibrary {
   }
   showFiltered(page = 1) {
     const cards = this.getFilteredCard();
-    this.#refs.cardContainer.innerHTML = galleryMarkup(cards.getPage(page, this.ITEMS_PER_PAGE));
+    if (cards.length)
+      this.#refs.cardContainer.innerHTML = galleryMarkup(cards.getPage(page, this.ITEMS_PER_PAGE));
+    else
+      this.#refs.cardContainer.innerHTML = '<li class="empty-library"><p>Library is empty</p></li>';
   }
 
   getFilteredCard() {
@@ -155,7 +158,7 @@ class UserLibrary {
     } else {
       this.remove(card);
     }
-    this.resetPagination();
+    if (globalVariables.curPage === HEADER_ENUM.LIBRARY) this.resetPagination();
   }
 
   resetPagination() {
