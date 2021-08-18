@@ -13,7 +13,7 @@ import './js/team-modal';
 import { openCardMovie } from './js/getCardMovie';
 
 import { scrollToTopBtn } from './js/back-to-top';
-
+import './js/color-theme-switch';
 
 const refs = getRefs();
 
