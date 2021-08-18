@@ -8,8 +8,8 @@ import { HeaderSwitcher, HEADER_ENUM } from './js/header-switch';
 import { getPopularFilms } from './js/get-popular-films';
 import { onSortChange } from './js/sort-by-value';
 import userLibrary from './js/userLibrary';
-import './js/pagination-nav';
 import './js/team-modal';
+import './js/pagination-nav';
 import { openCardMovie } from './js/getCardMovie';
 
 import { scrollToTopBtn } from './js/back-to-top';

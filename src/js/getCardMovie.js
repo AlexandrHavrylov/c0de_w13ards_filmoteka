@@ -2,7 +2,7 @@
 import { getRefs } from './get-refs';
 import ItemsApiService from './fetch-items.js';
 import filmInModal from '../templates/filmInModal.hbs';
-import notification from './pop-up-messages.js';
+import Notiflix from 'notiflix';
 import { addToWatched, addToQueue } from './add-to-watched';
 import userLibrary from './userLibrary';
 import { updateMoviesData } from './update-movies-data';
@@ -34,14 +34,18 @@ function openCardMovie(event) {
 async function renderCard(movieId) {
 
   try {
-    notification.onLoadingCircleAdd();
+       Notiflix.Loading.circle('Please wait ...');
     card = await itemsApiService.fetchCard(movieId);
     // костиль для коректного відображення карточки
     card.genre_ids = card.genres.map(genre => genre.id);
     // отримуємо картку з виправленими полями
     card = (await updateMoviesData({ results: [card] }))[0];
+
+   
     refs.modalMovie.innerHTML = filmInModal(card);
-    notification.onLoadingCircleRemove();
+    
+     Notiflix.Loading.remove();
+    
     refs.modalMovie.classList.remove('visually-hidden');
     const localCard = userLibrary.getById(card.id);
     if (localCard) card = { ...card, ...localCard };
@@ -56,7 +60,6 @@ async function renderCard(movieId) {
     trailerToWatch = document.querySelector('[data-name="trailer"]');
     modalMovieOverlay = document.querySelector('.modal-movie__overlay');
     modalMovieClose = document.querySelector('[data-action="modal-close"]');
-
     // добавление слушателей после формирования карточки
     modalMovieClose.addEventListener('click', closeCard);
     addToWatchBtn.addEventListener('click', addToWatchBtnListener);
@@ -66,10 +69,11 @@ async function renderCard(movieId) {
     trailerToWatch.addEventListener('click', openTrailer);
     return card;
   } catch (error) {
-    notification.onError();
+    Notiflix.Notify.info('Oops! Something went wrong, please try again');
     console.log(error.message);
   }
 }
+
 
 function addToWatchBtnListener() {
   addToWatched(card);
