@@ -106,11 +106,13 @@
 }
 
 .filter__text {
-  color: black;
+  color: var(--font-color-dark);
 }
 
 .filter__select {
   margin-bottom: 20px;
+  color: var(--font-color-dark);
+  background-color: var(--bg-color-light);
 }
 
 .empty-library {

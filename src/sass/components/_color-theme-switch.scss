@@ -7,7 +7,14 @@ body.light-theme {
 }
 
 body.dark-theme {
-  background-color: #333333;
+  --bg-color-light: #333;
+  --font-color-dark: rgba(255, 255, 255, 0.65);
+  --bg-color-modal: #333;
+  --bg-color-light: #333;
+  --bg-color-modal: #333;
+  --font-color-dark: rgba(255, 255, 255, 0.65);
+  --font-color-light: rgba(255, 255, 255, 0.65);
+  --font-color-footer: rgba(255, 255, 255, 0.65);
 }
 
 .toolbar {
