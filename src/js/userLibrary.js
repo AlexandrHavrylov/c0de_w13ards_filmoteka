@@ -158,7 +158,7 @@ class UserLibrary {
     } else {
       this.remove(card);
     }
-    this.resetPagination();
+    if (globalVariables.curPage === HEADER_ENUM.LIBRARY) this.resetPagination();
   }
 
   resetPagination() {
