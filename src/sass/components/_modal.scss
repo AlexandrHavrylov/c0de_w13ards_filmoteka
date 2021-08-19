@@ -295,3 +295,25 @@
     margin-top: 11px;
   }
 }
+
+.modal-trailer__btn--close {
+  position: absolute;
+  background-color: var(--accent-color);
+  color: var(--font-color-dark);
+  top: 2%;
+  left: 86%;
+  width: 57px;
+  height: 28px;
+  border: none;
+  border-radius: 5px;
+  @include tablet {
+    left: 89%;
+  }
+
+  @include desktop {
+    top: 9px;
+    left: 92%;
+    width: 57px;
+    height: 28px;
+  }
+}
