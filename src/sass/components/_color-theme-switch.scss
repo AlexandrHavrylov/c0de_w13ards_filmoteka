@@ -16,7 +16,9 @@ body.dark-theme {
   --font-color-light: rgba(255, 255, 255, 0.65);
   --font-color-footer: rgba(255, 255, 255, 0.65);
   --color-pagination: rgba(255, 255, 255, 0.65);
+  --bg-color-pagination: rgba(255, 107, 8, 0.9);
   --border-pagination: #ff6b08;
+  --pagination-active: #333;
 }
 
 .toolbar {
