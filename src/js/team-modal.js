@@ -1,5 +1,4 @@
 import SimpleLightbox from "simplelightbox";
-// import '../node_modules/simplelightbox/dist/simple-lightbox.min.css';
 const teamContainer = document.querySelector('.footer__link');
 const bodyEl = document.querySelector('body');
 const modal = document.querySelector('.modal-team');
