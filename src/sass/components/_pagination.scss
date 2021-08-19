@@ -48,9 +48,8 @@
   border-radius: 5px;
   border-width: 0;
   margin: 2px;
-  background-color: var(--bg-color-modal);
+  background-color: var(--bg-color-pagination);
   color: var(--color-pagination);
-  border: 1px solid var(--border-pagination);
 }
 
 .tui-pagination .tui-page-btn:hover,
@@ -103,8 +102,7 @@
   font-weight: normal;
   border: none;
   background-color: var(--bg-color-pagination);
-  color: var(--color-pagination);
-  border: 1px solid var(--border-pagination);
+
   &:hover,
   :focus {
     box-shadow: var(--pagination-shadow);
@@ -118,7 +116,7 @@
   margin-right: 10px;
   background-color: var (--bg-color-modal);
   color: var(--accent-color);
-  border: 1px solid var(--border-pagination);
+
   &:hover,
   :focus {
     box-shadow: var(--pagination-shadow);
@@ -132,7 +130,7 @@
   margin-left: 10px;
   background-color: var(--bg-color-pagination);
   color: var(--color-pagination);
-  border: 1px solid var(--border-pagination);
+
   &:hover,
   :focus {
     box-shadow: var(--pagination-shadow);
