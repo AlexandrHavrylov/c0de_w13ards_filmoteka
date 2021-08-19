@@ -33,14 +33,14 @@ new HeaderSwitcher({
       case HEADER_ENUM.HOME:
         refs.pagination.style.visibility = 'visible';
         refs.searchForm.value = '';
-        refs.filterContainer.classList.remove('visually-hidde');
+        refs.filterContainer.classList.remove('visually-hidden');
         getPopularFilms();
         refs.sort.addEventListener('change', onSortChange);
 
         break;
       case HEADER_ENUM.LIBRARY:
         getLibraryFilms();
-        refs.filterContainer.classList.add('visually-hidde');
+        refs.filterContainer.classList.add('visually-hidden');
         break;
     }
   },
