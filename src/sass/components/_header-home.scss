@@ -54,6 +54,11 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: all 250ms linear;
+
+  &:hover {
+    color: var(--accent-color);
+  }
 }
 
 // Скрытый заголовок возле лого===================
