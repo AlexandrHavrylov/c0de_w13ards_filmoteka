@@ -32,7 +32,7 @@ function openCardMovie(event) {
     renderCard(movieId);
     document.querySelector('body').classList.add('scroll-disable');
     goTopBtn.classList.add('visually-hidden');
-    colorSwitcher.classList.add('visually-hidden');
+
   }
 
 };
