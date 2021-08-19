@@ -14,6 +14,7 @@ import trailerInMovieDesktop from '../templates/trailerInMovieDesktop.hbs'
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
 const goTopBtn = document.querySelector('.back_to_top');
+const colorSwitcher = document.querySelector('.toolbar');
 let card;
 let modalMovieOverlay;
 let modalMovieClose;
@@ -29,7 +30,8 @@ function openCardMovie(event) {
   if (movieId ) {
     renderCard(movieId);
     document.querySelector('body').classList.add('scroll-disable');
-    goTopBtn.classList.add('visually-hidden')
+    goTopBtn.classList.add('visually-hidden');
+    colorSwitcher.classList.add('visually-hidden');
   }
 
 };
@@ -102,13 +104,14 @@ const closeCardMovie = () => {
   // Удаление слушателей
   const addToWatchBtn = document.querySelector("[data-name='watched']");
   const addToQueueBtn = document.querySelector("[data-name='queue']");
-  goTopBtn.classList.remove('visually-hidden');
 
   window.removeEventListener('keydown', closeCardEsc);
   modalMovieClose.removeEventListener('click', closeCard);
   modalMovieOverlay.removeEventListener('click', closeCard);
   addToWatchBtn.removeEventListener('click', addToWatchBtnListener);
   addToQueueBtn.removeEventListener('click', addToQueueBtnListener);
+  goTopBtn.classList.remove('visually-hidden');
+  colorSwitcher.classList.remove('visually-hidden');
 };
 
 // Добавление трейлера в модальное окно

@@ -20,6 +20,11 @@ body.dark-theme {
 .toolbar {
   display: flex;
   justify-content: flex-end;
+  margin-top: 105px;
+
+  @include tablet {
+    margin-top: 27px;
+  }
 }
 
 /* THEME SWITCH */
@@ -35,9 +40,23 @@ body.dark-theme {
   height: 15px;
   width: 15px;
 
-  margin-left: 8px;
+  margin-left: 0;
   &:first-child {
-    margin-right: 20px;
+    margin-right: 10px;
+  }
+
+  @include tablet {
+    margin-left: 0;
+    &:first-child {
+      margin-right: 8px;
+    }
+  }
+
+  @include desktop {
+    margin-left: 8px;
+    &:first-child {
+      margin-right: 20px;
+    }
   }
 }
 
