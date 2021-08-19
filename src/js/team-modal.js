@@ -1,8 +1,12 @@
+import SimpleLightbox from "simplelightbox";
+// import '../node_modules/simplelightbox/dist/simple-lightbox.min.css';
 const teamContainer = document.querySelector('.footer__link');
 const bodyEl = document.querySelector('body');
 const modal = document.querySelector('.modal-team');
 const overlay = document.querySelector('.overlay');
 const modalBtnClose = document.querySelector('.team-btn-close');
+
+const modalImage = new SimpleLightbox('.modal-team a');
 
 teamContainer.addEventListener('click', onOpenModal);
 
