@@ -50,6 +50,8 @@
   border-width: 0;
   margin: 0.5px;
   background-color: var(--bg-color-modal);
+  color: var(--color-pagination);
+  border: 1px solid var(--border-pagination);
 }
 
 .tui-pagination .tui-page-btn:hover,
