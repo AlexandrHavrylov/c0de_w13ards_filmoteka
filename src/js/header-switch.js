@@ -10,7 +10,7 @@ const CLASSLIST_ACTION = {
 
 const defaultOptions = {
   currentHeader: HEADER_ENUM.HOME, // поточна сторінка
-  hideClassCss: 'is-hidden', // клас для приховування елементів
+  hideClassCss: 'visually-hidden', // клас для приховування елементів
   header: '.header', // класс з хедером
   searchContainer: '.header__input', // контейнер з пошуком
   alert:'.alert',

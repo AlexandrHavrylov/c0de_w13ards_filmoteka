@@ -1,6 +1,4 @@
 .modal-movie__container {
-  // padding: 48px 20px 40px 20px;
-
   @include tablet {
     display: flex;
   }
@@ -12,7 +10,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--bg-overlay);
   overflow: auto;
 }
 
@@ -22,7 +20,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   display: block;
-  width: 88vw; //280px=>88vw
+  width: 88vw;
   height: 90vh;
   z-index: 100;
   background-color: var(--bg-color-light);
@@ -47,7 +45,7 @@
 .modal-movie__close-btn {
   position: absolute;
   top: 15px;
-  right: 20px; //15=>20px
+  right: 20px;
   width: 30px;
   height: 30px;
   border: none;
@@ -215,12 +213,12 @@
 
 .modal-movie__button-wrapper {
   display: flex;
-  justify-content: center; //добавил
+  justify-content: center;
   margin-top: 20px;
 
   @include tablet {
     justify-content: space-between;
-    width: 264px; //добавиш ширину контейнера
+    width: 264px;
   }
 
   @include desktop {
@@ -229,9 +227,9 @@
 }
 
 .modal-movie__button {
-  padding: 6px 5px; //13px 6px=>13px 5px
+  padding: 6px 5px;
   width: 112px;
-  height: 44px; //добавил высоту
+  height: 44px;
   border: 1px solid var(--border-color);
   border-radius: 5px;
   text-transform: uppercase;
