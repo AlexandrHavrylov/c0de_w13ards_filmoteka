@@ -9,6 +9,7 @@
 */
 import Pagination from 'tui-pagination';
 import galleryMarkup from '../templates/filmsInGallery.hbs';
+import emptyLibrary from '../templates/empty-library.hbs';
 import globalVariables from './global-variables';
 import { HEADER_ENUM } from './header-switch';
 
@@ -137,8 +138,7 @@ class UserLibrary {
     const cards = this.getFilteredCard();
     if (cards.length)
       this.#refs.cardContainer.innerHTML = galleryMarkup(cards.getPage(page, this.ITEMS_PER_PAGE));
-    else
-      this.#refs.cardContainer.innerHTML = '<li class="empty-library"><p>Library is empty</p></li>';
+    else this.#refs.cardContainer.innerHTML = emptyLibrary();
   }
 
   getFilteredCard() {
