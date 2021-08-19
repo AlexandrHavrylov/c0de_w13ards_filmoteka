@@ -30,7 +30,7 @@ new HeaderSwitcher({
 
     switch (page) {
       case HEADER_ENUM.HOME:
-        refs.pagination.hidden = false;
+        refs.pagination.style.visibility = 'visible';
         refs.searchForm.value = '';
         refs.filterContainer.classList.remove('is-hidden');
         getPopularFilms();
