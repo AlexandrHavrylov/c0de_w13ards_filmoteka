@@ -33,11 +33,10 @@ async function onSearchBtnClick(e) {
     // ========== Создание пагинации ==========
     // Общее количество полученных страниц храним в numberOfPages
     numberOfPages = result.total_pages;
-    // console.log(numberOfPages);
+    //console.log(numberOfPages);
 
     // Пагинация
     const container = document.getElementById('pagination');
-
 
     // Читаем ширину экрана
     let deviceWidth = document.documentElement.clientWidth;
@@ -76,13 +75,13 @@ async function onSearchBtnClick(e) {
       });
     }
 
-
     refs.alert.innerHTML = '';
 
     if (result.total_pages === 0) {
       refs.alert.innerHTML =
         'Search result is not successful. Enter the correct movie name and try again.';
     }
+    container.style.visibility = result.total_pages ? 'visible' : 'hidden';
   }
 }
 
