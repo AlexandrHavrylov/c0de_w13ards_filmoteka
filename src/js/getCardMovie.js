@@ -17,6 +17,7 @@ let modalMovieOverlay;
 let modalMovieClose;
 let modalTrailer;
 let trailerToWatch;
+let modalTrailerClose;
 
 // Открытие модального окна с готовой карточкой
 
@@ -126,7 +127,7 @@ const closeTrailer = (event) => {
   const modalTrailerItem = document.querySelector('.modal-movie__video');
   modalTrailerItem.setAttribute("src", " ")
   modalMovieOverlay.removeEventListener('click', closeTrailer);
-  modalMovieClose.removeEventListener('click', closeTrailer);
+  modalTrailerClose.removeEventListener('click', closeTrailer);
   window.removeEventListener('keydown', closeTrailerEsc);
   modalMovieOverlay.addEventListener('click', closeCard);
   modalMovieClose.addEventListener('click', closeCard);
@@ -156,8 +157,9 @@ try {
     modalTrailer.innerHTML = trailerInMovieTablet(cardImdb);
   }
   modalTrailer.classList.remove(('visually-hidden'));
+  modalTrailerClose = document.querySelector('.modal-trailer__btn--close');
   modalMovieOverlay.addEventListener('click', closeTrailer);
-  modalMovieClose.addEventListener('click', closeTrailer);
+  modalTrailerClose.addEventListener('click', closeTrailer);
   window.addEventListener('keydown', closeTrailerEsc);
   modalMovieClose.removeEventListener('click', closeCard);
    modalMovieOverlay.removeEventListener('click', closeCard);
