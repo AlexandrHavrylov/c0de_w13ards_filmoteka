@@ -10,17 +10,13 @@ import trailerInMovieMobile from '../templates/trailerInMovieMobile.hbs'
 import trailerInMovieTablet from '../templates/trailerInMovieTablet.hbs'
 import trailerInMovieDesktop from '../templates/trailerInMovieDesktop.hbs'
 
-
 const itemsApiService = new ItemsApiService();
 const refs = getRefs();
-const goTopBtn = document.querySelector('.back_to_top');
-const colorSwitcher = document.querySelector('.toolbar');
 let card;
 let modalMovieOverlay;
 let modalMovieClose;
 let modalTrailer;
 let trailerToWatch;
-let modalTrailerClose;
 
 // Открытие модального окна с готовой карточкой
 
@@ -30,9 +26,7 @@ function openCardMovie(event) {
 
   if (movieId ) {
     renderCard(movieId);
-    document.querySelector('body').classList.add('scroll-disable');
-    goTopBtn.classList.add('visually-hidden');
-    colorSwitcher.classList.add('visually-hidden');
+      document.querySelector('body').classList.add('scroll-disable');
   }
 
 };
@@ -111,8 +105,6 @@ const closeCardMovie = () => {
   modalMovieOverlay.removeEventListener('click', closeCard);
   addToWatchBtn.removeEventListener('click', addToWatchBtnListener);
   addToQueueBtn.removeEventListener('click', addToQueueBtnListener);
-  goTopBtn.classList.remove('visually-hidden');
-  colorSwitcher.classList.remove('visually-hidden');
 };
 
 // Добавление трейлера в модальное окно
@@ -134,7 +126,7 @@ const closeTrailer = (event) => {
   const modalTrailerItem = document.querySelector('.modal-movie__video');
   modalTrailerItem.setAttribute("src", " ")
   modalMovieOverlay.removeEventListener('click', closeTrailer);
-  modalTrailerClose.removeEventListener('click', closeTrailer);
+  modalMovieClose.removeEventListener('click', closeTrailer);
   window.removeEventListener('keydown', closeTrailerEsc);
   modalMovieOverlay.addEventListener('click', closeCard);
   modalMovieClose.addEventListener('click', closeCard);
@@ -164,9 +156,8 @@ try {
     modalTrailer.innerHTML = trailerInMovieTablet(cardImdb);
   }
   modalTrailer.classList.remove(('visually-hidden'));
-  modalTrailerClose = document.querySelector('.modal-trailer__btn--close');
   modalMovieOverlay.addEventListener('click', closeTrailer);
-  modalTrailerClose.addEventListener('click', closeTrailer);
+  modalMovieClose.addEventListener('click', closeTrailer);
   window.addEventListener('keydown', closeTrailerEsc);
   modalMovieClose.removeEventListener('click', closeCard);
    modalMovieOverlay.removeEventListener('click', closeCard);

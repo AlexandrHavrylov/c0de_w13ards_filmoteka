@@ -152,7 +152,6 @@
 
   margin-left: auto;
   margin-right: auto;
-  border-bottom: 0.5px solid var(--font-color-light);
 
   @include tablet {
     left: 216px;
@@ -171,6 +170,7 @@
   border: none;
   background-color: transparent;
   color: var(--font-color-light);
+  border-bottom: 0.5px solid var(--font-color-light);
   font-weight: normal;
   font-size: 14px;
   line-height: 1.1428;
@@ -227,12 +227,22 @@
   width: 15px;
   height: 15px;
   border-style: none;
-  margin-left: 5px;
+  margin-left: -13px;
+  z-index: 1;
   cursor: pointer;
   &:focus,
   &:active {
     outline: none;
   }
+}
+
+.is-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
 }
 
 //оповещение под формой поиска, если ничего не найдено

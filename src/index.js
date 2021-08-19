@@ -14,7 +14,6 @@ import { openCardMovie } from './js/getCardMovie';
 
 import { scrollToTopBtn } from './js/back-to-top';
 import './js/color-theme-switch';
-import '../node_modules/simplelightbox/dist/simple-lightbox.min.css';
 
 const refs = getRefs();
 
@@ -31,7 +30,7 @@ new HeaderSwitcher({
 
     switch (page) {
       case HEADER_ENUM.HOME:
-        refs.pagination.style.visibility = 'visible';
+        refs.pagination.hidden = false;
         refs.searchForm.value = '';
         refs.filterContainer.classList.remove('is-hidden');
         getPopularFilms();
