@@ -8,9 +8,6 @@ body.light-theme {
 
 body.dark-theme {
   --bg-color-light: #333;
-  --font-color-dark: rgba(255, 255, 255, 0.65);
-  --bg-color-modal: #333;
-  --bg-color-light: #333;
   --bg-color-modal: #333;
   --font-color-dark: rgba(255, 255, 255, 0.65);
   --font-color-light: rgba(255, 255, 255, 0.65);
@@ -18,6 +15,7 @@ body.dark-theme {
   --color-pagination: rgba(255, 255, 255, 0.65);
   --bg-color-pagination: rgba(107, 107, 107, 1);
   --border-pagination: #ff6b08;
+  --bg-color-footer: #6b6b6b;
 }
 
 .toolbar {
